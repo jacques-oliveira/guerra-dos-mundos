@@ -1,0 +1,7 @@
+/home/jacques/Documents/game-development/guerra-dos-mundos/build/CMakeFiles/guerra-dos-mundos.dir
+/home/jacques/Documents/game-development/guerra-dos-mundos/build/CMakeFiles/edit_cache.dir
+/home/jacques/Documents/game-development/guerra-dos-mundos/build/CMakeFiles/rebuild_cache.dir
+/home/jacques/Documents/game-development/guerra-dos-mundos/build/CMakeFiles/list_install_components.dir
+/home/jacques/Documents/game-development/guerra-dos-mundos/build/CMakeFiles/install.dir
+/home/jacques/Documents/game-development/guerra-dos-mundos/build/CMakeFiles/install/local.dir
+/home/jacques/Documents/game-development/guerra-dos-mundos/build/CMakeFiles/install/strip.dir

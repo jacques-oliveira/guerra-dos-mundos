@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/jacques/Documents/game-development/guerra-dos-mundos/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/guerra-dos-mundos.dir/main.cpp.o -c /home/jacques/Documents/game-development/guerra-dos-mundos/main.cpp",
+  "file": "/home/jacques/Documents/game-development/guerra-dos-mundos/main.cpp",
+  "output": "CMakeFiles/guerra-dos-mundos.dir/main.cpp.o"
+}
+]
