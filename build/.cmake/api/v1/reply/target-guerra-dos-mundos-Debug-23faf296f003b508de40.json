@@ -11,7 +11,8 @@
 		"commands" : 
 		[
 			"add_executable",
-			"install"
+			"install",
+			"target_link_libraries"
 		],
 		"files" : 
 		[
@@ -32,6 +33,12 @@
 				"command" : 1,
 				"file" : 0,
 				"line" : 7,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 9,
 				"parent" : 0
 			}
 		]
@@ -78,6 +85,21 @@
 			{
 				"fragment" : "-rdynamic",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lsfml-graphics",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lsfml-window",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-lsfml-system",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"

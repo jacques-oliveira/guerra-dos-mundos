@@ -1,1 +1,1 @@
-/usr/bin/c++ -g -rdynamic -Wl,--dependency-file=CMakeFiles/guerra-dos-mundos.dir/link.d "CMakeFiles/guerra-dos-mundos.dir/main.cpp.o" -o guerra-dos-mundos
+/usr/bin/c++ -g -rdynamic -Wl,--dependency-file=CMakeFiles/guerra-dos-mundos.dir/link.d "CMakeFiles/guerra-dos-mundos.dir/main.cpp.o" -o guerra-dos-mundos  -lsfml-graphics -lsfml-window -lsfml-system

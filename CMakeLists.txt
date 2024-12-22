@@ -5,3 +5,10 @@ project(guerra-dos-mundos)
 add_executable(guerra-dos-mundos main.cpp)
 
 install(TARGETS guerra-dos-mundos RUNTIME DESTINATION bin)
+
+target_link_libraries(
+    guerra-dos-mundos
+    -lsfml-graphics
+    -lsfml-window
+    -lsfml-system
+)
