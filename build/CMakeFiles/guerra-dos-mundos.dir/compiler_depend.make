@@ -304,8 +304,57 @@ CMakeFiles/guerra-dos-mundos.dir/main.cpp.o: /home/jacques/Documents/game-develo
 guerra-dos-mundos: /usr/lib/libc.so \
   /usr/lib/libgcc_s.so \
   /usr/lib/libm.so \
-  /usr/lib/ld-linux-x86-64.so.2
+  /usr/lib/ld-linux-x86-64.so.2 \
+  /usr/lib/libX11.so.6 \
+  /usr/lib/libXau.so.6 \
+  /usr/lib/libXcursor.so.1 \
+  /usr/lib/libXdmcp.so.6 \
+  /usr/lib/libXext.so.6 \
+  /usr/lib/libXfixes.so.3 \
+  /usr/lib/libXrandr.so.2 \
+  /usr/lib/libXrender.so.1 \
+  /usr/lib/libbrotlicommon.so.1 \
+  /usr/lib/libbrotlidec.so.1 \
+  /usr/lib/libbz2.so.1.0 \
+  /usr/lib/libcap.so.2 \
+  /usr/lib/libfreetype.so.6 \
+  /usr/lib/libglib-2.0.so.0 \
+  /usr/lib/libgraphite2.so.3 \
+  /usr/lib/libharfbuzz.so.0 \
+  /usr/lib/libpcre2-8.so.0 \
+  /usr/lib/libpng16.so.16 \
+  /usr/lib/libudev.so.1 \
+  /usr/lib/libxcb.so.1 \
+  /usr/lib/libz.so.1
 
+
+/usr/lib/libpng16.so.16:
+
+/usr/lib/libpcre2-8.so.0:
+
+/usr/lib/libharfbuzz.so.0:
+
+/usr/lib/libgraphite2.so.3:
+
+/usr/lib/libglib-2.0.so.0:
+
+/usr/lib/libfreetype.so.6:
+
+/usr/lib/libcap.so.2:
+
+/usr/lib/libXrandr.so.2:
+
+/usr/lib/libXfixes.so.3:
+
+/usr/lib/libXext.so.6:
+
+/usr/lib/libXdmcp.so.6:
+
+/usr/lib/libXcursor.so.1:
+
+/usr/lib/libXau.so.6:
+
+/usr/lib/libX11.so.6:
 
 /usr/lib/ld-linux-x86-64.so.2:
 
@@ -352,6 +401,8 @@ guerra-dos-mundos: /usr/lib/libc.so \
 /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/c++config.h:
 
 /usr/include/bits/types/struct_FILE.h:
+
+/usr/lib/libbrotlidec.so.1:
 
 /usr/include/c++/14.2.1/initializer_list:
 
@@ -404,6 +455,8 @@ guerra-dos-mundos: /usr/lib/libc.so \
 /usr/include/bits/byteswap.h:
 
 /usr/include/bits/timesize.h:
+
+/usr/lib/libxcb.so.1:
 
 /usr/include/bits/endian.h:
 
@@ -553,6 +606,8 @@ guerra-dos-mundos: /usr/lib/libc.so \
 
 /usr/include/c++/14.2.1/bits/requires_hosted.h:
 
+/usr/lib/libbrotlicommon.so.1:
+
 /usr/include/wchar.h:
 
 /usr/include/c++/14.2.1/clocale:
@@ -641,6 +696,8 @@ guerra-dos-mundos: /usr/lib/libc.so \
 
 /usr/include/c++/14.2.1/bits/codecvt.h:
 
+/usr/lib/libudev.so.1:
+
 /usr/include/c++/14.2.1/bits/stl_iterator.h:
 
 /usr/include/bits/types.h:
@@ -701,6 +758,8 @@ guerra-dos-mundos: /usr/lib/libc.so \
 
 /usr/include/c++/14.2.1/bits/basic_ios.h:
 
+/usr/lib/libz.so.1:
+
 /usr/include/bits/uintn-identity.h:
 
 /usr/include/c++/14.2.1/bits/char_traits.h:
@@ -724,6 +783,8 @@ guerra-dos-mundos: /usr/lib/libc.so \
 /usr/include/c++/14.2.1/bits/algorithmfwd.h:
 
 /usr/include/c++/14.2.1/bits/alloc_traits.h:
+
+/usr/lib/libbz2.so.1.0:
 
 /usr/include/SFML/System/InputStream.hpp:
 
@@ -818,6 +879,8 @@ guerra-dos-mundos: /usr/lib/libc.so \
 /usr/include/features-time64.h:
 
 /usr/include/c++/14.2.1/bits/range_access.h:
+
+/usr/lib/libXrender.so.1:
 
 /usr/include/c++/14.2.1/bits/stl_function.h:
 
