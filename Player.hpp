@@ -5,4 +5,5 @@ public :
     Player();
     ~Player();
     void move();
+    void draw();
 };
