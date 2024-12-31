@@ -19,15 +19,28 @@ void Game::processEvents(){
     }
 }
 
-void Game::run(){
+void Game::run(int frame_per_seconds){
+
+    sf::Clock clock;
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
+
     while(_window.isOpen()){
         processEvents();
-        update();
-        render();
+        bool repaint = false;
+
+        timeSinceLastUpdate += clock.restart();
+        while(timeSinceLastUpdate > TimePerFrame){
+            timeSinceLastUpdate -= TimePerFrame;
+            repaint = true;
+            update(TimePerFrame);
+        }
+        if(repaint)
+            render();
     }
 }
 
-void Game::update(){
+void Game::update(sf::Time deltaTime){
 
 }
 
