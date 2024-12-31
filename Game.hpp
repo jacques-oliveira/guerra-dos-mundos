@@ -13,12 +13,12 @@ public :
     Game();
     ~Game();
 
-    void run();
+    void run(int frame_per_seconds);
     void clean();
 
 private:
     void processEvents();
-    void update();
+    void update(sf::Time deltaTime);
     void render();
 
     sf::RenderWindow _window;
