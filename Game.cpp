@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
 
-Game::Game(){
+Game::Game() : _window(sf::VideoMode(800,600),"Guerra dos Mundos"){
 
 }
 
@@ -9,22 +9,31 @@ Game::~Game(){
 
 }
 
-void Game::init(const char* title, int xpos, int ypos,int width, int height, bool fullscreen){
+void Game::processEvents(){
+    sf::Event event;
 
-    if(window->isOpen()){
-        std::cout<<"Window created!"<<std::endl;
-        isRunning = true;
+    while(_window.pollEvent(event)){
+        if( (event.type == sf::Event::Closed) or ( (event.type == sf::Event::KeyPressed) and (event.key.code == sf::Keyboard::Escape)) ){
+            _window.close();
+        }
     }
 }
 
-void Game::handleEvents(){
+void Game::run(){
+    while(_window.isOpen()){
+        processEvents();
+        update();
+        render();
+    }
 }
 
 void Game::update(){
 
 }
 
-void Game::renderer(){
+void Game::render(){
+    _window.clear();
+    _window.display();
 }
 
 void Game::clean(){
