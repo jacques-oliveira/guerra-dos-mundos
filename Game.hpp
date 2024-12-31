@@ -7,19 +7,19 @@
 class Game{
 
 public :
+    Game(const Game&) = delete;
+    Game& operator = (const Game&) = delete;
+
     Game();
     ~Game();
 
-    void init(const char* title, int xpos, int ypos,int width, int height, bool fullscreen);
-    void handleEvents();
-    void update();
-    void renderer();
+    void run();
     void clean();
 
-    bool running(){ return isRunning;};
-
 private:
-    bool isRunning;
-    sf::Window *window;
-    sf::RenderWindow *renderWindow;
+    void processEvents();
+    void update();
+    void render();
+
+    sf::RenderWindow _window;
 };
