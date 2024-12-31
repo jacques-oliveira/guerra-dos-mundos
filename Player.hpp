@@ -6,4 +6,7 @@ public :
     ~Player();
     void move();
     void draw();
+    void update();
+private :
+    float life;
 };
