@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "Player.hpp"
 
 class Game{
 
@@ -15,6 +16,7 @@ public :
 
     void run(int frame_per_seconds);
     void clean();
+    Player _player;
 
 private:
     void processEvents();
