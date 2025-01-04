@@ -12,7 +12,6 @@ public :
 
     template<typename ...Args>
     void setPosition(Args&& ... args);
-    void move();
 
     void update(sf::Time deltaTime);
     bool isMoving;

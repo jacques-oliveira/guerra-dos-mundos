@@ -61,7 +61,6 @@ void Game::run(int frame_per_seconds){
         if(repaint)
             render();
     }
-    _player.processEvents();
 }
 
 void Game::update(sf::Time deltaTime){
