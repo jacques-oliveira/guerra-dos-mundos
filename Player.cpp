@@ -32,7 +32,7 @@ void Player::update(sf::Time deltaTime){
 
     float seconds = deltaTime.asSeconds();
     if(rotation != 0){
-        float angle = (rotation > 0 ? 1:-1);
+        float angle = rotation *180*seconds;
         _shape.rotate(angle);
     }
     if(isMoving){
