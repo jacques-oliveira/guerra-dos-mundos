@@ -5,7 +5,7 @@
 using namespace std;
 
 Player::Player() : _shape(sf::Vector2f(32,32)){
-    life = 100;
+
     _shape.setFillColor(sf::Color::Blue);
     _shape.setOrigin(16,16);
     _shape.setScale(5,5);
@@ -15,9 +15,6 @@ Player::~Player(){
 
 }
 
-void Player::move(){
-
-}
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -35,7 +32,7 @@ void Player::update(sf::Time deltaTime){
 
     float seconds = deltaTime.asSeconds();
     if(rotation != 0){
-        float angle = (rotation > 0 ? 1:-1);
+        float angle = rotation *180*seconds;
         _shape.rotate(angle);
     }
     if(isMoving){
