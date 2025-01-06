@@ -15,10 +15,16 @@ class TileGenerator{
 public:
     TileGenerator();
     ~TileGenerator();
-    static void generateTileMap(const string& tilesetFileName, const string& outputFileName, short tileWidth, short tileHeight);
+
+    void generateTileMap(const string& tilesetFileName, short tileWidth, short tileHeight);
     static vector<vector<int>> loadTileMap(const string& filename);
     static void displayTileMap(const string& tilesetFilename, const vector<vector<int>>& tileMap, int tileWidth, int tileHeight);
     static vector<TileBlock> extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight);
+
+    const sf::Sprite& getEnvSprite() const;
+private:
+    sf::Sprite envSprite;
+    sf::Texture tilesetTexture;
 };
 
 

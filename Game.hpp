@@ -4,6 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
+#include "TileGenerator.hpp"
 
 class Game{
 
@@ -17,6 +18,8 @@ public :
     void run(int frame_per_seconds);
     void clean();
     Player _player;
+    sf::Sprite envSprite;
+    TileGenerator tileGen;
 
 private:
     void processEvents();
