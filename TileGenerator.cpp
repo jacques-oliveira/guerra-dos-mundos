@@ -1,49 +1,32 @@
 #include "TileGenerator.hpp"
 
 
-TileGenerator::TileGenerator(){
+TileGenerator::TileGenerator() {
 }
 
 TileGenerator::~TileGenerator(){
 }
 
-void TileGenerator::generateTileMap(const string& tilesetFileName, const string& outputFileName, short tileWidth, short tileHeight){
-    sf::Texture tilesetTexture;
+void TileGenerator::generateTileMap(const string& tilesetFileName, short tileWidth, short tileHeight){
+
     if (!tilesetTexture.loadFromFile(tilesetFileName)) {
-        cerr << "Erro ao carregar o tileset." << endl;
+        cerr << "Erro ao carregar a textura: " << tilesetFileName << endl;
         return;
     }
 
     sf::Image tilesetImage = tilesetTexture.copyToImage();
-
-    short tilesPerRow = tilesetTexture.getSize().x / tileWidth;
-    short tilesPerColumn = tilesetTexture.getSize().y / tileHeight;
-
-    ofstream outputFile(outputFileName);
-    if (!outputFile.is_open()) {
-        cerr << "Erro ao abrir o arquivo para escrita." << endl;
-        return;
-    }
+    envSprite.setTexture(tilesetTexture);
 
     vector<TileBlock> tileBlockVector = extractTileBlock(tilesetImage, tileWidth, tileHeight);
 
-    for(short i =1; i < tileBlockVector.size()-1;  i++){
-        if(tileBlockVector[i].isTransparent()){
-            outputFile << 0;
-        }else{
-            outputFile << (i % tilesPerRow) + (i / tilesPerRow) * tilesPerRow;
-        }
-        if( (i + 1) % tilesPerRow != 0){
-            outputFile << ",";
-        }else{
-            outputFile << "\n";
-        }
-    }
+    cout<<"Sprite loaded"<<endl;
 
-
-    outputFile.close();
-    cout << "Arquivo " << outputFileName << " gerado com sucesso!" << endl;
 }
+
+const sf::Sprite& TileGenerator::getEnvSprite() const{
+    return envSprite;
+}
+
 
 vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight) {
     std::vector<TileBlock> blocks;
