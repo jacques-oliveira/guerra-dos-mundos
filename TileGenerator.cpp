@@ -15,12 +15,18 @@ void TileGenerator::generateTileMap(const string& tilesetFileName, short tileWid
     }
 
     sf::Image tilesetImage = tilesetTexture.copyToImage();
-    envSprite.setTexture(tilesetTexture);
 
     vector<TileBlock> tileBlockVector = extractTileBlock(tilesetImage, tileWidth, tileHeight);
 
-    cout<<"Sprite loaded"<<endl;
 
+    for(auto& i : tileBlockVector){
+        if(!i.isTransparent()){
+            tileBaseList.push_back(*i.getSprite().getTexture());
+        }
+    }
+    sf::Texture& t = tileBaseList[5];
+    envSprite.setTexture(t);
+    cout<<tileBaseList.size()<<endl;
 }
 
 const sf::Sprite& TileGenerator::getEnvSprite() const{

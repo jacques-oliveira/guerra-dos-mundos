@@ -1,7 +1,8 @@
 #include "TileBlock.hpp"
 
 TileBlock::TileBlock(const sf::Image& image) : image(image){
-
+    texture.loadFromImage(image);
+    sprite.setTexture(texture);
 }
 
 bool TileBlock::isTransparent() const{
@@ -16,3 +17,7 @@ bool TileBlock::isTransparent() const{
     return true;
 }
 
+sf::Sprite & TileBlock::getSprite(){
+    sprite.setTexture(texture);
+    return sprite;
+}

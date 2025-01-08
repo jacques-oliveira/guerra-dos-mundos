@@ -3,8 +3,10 @@
 #include "Player.hpp"
 #include "TileGenerator.hpp"
 
-Game::Game() : _window(sf::VideoMode(800,600),"Guerra dos Mundos"){
-    tileGen.generateTileMap("/home/jacques/Downloads/env-game.png",32,32);
+Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
+
+    char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
+    tileGen.generateTileMap(path,64,64);
 }
 
 Game::~Game(){
@@ -69,10 +71,11 @@ void Game::update(sf::Time deltaTime){
 }
 
 void Game::render(){
-    const sf::Sprite& sprite = tileGen.getEnvSprite();
+     const sf::Sprite& sprite = tileGen.getEnvSprite();
     _window.clear();
     _window.draw(sprite);
-    _window.draw(_player);
+    //_window.draw(_player);
+
     _window.display();
 }
 
