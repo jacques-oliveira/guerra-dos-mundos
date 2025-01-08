@@ -9,10 +9,10 @@ struct TileBlock {
 public:
     TileBlock(const sf::Image& image);
     bool isTransparent() const;
-    const sf::Sprite& getSprite() const;
+    sf::Sprite& getSprite();
 
 private:
     sf::Image image;
     sf::Sprite sprite;
-
+    sf::Texture texture;
 };
