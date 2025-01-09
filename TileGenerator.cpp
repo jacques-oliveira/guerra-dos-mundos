@@ -1,7 +1,7 @@
 #include "TileGenerator.hpp"
 
 
-TileGenerator::TileGenerator() {
+TileGenerator::TileGenerator(){
 }
 
 TileGenerator::~TileGenerator(){
@@ -21,11 +21,10 @@ void TileGenerator::generateTileMap(const string& tilesetFileName, short tileWid
 
     for(auto& i : tileBlockVector){
         if(!i.isTransparent()){
-            tileBaseList.push_back(i.getSprite());
+            listBaseTexture.push_back(*i.getSprite().getTexture());
         }
     }
-    // sf::Texture& t = tileBaseList[5];
-    // envSprite.setTexture(t);
+
 }
 
 const sf::Sprite& TileGenerator::getEnvSprite() const{
@@ -33,19 +32,19 @@ const sf::Sprite& TileGenerator::getEnvSprite() const{
 }
 
 void TileGenerator::drawTiles(sf::RenderWindow& window, short tileWidth, short tileHeight){
-    vector<vector<int>> tileMap = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
-    std::cout<<tileMap.size()<<std::endl;
-    window.clear();
-    for (size_t i = 0; i < tileMap.size(); ++i) {
-        for (size_t j = 0; j < tileMap[i].size(); ++j) {
-            int tileIndex = tileMap[i][j];
-            if (tileIndex >= 0) {
-                tileBaseList[tileIndex].setPosition(j * tileWidth, i * tileHeight);
-                window.draw(tileBaseList[tileIndex]);
-            }
-        }
-    }
-    window.display();
+    // vector<vector<int>> tileMap = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
+    // std::cout<<tileMap.size()<<std::endl;
+    // window.clear();
+    // for (size_t i = 0; i < tileMap.size(); ++i) {
+    //     for (size_t j = 0; j < tileMap[i].size(); ++j) {
+    //         int tileIndex = tileMap[i][j];
+    //         if (tileIndex >= 0) {
+    //             tileBaseList[tileIndex].setPosition(j * tileWidth, i * tileHeight);
+    //             window.draw(tileBaseList[tileIndex]);
+    //         }
+    //     }
+    // }
+    // window.display();
 }
 
 vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight) {
