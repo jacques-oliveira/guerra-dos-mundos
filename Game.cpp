@@ -6,8 +6,8 @@
 Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
 
     char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
-    tileGen.generateTileMap(path,64,64);
-    tileGen.drawTiles(_window,64,64);
+    //tileGen.generateTileMap(path,64,64);
+    //tileGen.drawTiles(_window,64,64);
 
 }
 
@@ -53,6 +53,9 @@ void Game::run(int frame_per_seconds){
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
 
+    _window.setFramerateLimit(frame_per_seconds);
+    _window.setVerticalSyncEnabled(true);
+
     while(_window.isOpen()){
         processEvents();
         bool repaint = false;
@@ -63,8 +66,9 @@ void Game::run(int frame_per_seconds){
             repaint = true;
             update(TimePerFrame);
         }
-        if(repaint)
+        if(repaint){
             render();
+        }
     }
 }
 
@@ -73,12 +77,11 @@ void Game::update(sf::Time deltaTime){
 }
 
 void Game::render(){
-     const sf::Sprite& sprite = tileGen.getEnvSprite();
+     //const sf::Sprite& sprite = tileGen.getEnvSprite();
+    //sf::Sprite sp(tileGen.listBaseTexture[1]);
     _window.clear();
-    //_window.draw(sprite);
-
+    //_window.draw(sp);
     _window.draw(_player);
-
     _window.display();
 }
 
