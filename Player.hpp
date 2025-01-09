@@ -21,6 +21,7 @@ public :
 private :
     float life;
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::RectangleShape _shape;
+    sf::Sprite playerSprite;
+    sf::Texture playerTexture;
     sf::Vector2f _velocity;
 };

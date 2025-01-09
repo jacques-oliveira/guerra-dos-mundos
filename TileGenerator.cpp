@@ -21,18 +21,32 @@ void TileGenerator::generateTileMap(const string& tilesetFileName, short tileWid
 
     for(auto& i : tileBlockVector){
         if(!i.isTransparent()){
-            tileBaseList.push_back(*i.getSprite().getTexture());
+            tileBaseList.push_back(i.getSprite());
         }
     }
-    sf::Texture& t = tileBaseList[5];
-    envSprite.setTexture(t);
-    cout<<tileBaseList.size()<<endl;
+    // sf::Texture& t = tileBaseList[5];
+    // envSprite.setTexture(t);
 }
 
 const sf::Sprite& TileGenerator::getEnvSprite() const{
     return envSprite;
 }
 
+void TileGenerator::drawTiles(sf::RenderWindow& window, short tileWidth, short tileHeight){
+    vector<vector<int>> tileMap = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
+    std::cout<<tileMap.size()<<std::endl;
+    window.clear();
+    for (size_t i = 0; i < tileMap.size(); ++i) {
+        for (size_t j = 0; j < tileMap[i].size(); ++j) {
+            int tileIndex = tileMap[i][j];
+            if (tileIndex >= 0) {
+                tileBaseList[tileIndex].setPosition(j * tileWidth, i * tileHeight);
+                window.draw(tileBaseList[tileIndex]);
+            }
+        }
+    }
+    window.display();
+}
 
 vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight) {
     std::vector<TileBlock> blocks;
@@ -55,7 +69,7 @@ vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image, int bl
     return blocks;
 }
 
-vector<vector<int>> TileGenerator::loadTileMap(const string& filename){
+vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
     vector<vector<int>> tileMap;
     ifstream inputFile(filename);
 
@@ -77,43 +91,4 @@ vector<vector<int>> TileGenerator::loadTileMap(const string& filename){
 
     inputFile.close();
     return tileMap;
-}
-
-void TileGenerator::displayTileMap(const string& tilesetFilename, const vector<vector<int>>& tileMap, int tileWidth, int tileHeight){
-    sf::RenderWindow window(sf::VideoMode(800, 600), "TileMap Viewer");
-
-    sf::Texture tilesetTexture;
-    if (!tilesetTexture.loadFromFile(tilesetFilename)) {
-        cerr << "Erro ao carregar o tileset." << endl;
-        return;
-    }
-
-    sf::Sprite tileSprite(tilesetTexture);
-
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-
-        for (size_t row = 0; row < tileMap.size(); ++row) {
-            for (size_t col = 0; col < tileMap[row].size(); ++col) {
-                int tileNumber = tileMap[row][col];
-
-                int tilesPerRow = tilesetTexture.getSize().x / tileWidth;
-                int tu = tileNumber % tilesPerRow;
-                int tv = tileNumber / tilesPerRow;
-
-                tileSprite.setTextureRect(sf::IntRect(tu * tileWidth, tv * tileHeight, tileWidth, tileHeight));
-                tileSprite.setPosition(col * tileWidth, row * tileHeight);
-
-                window.draw(tileSprite);
-            }
-        }
-
-        window.display();
-    }
 }

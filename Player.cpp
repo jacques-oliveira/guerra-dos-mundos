@@ -4,11 +4,13 @@
 
 using namespace std;
 
-Player::Player() : _shape(sf::Vector2f(32,32)){
+Player::Player(){
 
-    _shape.setFillColor(sf::Color::Blue);
-    _shape.setOrigin(16,16);
-    _shape.setScale(5,5);
+    if(!playerTexture.loadFromFile("/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/jaco_sprite.png")){
+        return;
+    }
+    playerSprite.setTexture(playerTexture);
+    playerSprite.scale(0.25,0.25);
 }
 
 Player::~Player(){
@@ -18,7 +20,7 @@ Player::~Player(){
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(_shape, states);
+    target.draw(playerSprite, states);
 }
 
 void Player::processEvents(){
@@ -30,16 +32,16 @@ void Player::processEvents(){
 
 void Player::update(sf::Time deltaTime){
 
-    float seconds = deltaTime.asSeconds();
-    if(rotation != 0){
-        float angle = rotation *180*seconds;
-        _shape.rotate(angle);
-    }
-    if(isMoving){
-        float angle = _shape.getRotation() / 180 *M_PI -M_PI /2;
-        _velocity += sf::Vector2f(std::cos(angle),std::sin(angle)) * 60.f *seconds;
-    }
-    _shape.move(seconds * _velocity);
+    // float seconds = deltaTime.asSeconds();
+    // if(rotation != 0){
+    //     float angle = rotation *180*seconds;
+    //     _shape.rotate(angle);
+    // }
+    // if(isMoving){
+    //     float angle = _shape.getRotation() / 180 *M_PI -M_PI /2;
+    //     _velocity += sf::Vector2f(std::cos(angle),std::sin(angle)) * 60.f *seconds;
+    // }
+    // _shape.move(seconds * _velocity);
 }
 
 
