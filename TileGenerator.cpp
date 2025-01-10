@@ -2,12 +2,14 @@
 
 
 TileGenerator::TileGenerator(){
+    tileWidth = 64;
+    tileHeight = 64;
 }
 
 TileGenerator::~TileGenerator(){
 }
 
-void TileGenerator::generateTileMap(const string& tilesetFileName, short tileWidth, short tileHeight){
+void TileGenerator::generateTileMap(const string& tilesetFileName){
 
     if (!tilesetTexture.loadFromFile(tilesetFileName)) {
         cerr << "Erro ao carregar a textura: " << tilesetFileName << endl;
@@ -16,7 +18,7 @@ void TileGenerator::generateTileMap(const string& tilesetFileName, short tileWid
 
     sf::Image tilesetImage = tilesetTexture.copyToImage();
 
-    vector<TileBlock> tileBlockVector = extractTileBlock(tilesetImage, tileWidth, tileHeight);
+    vector<TileBlock> tileBlockVector = extractTileBlock(tilesetImage);
 
 
     for(auto& i : tileBlockVector){
@@ -31,34 +33,31 @@ const sf::Sprite& TileGenerator::getEnvSprite() const{
     return envSprite;
 }
 
-void TileGenerator::drawTiles(sf::RenderWindow& window, short tileWidth, short tileHeight){
-    // vector<vector<int>> tileMap = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
-    // std::cout<<tileMap.size()<<std::endl;
-    // window.clear();
-    // for (size_t i = 0; i < tileMap.size(); ++i) {
-    //     for (size_t j = 0; j < tileMap[i].size(); ++j) {
-    //         int tileIndex = tileMap[i][j];
-    //         if (tileIndex >= 0) {
-    //             tileBaseList[tileIndex].setPosition(j * tileWidth, i * tileHeight);
-    //             window.draw(tileBaseList[tileIndex]);
-    //         }
-    //     }
-    // }
-    // window.display();
+void TileGenerator::drawMap(sf::RenderTarget& target){
+    vector<vector<int>> txtMapFile = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
+
+    for(short i =0; i < txtMapFile.size(); ++i){
+        for(short j = 0; j < txtMapFile[i].size(); ++j){
+            sf::Sprite sprite;
+            sprite.setTexture(listBaseTexture[txtMapFile[i][j]]);
+            sprite.setPosition(j * tileWidth,i * tileHeight);
+            target.draw(sprite);
+        }
+    }
 }
 
-vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight) {
+vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image) {
     std::vector<TileBlock> blocks;
 
     // Percorre a imagem em blocos
-    for (unsigned int y = 0; y < image.getSize().y; y += blockHeight) {
-        for (unsigned int x = 0; x < image.getSize().x; x += blockWidth) {
+    for (unsigned int y = 0; y < image.getSize().y; y += tileHeight) {
+        for (unsigned int x = 0; x < image.getSize().x; x += tileWidth) {
             // Cria uma nova imagem para o bloco
             sf::Image blockImage;
-            blockImage.create(blockWidth, blockHeight);
+            blockImage.create(tileWidth, tileHeight);
 
             // Copia os pixels do bloco atual
-            blockImage.copy(image, 0, 0, sf::IntRect(x, y, blockWidth, blockHeight));
+            blockImage.copy(image, 0, 0, sf::IntRect(x, y, tileWidth, tileHeight));
 
             // Adiciona o bloco ao vetor
             blocks.emplace_back(blockImage);
@@ -80,11 +79,19 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
     string line;
     while (getline(inputFile, line)) {
         vector<int> row;
-        istringstream lineStream(line);
-        int tile;
-        while (lineStream >> tile) {
-            row.push_back(tile);
+        stringstream lineStream(line);
+        string value;
+
+        while (getline(lineStream, value, ',')) {
+
+            try {
+                row.push_back(stoi(value));
+            } catch (const invalid_argument& e) {
+                cerr << "Erro ao converter valor: " << value << endl;
+                row.push_back(0);  // Coloca um valor padrão em caso de erro
+            }
         }
+
         tileMap.push_back(row);
     }
 
