@@ -18,7 +18,7 @@ void TileGenerator::generateTileMap(const string& tilesetFileName){
 
     sf::Image tilesetImage = tilesetTexture.copyToImage();
 
-    vector<TileBlock> tileBlockVector = extractTileBlock(tilesetImage, tileWidth, tileHeight);
+    vector<TileBlock> tileBlockVector = extractTileBlock(tilesetImage);
 
 
     for(auto& i : tileBlockVector){
@@ -46,18 +46,18 @@ void TileGenerator::drawMap(sf::RenderTarget& target){
     }
 }
 
-vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight) {
+vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image) {
     std::vector<TileBlock> blocks;
 
     // Percorre a imagem em blocos
-    for (unsigned int y = 0; y < image.getSize().y; y += blockHeight) {
-        for (unsigned int x = 0; x < image.getSize().x; x += blockWidth) {
+    for (unsigned int y = 0; y < image.getSize().y; y += tileHeight) {
+        for (unsigned int x = 0; x < image.getSize().x; x += tileWidth) {
             // Cria uma nova imagem para o bloco
             sf::Image blockImage;
-            blockImage.create(blockWidth, blockHeight);
+            blockImage.create(tileWidth, tileHeight);
 
             // Copia os pixels do bloco atual
-            blockImage.copy(image, 0, 0, sf::IntRect(x, y, blockWidth, blockHeight));
+            blockImage.copy(image, 0, 0, sf::IntRect(x, y, tileWidth, tileHeight));
 
             // Adiciona o bloco ao vetor
             blocks.emplace_back(blockImage);
@@ -82,9 +82,8 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
         stringstream lineStream(line);
         string value;
 
-        // Separando por vírgula, considerando que os números são separados por vírgulas
         while (getline(lineStream, value, ',')) {
-            // Converte o valor de string para int e adiciona à linha
+
             try {
                 row.push_back(stoi(value));
             } catch (const invalid_argument& e) {

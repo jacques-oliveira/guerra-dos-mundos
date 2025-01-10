@@ -11,6 +11,8 @@ Player::Player(){
     }
     playerSprite.setTexture(playerTexture);
     playerSprite.scale(0.25,0.25);
+    playerSprite.setPosition(100,100);
+    life = 100;
 }
 
 Player::~Player(){
