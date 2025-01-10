@@ -16,17 +16,18 @@ public:
     TileGenerator();
     ~TileGenerator();
 
-    void generateTileMap(const string& tilesetFileName, short tileWidth, short tileHeight);
+    void generateTileMap(const string& tilesetFileName);
     static vector<vector<int>> loadTileTxtMatrix(const string& filename);
     static vector<TileBlock> extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight);
     vector<sf::Texture> listBaseTexture;
     const sf::Sprite& getEnvSprite() const;
-    void drawTiles(sf::RenderWindow&,short, short);
+    void drawMap(sf::RenderTarget&);
 
 private:
     sf::Sprite envSprite;
     sf::Texture tilesetTexture;
-
+    short tileWidth,tileHeight;
+    bool isMapDrew;
 };
 
 

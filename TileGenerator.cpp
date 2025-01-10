@@ -2,12 +2,14 @@
 
 
 TileGenerator::TileGenerator(){
+    tileWidth = 64;
+    tileHeight = 64;
 }
 
 TileGenerator::~TileGenerator(){
 }
 
-void TileGenerator::generateTileMap(const string& tilesetFileName, short tileWidth, short tileHeight){
+void TileGenerator::generateTileMap(const string& tilesetFileName){
 
     if (!tilesetTexture.loadFromFile(tilesetFileName)) {
         cerr << "Erro ao carregar a textura: " << tilesetFileName << endl;
@@ -31,20 +33,17 @@ const sf::Sprite& TileGenerator::getEnvSprite() const{
     return envSprite;
 }
 
-void TileGenerator::drawTiles(sf::RenderWindow& window, short tileWidth, short tileHeight){
-    // vector<vector<int>> tileMap = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
-    // std::cout<<tileMap.size()<<std::endl;
-    // window.clear();
-    // for (size_t i = 0; i < tileMap.size(); ++i) {
-    //     for (size_t j = 0; j < tileMap[i].size(); ++j) {
-    //         int tileIndex = tileMap[i][j];
-    //         if (tileIndex >= 0) {
-    //             tileBaseList[tileIndex].setPosition(j * tileWidth, i * tileHeight);
-    //             window.draw(tileBaseList[tileIndex]);
-    //         }
-    //     }
-    // }
-    // window.display();
+void TileGenerator::drawMap(sf::RenderTarget& target){
+    vector<vector<int>> txtMapFile = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
+
+    for(short i =0; i < txtMapFile.size(); ++i){
+        for(short j = 0; j < txtMapFile[i].size(); ++j){
+            sf::Sprite sprite;
+            sprite.setTexture(listBaseTexture[txtMapFile[i][j]]);
+            sprite.setPosition(j * tileWidth,i * tileHeight);
+            target.draw(sprite);
+        }
+    }
 }
 
 vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image, int blockWidth, int blockHeight) {
@@ -80,11 +79,20 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
     string line;
     while (getline(inputFile, line)) {
         vector<int> row;
-        istringstream lineStream(line);
-        int tile;
-        while (lineStream >> tile) {
-            row.push_back(tile);
+        stringstream lineStream(line);
+        string value;
+
+        // Separando por vírgula, considerando que os números são separados por vírgulas
+        while (getline(lineStream, value, ',')) {
+            // Converte o valor de string para int e adiciona à linha
+            try {
+                row.push_back(stoi(value));
+            } catch (const invalid_argument& e) {
+                cerr << "Erro ao converter valor: " << value << endl;
+                row.push_back(0);  // Coloca um valor padrão em caso de erro
+            }
         }
+
         tileMap.push_back(row);
     }
 

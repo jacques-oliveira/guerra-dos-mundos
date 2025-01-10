@@ -32,16 +32,16 @@ void Player::processEvents(){
 
 void Player::update(sf::Time deltaTime){
 
-    // float seconds = deltaTime.asSeconds();
-    // if(rotation != 0){
-    //     float angle = rotation *180*seconds;
-    //     _shape.rotate(angle);
-    // }
-    // if(isMoving){
-    //     float angle = _shape.getRotation() / 180 *M_PI -M_PI /2;
-    //     _velocity += sf::Vector2f(std::cos(angle),std::sin(angle)) * 60.f *seconds;
-    // }
-    // _shape.move(seconds * _velocity);
+    float seconds = deltaTime.asSeconds();
+    if(rotation != 0){
+        float angle = rotation *180*seconds;
+        playerSprite.rotate(angle);
+    }
+    if(isMoving){
+        float angle = playerSprite.getRotation() / 180 *M_PI -M_PI /2;
+        _velocity += sf::Vector2f(std::cos(angle),std::sin(angle)) * 60.f *seconds;
+    }
+    playerSprite.move(seconds * _velocity);
 }
 
 
