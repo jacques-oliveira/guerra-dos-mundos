@@ -47,7 +47,9 @@ void TileGenerator::drawMap(sf::RenderTarget& target){
 
 vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image) {
     std::vector<TileBlock> blocks;
-
+    sf::Image blockImage;
+    blockImage.create(tileWidth, tileHeight);
+    blocks.push_back(blockImage);
     for (unsigned int y = 0; y < image.getSize().y; y += tileHeight) {
         for (unsigned int x = 0; x < image.getSize().x; x += tileWidth) {
 
