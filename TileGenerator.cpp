@@ -119,5 +119,3 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
     }
     return tileMap;
 }
-
-vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
