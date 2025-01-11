@@ -19,7 +19,7 @@ public:
     void generateTileMap(const string& tilesetFileName);
     static vector<vector<int>> loadTileTxtMatrix(const string& filename);
     vector<TileBlock> extractTileBlock(const sf::Image& image);
-    vector<sf::Texture> listBaseTexture;
+
     const sf::Sprite& getEnvSprite() const;
     void drawMap(sf::RenderTarget&);
 
@@ -28,6 +28,8 @@ private:
     sf::Texture tilesetTexture;
     short tileWidth,tileHeight;
     bool isMapDrew;
+    vector<vector<int>> txtMapFile;
+    vector<sf::Texture> listBaseTexture;
 };
 
 

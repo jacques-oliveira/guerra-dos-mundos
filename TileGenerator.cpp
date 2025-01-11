@@ -4,6 +4,15 @@
 TileGenerator::TileGenerator(){
     tileWidth = 64;
     tileHeight = 64;
+    txtMapFile = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
+    // cout<<"Matrix"<<endl;
+    // for(int k = 0; k < txtMapFile.size(); ++k){
+    //     for (int l = 0; l < txtMapFile[k].size(); ++l){
+    //         cout<<"*"<<txtMapFile[k][l];
+    //     }
+    //     cout<<""<<endl;
+    // }
+    // cout<<txtMapFile[3][8]<<endl;
 }
 
 TileGenerator::~TileGenerator(){
@@ -34,7 +43,6 @@ const sf::Sprite& TileGenerator::getEnvSprite() const{
 }
 
 void TileGenerator::drawMap(sf::RenderTarget& target){
-    vector<vector<int>> txtMapFile = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
 
     for(short i =0; i < txtMapFile.size(); ++i){
         for(short j = 0; j < txtMapFile[i].size(); ++j){
@@ -77,24 +85,39 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
     }
 
     string line;
-    while (getline(inputFile, line)) {
-        vector<int> row;
-        stringstream lineStream(line);
-        string value;
+    try{
+        while (getline(inputFile, line)) {
+            vector<int> row;
 
-        while (getline(lineStream, value, ',')) {
+            string sig = "";
+            string strNum = "";
+            for(int i =0; i < line.size();  i++){
+                string c(1,line[i]);
+                if(c == "," || c == "" || c == " "){
+                    if(strNum != ""){
+                        int num = stoi(strNum);
+                        row.push_back(num);
+                    }
+                    strNum = "";
+                }else if(c != "-"){
 
-            try {
-                row.push_back(stoi(value));
-            } catch (const invalid_argument& e) {
-                cerr << "Erro ao converter valor: " << value << endl;
-                row.push_back(0);  // Coloca um valor padrão em caso de erro
+                    if(sig == "-"){
+                        c = sig + c;
+                        sig = "";
+                    }
+                    strNum += c;
+                }else{
+                    sig += c;
+                }
             }
+            tileMap.push_back(row);
         }
-
-        tileMap.push_back(row);
+        inputFile.close();
+        return tileMap;
+    }catch(const exception& e){
+        cerr<<"Erro ao criar tile"<<e.what()<<endl;
     }
-
-    inputFile.close();
     return tileMap;
 }
+
+vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
