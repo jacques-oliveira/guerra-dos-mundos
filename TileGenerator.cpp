@@ -5,14 +5,6 @@ TileGenerator::TileGenerator(){
     tileWidth = 64;
     tileHeight = 64;
     txtMapFile = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
-    // cout<<"Matrix"<<endl;
-    // for(int k = 0; k < txtMapFile.size(); ++k){
-    //     for (int l = 0; l < txtMapFile[k].size(); ++l){
-    //         cout<<"*"<<txtMapFile[k][l];
-    //     }
-    //     cout<<""<<endl;
-    // }
-    // cout<<txtMapFile[3][8]<<endl;
 }
 
 TileGenerator::~TileGenerator(){
@@ -28,7 +20,6 @@ void TileGenerator::generateTileMap(const string& tilesetFileName){
     sf::Image tilesetImage = tilesetTexture.copyToImage();
 
     vector<TileBlock> tileBlockVector = extractTileBlock(tilesetImage);
-
 
     for(auto& i : tileBlockVector){
         if(!i.isTransparent()){
@@ -56,22 +47,20 @@ void TileGenerator::drawMap(sf::RenderTarget& target){
 
 vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image) {
     std::vector<TileBlock> blocks;
-
-    // Percorre a imagem em blocos
+    sf::Image blockImage;
+    blockImage.create(tileWidth, tileHeight);
+    blocks.push_back(blockImage);
     for (unsigned int y = 0; y < image.getSize().y; y += tileHeight) {
         for (unsigned int x = 0; x < image.getSize().x; x += tileWidth) {
-            // Cria uma nova imagem para o bloco
+
             sf::Image blockImage;
             blockImage.create(tileWidth, tileHeight);
 
-            // Copia os pixels do bloco atual
             blockImage.copy(image, 0, 0, sf::IntRect(x, y, tileWidth, tileHeight));
 
-            // Adiciona o bloco ao vetor
             blocks.emplace_back(blockImage);
         }
     }
-
     return blocks;
 }
 
@@ -119,5 +108,3 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
     }
     return tileMap;
 }
-
-vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
