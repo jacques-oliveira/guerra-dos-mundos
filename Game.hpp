@@ -27,4 +27,5 @@ private:
     void render();
 
     sf::RenderWindow _window;
+    sf::View view;
 };

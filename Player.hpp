@@ -17,6 +17,7 @@ public :
     bool isMoving;
     float movementSpeed;
     void processEvents();
+    const sf::Sprite&  getPlayerSprite() const;
 
 private :
     float life;

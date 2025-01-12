@@ -7,6 +7,7 @@ Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
 
     char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
     tileGen.generateTileMap(path);
+    view = _window.getDefaultView();
 }
 
 Game::~Game(){
@@ -51,7 +52,9 @@ void Game::run(int frame_per_seconds){
     while(_window.isOpen()){
         processEvents();
         bool repaint = false;
-
+        view.setCenter(_player.getPlayerSprite().getPosition().x*60.f*0.005,_player.getPlayerSprite().getPosition().y*60.f*0.005);
+        view.move(300,200);
+        _window.setView(view);
         timeSinceLastUpdate += clock.restart();
         while(timeSinceLastUpdate > TimePerFrame){
             timeSinceLastUpdate -= TimePerFrame;

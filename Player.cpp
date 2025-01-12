@@ -55,6 +55,10 @@ void Player::update(sf::Time deltaTime){
     }
 }
 
+const sf::Sprite & Player::getPlayerSprite() const{
+    return playerSprite;
+}
+
 
 
 
