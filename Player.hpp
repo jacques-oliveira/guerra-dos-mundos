@@ -15,7 +15,7 @@ public :
 
     void update(sf::Time deltaTime);
     bool isMoving;
-    int rotation;
+    float movementSpeed;
     void processEvents();
 
 private :
@@ -24,4 +24,6 @@ private :
     sf::Sprite playerSprite;
     sf::Texture playerTexture;
     sf::Vector2f _velocity;
+    bool moveUp,moveDown,moveLeft, moveRight;
+
 };
