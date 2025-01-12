@@ -27,10 +27,10 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 void Player::processEvents(){
-    moveUp = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
-    moveDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
-    moveLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
-    moveRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
+    moveUp = sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+    moveDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+    moveLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+    moveRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D);
 }
 
 void Player::update(sf::Time deltaTime){
@@ -53,6 +53,10 @@ void Player::update(sf::Time deltaTime){
         _velocity = sf::Vector2f(movementSpeed,0);
         playerSprite.move(_velocity * 60.f *seconds);
     }
+}
+
+const sf::Sprite & Player::getPlayerSprite() const{
+    return playerSprite;
 }
 
 
