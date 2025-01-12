@@ -21,25 +21,19 @@ void Game::processEvents(){
             _window.close();
         }else if (event.type == sf::Event::KeyPressed)
         {
-            if (event.key.code == sf::Keyboard::Escape)
-                _window.close();
-            else if(event.key.code == sf::Keyboard::Up){
+            if(event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
+                event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right){
                 _player.isMoving = true;
-                std::cout<<"Up"<<std::endl;
             }
-            else if (event.key.code == sf::Keyboard::Left)
-                _player.rotation = -1;
-            else if (event.key.code == sf::Keyboard::Right)
-                _player.rotation = 1;
         }
         else if (event.type == sf::Event::KeyReleased)
         {
-            if(event.key.code == sf::Keyboard::Up)
+            if(event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
+                event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right
+            ){
+
                 _player.isMoving = false;
-            else if (event.key.code == sf::Keyboard::Left)
-                _player.rotation = 0;
-            else if (event.key.code == sf::Keyboard::Right)
-                _player.rotation = 0;
+            }
         }
     }
     _player.processEvents();
@@ -71,7 +65,7 @@ void Game::run(int frame_per_seconds){
 }
 
 void Game::update(sf::Time deltaTime){
-
+    _player.update(deltaTime);
 }
 
 void Game::render(){
