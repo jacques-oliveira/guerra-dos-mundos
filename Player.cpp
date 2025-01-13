@@ -36,10 +36,19 @@ void Player::processEvents(){
 void Player::update(sf::Time deltaTime){
 
     float seconds = deltaTime.asSeconds()*0.1;
-    float speed = 600.0f;
+
     // if(isMoving){
     //
     // }
+    move(seconds);
+}
+
+const sf::Sprite & Player::getPlayerSprite() const{
+    return playerSprite;
+}
+
+void Player::move(float seconds){
+    float speed = 600.0f;
     if(moveUp){
         _velocity = sf::Vector2f(0,-movementSpeed);
         playerSprite.move(_velocity * speed *seconds);
@@ -54,11 +63,6 @@ void Player::update(sf::Time deltaTime){
         playerSprite.move(_velocity * speed *seconds);
     }
 }
-
-const sf::Sprite & Player::getPlayerSprite() const{
-    return playerSprite;
-}
-
 
 
 
