@@ -11,8 +11,11 @@ public:
     Character();
     ~Character();
     string name;
-    virtual void move();
+    virtual void move() = 0;
     float getHealth();
+    void attack();
+    void defense();
 private:
     float health;
+    float damage;
 };
