@@ -57,10 +57,10 @@ void Game::run(int frame_per_seconds){
         sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
         sf::Vector2f currentCenter = view.getCenter();
 
-        sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.1f;
+        sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
         view.setCenter(smoothedCenter);
 
-        //view.move(-20,18);
+        view.move(10,5);
         _window.setView(view);
         timeSinceLastUpdate += clock.restart();
         while(timeSinceLastUpdate > TimePerFrame){
@@ -80,13 +80,9 @@ void Game::update(sf::Time deltaTime){
 }
 
 void Game::render(){
-    //const sf::Sprite& sprite = tileGen.getEnvSprite();
-    //sf::Sprite sp(tileGen.listBaseTexture[1]);
     _window.clear();
-    //_window.draw(sp);
     tileGen.drawMap(_window);
     _window.draw(_player);
-
     _window.display();
 }
 
