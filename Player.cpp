@@ -35,23 +35,23 @@ void Player::processEvents(){
 
 void Player::update(sf::Time deltaTime){
 
-    float seconds = deltaTime.asSeconds();
-
+    float seconds = deltaTime.asSeconds()*0.1;
+    float speed = 600.0f;
     // if(isMoving){
     //
     // }
     if(moveUp){
         _velocity = sf::Vector2f(0,-movementSpeed);
-        playerSprite.move(_velocity * 60.f *seconds);
+        playerSprite.move(_velocity * speed *seconds);
     }else if(moveDown){
         _velocity = sf::Vector2f(0,movementSpeed);
-        playerSprite.move(_velocity * 60.f *seconds);
+        playerSprite.move(_velocity * speed *seconds);
     }else if(moveLeft){
         _velocity = sf::Vector2f(-movementSpeed,0);
-        playerSprite.move(_velocity * 60.f *seconds);
+        playerSprite.move(_velocity * speed *seconds);
     }else if(moveRight){
         _velocity = sf::Vector2f(movementSpeed,0);
-        playerSprite.move(_velocity * 60.f *seconds);
+        playerSprite.move(_velocity * speed *seconds);
     }
 }
 
