@@ -52,8 +52,15 @@ void Game::run(int frame_per_seconds){
     while(_window.isOpen()){
         processEvents();
         bool repaint = false;
-        view.setCenter(_player.getPlayerSprite().getPosition().x*60.f*0.005,_player.getPlayerSprite().getPosition().y*60.f*0.005);
-        view.move(300,200);
+
+        sf::Vector2f playerPosition = _player.getPlayerSprite().getPosition();
+        sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+        sf::Vector2f currentCenter = view.getCenter();
+
+        sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.1f;
+        view.setCenter(smoothedCenter);
+
+        //view.move(-20,18);
         _window.setView(view);
         timeSinceLastUpdate += clock.restart();
         while(timeSinceLastUpdate > TimePerFrame){
@@ -64,6 +71,7 @@ void Game::run(int frame_per_seconds){
         if(repaint){
             render();
         }
+
     }
 }
 
