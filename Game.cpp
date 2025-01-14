@@ -7,7 +7,8 @@
 Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
 
     char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
-    tileGen.generateTileMap(path);
+    tileGen = new TileGenerator();
+    tileGen->generateTileMap(path);
     view = _window.getDefaultView();
     _enemy = new Enemy(Boss);
     _player = new Player();
@@ -86,7 +87,7 @@ void Game::update(sf::Time deltaTime){
 
 void Game::render(){
     _window.clear();
-    tileGen.drawMap(_window);
+    tileGen->drawMap(_window);
     _window.draw(_enemy->getEnemySprite());
     _window.draw(_player->getPlayerSprite());
     _window.display();

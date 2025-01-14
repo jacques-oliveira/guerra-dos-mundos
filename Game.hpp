@@ -21,7 +21,7 @@ public :
     Player* _player;
     Enemy* _enemy;
     sf::Sprite envSprite;
-    TileGenerator tileGen;
+    TileGenerator* tileGen;
 
 private:
     void processEvents();
