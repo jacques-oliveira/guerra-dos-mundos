@@ -10,11 +10,13 @@ Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
     tileGen.generateTileMap(path);
     view = _window.getDefaultView();
     _enemy = new Enemy(Boss);
+    _player = new Player();
     std::cout<<_enemy->enemytype<<std::endl;
 
 }
 
 Game::~Game(){
+    delete _enemy;
 }
 
 void Game::processEvents(){
@@ -27,7 +29,7 @@ void Game::processEvents(){
         {
             if(event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
                 event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right){
-                _player.isMoving = true;
+                _player->isMoving = true;
             }
         }
         else if (event.type == sf::Event::KeyReleased)
@@ -36,11 +38,11 @@ void Game::processEvents(){
                 event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right
             ){
 
-                _player.isMoving = false;
+                _player->isMoving = false;
             }
         }
     }
-    _player.processEvents();
+    _player->processEvents();
 }
 
 void Game::run(int frame_per_seconds){
@@ -56,7 +58,7 @@ void Game::run(int frame_per_seconds){
         processEvents();
         bool repaint = false;
 
-        sf::Vector2f playerPosition = _player.getPlayerSprite().getPosition();
+        sf::Vector2f playerPosition = _player->getPlayerSprite().getPosition();
         sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
         sf::Vector2f currentCenter = view.getCenter();
 
@@ -79,14 +81,14 @@ void Game::run(int frame_per_seconds){
 }
 
 void Game::update(sf::Time deltaTime){
-    _player.update(deltaTime);
+    _player->update(deltaTime);
 }
 
 void Game::render(){
     _window.clear();
     tileGen.drawMap(_window);
     _window.draw(_enemy->getEnemySprite());
-    _window.draw(_player);
+    _window.draw(_player->getPlayerSprite());
     _window.display();
 }
 
