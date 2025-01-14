@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
 #include "TileGenerator.hpp"
+#include "Enemy.hpp"
 
 class Game{
 
@@ -18,6 +19,7 @@ public :
     void run(int frame_per_seconds);
     void clean();
     Player _player;
+    Enemy* _enemy;
     sf::Sprite envSprite;
     TileGenerator tileGen;
 
