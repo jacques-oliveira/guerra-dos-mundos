@@ -20,7 +20,6 @@ public :
     void clean();
     Player* _player;
     Enemy* _enemy;
-    sf::Sprite envSprite;
     TileGenerator* tileGen;
 
 private:

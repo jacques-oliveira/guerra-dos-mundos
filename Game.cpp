@@ -18,6 +18,7 @@ Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
 
 Game::~Game(){
     delete _enemy;
+    delete _player;
 }
 
 void Game::processEvents(){
