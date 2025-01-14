@@ -4,12 +4,12 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 
-Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
-
+Game::Game()  {
+    _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
     char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
     tileGen = new TileGenerator();
     tileGen->generateTileMap(path);
-    view = _window.getDefaultView();
+    view = _window->getDefaultView();
     _enemy = new Enemy(Boss);
     _player = new Player();
     std::cout<<_enemy->enemytype<<std::endl;
@@ -19,14 +19,15 @@ Game::Game() : _window(sf::VideoMode(1024,768),"Guerra dos Mundos"){
 Game::~Game(){
     delete _enemy;
     delete _player;
+    delete _window;
 }
 
 void Game::processEvents(){
     sf::Event event;
 
-    while(_window.pollEvent(event)){
+    while(_window->pollEvent(event)){
         if( (event.type == sf::Event::Closed) or ( (event.type == sf::Event::KeyPressed) and (event.key.code == sf::Keyboard::Escape)) ){
-            _window.close();
+            _window->close();
         }else if (event.type == sf::Event::KeyPressed)
         {
             if(event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
@@ -53,10 +54,10 @@ void Game::run(int frame_per_seconds){
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
 
-    _window.setFramerateLimit(frame_per_seconds);
-    _window.setVerticalSyncEnabled(true);
+    _window->setFramerateLimit(frame_per_seconds);
+    _window->setVerticalSyncEnabled(true);
 
-    while(_window.isOpen()){
+    while(_window->isOpen()){
         processEvents();
         bool repaint = false;
 
@@ -68,7 +69,7 @@ void Game::run(int frame_per_seconds){
         view.setCenter(smoothedCenter);
 
         view.move(10,5);
-        _window.setView(view);
+        _window->setView(view);
         timeSinceLastUpdate += clock.restart();
         while(timeSinceLastUpdate > TimePerFrame){
             timeSinceLastUpdate -= TimePerFrame;
@@ -87,11 +88,11 @@ void Game::update(sf::Time deltaTime){
 }
 
 void Game::render(){
-    _window.clear();
-    tileGen->drawMap(_window);
-    _window.draw(_enemy->getEnemySprite());
-    _window.draw(_player->getPlayerSprite());
-    _window.display();
+    _window->clear();
+    tileGen->drawMap(*_window);
+    _window->draw(_enemy->getEnemySprite());
+    _window->draw(_player->getPlayerSprite());
+    _window->display();
 }
 
 void Game::clean(){

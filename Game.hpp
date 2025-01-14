@@ -27,6 +27,6 @@ private:
     void update(sf::Time deltaTime);
     void render();
 
-    sf::RenderWindow _window;
+    sf::RenderWindow* _window;
     sf::View view;
 };
