@@ -20,14 +20,13 @@ public :
     void clean();
     Player* _player;
     Enemy* _enemy;
-    sf::Sprite envSprite;
-    TileGenerator tileGen;
+    TileGenerator* tileGen;
 
 private:
     void processEvents();
     void update(sf::Time deltaTime);
     void render();
 
-    sf::RenderWindow _window;
+    sf::RenderWindow* _window;
     sf::View view;
 };
