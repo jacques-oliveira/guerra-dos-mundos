@@ -52,39 +52,36 @@ void Game::processEvents(){
             }
         }
         if(event.type == sf::Event::MouseButtonPressed){
-            if(event.mouseButton.button == sf::Mouse::Left){
+            if(event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == false){
                 cout<<"Mouse left click"<<endl;
                 //primeiro vértice do retângulo da seleção
-                isSelectingPlayer = true;
                 sf::Vector2f start = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
-                selectionStart = start;
-                selectionBox.setPosition(start);
-                selectionBox.setSize({0.f,0.f});
+                startSelection(start);
                 //moveSelectedPlayers(destination);
-            }else  if (event.mouseButton.button == sf::Mouse::Right){
+            }else  if (event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == true){
                 sf::Vector2f destination = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
                 //moveSelectedPlayers(destination);
+
+                cout<<"Moving player to destination"<<endl;
+            }
+            if(event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
+                _player->unselectPlayer(true);
+                cout<<"Unselect Player"<<endl;
             }
 
-        }
-        if(event.type == sf::Event::MouseButtonReleased){
-            if(event.mouseButton.button == sf::Mouse::Left){
-                cout<<"Mouse left released"<<endl;
-                //ultimo vértice do retângulo da seleção
-                sf::Vector2f end = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
-                isSelectingPlayer = false;
-                sf::FloatRect selectionArea(
-                    selectionBox.getPosition(),
-                    selectionBox.getSize()
-                );
-                //set player selected, player inside area
-                _player->setSelected(_player->isInside(selectionArea));
-            }
         }
 
         if(event.type == sf::Event::MouseMoved){
             if(isSelectingPlayer){
                 updateSelection(_window->mapPixelToCoords(sf::Mouse::getPosition(*_window)));
+            }
+        }
+
+        if(event.type == sf::Event::MouseButtonReleased){
+            if(event.mouseButton.button == sf::Mouse::Left){
+                cout<<"Mouse left released"<<endl;
+                //ultimo vértice do retângulo da seleção
+                endSelection();
             }
         }
     }
@@ -145,6 +142,13 @@ void Game::clean(){
 
 }
 
+void Game:: startSelection(sf::Vector2f& start){
+    isSelectingPlayer = true;
+    selectionStart = start;
+    selectionBox.setPosition(start);
+    selectionBox.setSize({0.f,0.f});
+}
+
 void Game::updateSelection(const sf::Vector2f& current){
     sf::Vector2f size = current - selectionStart;
     selectionBox.setSize(size);
@@ -154,5 +158,13 @@ void Game::updateSelection(const sf::Vector2f& current){
     });
 }
 
-
+void Game::endSelection(){
+    isSelectingPlayer = false;
+    sf::FloatRect selectionArea(
+        selectionBox.getPosition(),
+        selectionBox.getSize()
+    );
+    //set player selected, player inside area
+    _player->setSelected(_player->isInside(selectionArea));
+}
 

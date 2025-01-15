@@ -24,6 +24,8 @@ public :
     Enemy* _enemy;
     TileGenerator* tileGen;
     void setSelected(bool);
+    void startSelection(sf::Vector2f&);
+    void endSelection();
 
 private:
     void processEvents();

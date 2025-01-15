@@ -18,6 +18,7 @@ Player::Player(){
     shape.setRadius(10.f);
     shape.setFillColor(sf::Color::Green);
     shape.setPosition(100, 100);
+    selected = false;
 }
 
 Player::~Player(){
@@ -74,6 +75,15 @@ void Player::move(float seconds){
         _velocity = sf::Vector2f(movementSpeed,0);
         playerSprite.move(_velocity * speed *seconds);
     }
+}
+
+bool Player::isPlayerSelected(){
+    return selected;
+}
+
+void Player::unselectPlayer(bool rightMouseButton){
+    if(rightMouseButton)
+        selected = false;
 }
 
 

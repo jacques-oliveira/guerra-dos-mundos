@@ -20,6 +20,8 @@ public :
     const sf::Sprite&  getPlayerSprite() const;
     void setSelected(bool);
     bool isInside(const sf::FloatRect& selectionArea) const;
+    bool isPlayerSelected();
+    void unselectPlayer(bool);
 
 private :
     float life;
@@ -30,7 +32,4 @@ private :
     bool moveUp,moveDown,moveLeft, moveRight;
     void move(float);
     bool selected;
-
-
-
 };
