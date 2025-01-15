@@ -7,6 +7,8 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 
+using namespace std;
+
 class Game{
 
 public :
@@ -21,12 +23,21 @@ public :
     Player* _player;
     Enemy* _enemy;
     TileGenerator* tileGen;
+    void setSelected(bool);
+    void startSelection(sf::Vector2f&);
+    void endSelection();
 
 private:
     void processEvents();
     void update(sf::Time deltaTime);
     void render();
-
     sf::RenderWindow* _window;
     sf::View view;
+    bool isSelectingPlayer;
+    sf::RectangleShape selectionBox;
+    sf::Vector2f selectionStart;
+    void updateSelection(const sf::Vector2f& current);
+    bool isInside(const sf::FloatRect& selectionArea) const;
+
+
 };

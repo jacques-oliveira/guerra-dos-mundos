@@ -4,6 +4,7 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 
+
 Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
     char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
@@ -13,6 +14,12 @@ Game::Game()  {
     _enemy = new Enemy(Boss);
     _player = new Player();
     std::cout<<_enemy->enemytype<<std::endl;
+
+    // Configura o retângulo de seleção
+    selectionBox.setFillColor(sf::Color(0, 0, 255, 50)); // Azul translúcido
+    selectionBox.setOutlineThickness(1.f);
+    selectionBox.setOutlineColor(sf::Color::Blue);
+    isSelectingPlayer = false;
 
 }
 
@@ -42,6 +49,39 @@ void Game::processEvents(){
             ){
 
                 _player->isMoving = false;
+            }
+        }
+        if(event.type == sf::Event::MouseButtonPressed){
+            if(event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == false){
+                cout<<"Mouse left click"<<endl;
+                //primeiro vértice do retângulo da seleção
+                sf::Vector2f start = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
+                startSelection(start);
+                //moveSelectedPlayers(destination);
+            }else  if (event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == true){
+                sf::Vector2f destination = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
+                //moveSelectedPlayers(destination);
+
+                cout<<"Moving player to destination"<<endl;
+            }
+            if(event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
+                _player->unselectPlayer(true);
+                cout<<"Unselect Player"<<endl;
+            }
+
+        }
+
+        if(event.type == sf::Event::MouseMoved){
+            if(isSelectingPlayer){
+                updateSelection(_window->mapPixelToCoords(sf::Mouse::getPosition(*_window)));
+            }
+        }
+
+        if(event.type == sf::Event::MouseButtonReleased){
+            if(event.mouseButton.button == sf::Mouse::Left){
+                cout<<"Mouse left released"<<endl;
+                //ultimo vértice do retângulo da seleção
+                endSelection();
             }
         }
     }
@@ -92,6 +132,9 @@ void Game::render(){
     tileGen->drawMap(*_window);
     _window->draw(_enemy->getEnemySprite());
     _window->draw(_player->getPlayerSprite());
+    if(isSelectingPlayer){
+        _window->draw(selectionBox);
+    }
     _window->display();
 }
 
@@ -99,5 +142,29 @@ void Game::clean(){
 
 }
 
+void Game:: startSelection(sf::Vector2f& start){
+    isSelectingPlayer = true;
+    selectionStart = start;
+    selectionBox.setPosition(start);
+    selectionBox.setSize({0.f,0.f});
+}
 
+void Game::updateSelection(const sf::Vector2f& current){
+    sf::Vector2f size = current - selectionStart;
+    selectionBox.setSize(size);
+    selectionBox.setPosition({
+        min(selectionStart.x,  current.x),
+        min(selectionStart.y,current.y)
+    });
+}
+
+void Game::endSelection(){
+    isSelectingPlayer = false;
+    sf::FloatRect selectionArea(
+        selectionBox.getPosition(),
+        selectionBox.getSize()
+    );
+    //set player selected, player inside area
+    _player->setSelected(_player->isInside(selectionArea));
+}
 

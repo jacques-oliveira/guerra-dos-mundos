@@ -12,12 +12,16 @@ public :
 
     template<typename ...Args>
     void setPosition(Args&& ... args);
-
+    sf::CircleShape shape;
     void update(sf::Time deltaTime);
     bool isMoving;
     float movementSpeed;
     void processEvents();
     const sf::Sprite&  getPlayerSprite() const;
+    void setSelected(bool);
+    bool isInside(const sf::FloatRect& selectionArea) const;
+    bool isPlayerSelected();
+    void unselectPlayer(bool);
 
 private :
     float life;
@@ -27,5 +31,5 @@ private :
     sf::Vector2f _velocity;
     bool moveUp,moveDown,moveLeft, moveRight;
     void move(float);
-
+    bool selected;
 };

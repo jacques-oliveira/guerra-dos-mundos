@@ -14,12 +14,25 @@ Player::Player(){
     playerSprite.setPosition(100,100);
     this->movementSpeed = 4.f;
     life = 100;
+
+    shape.setRadius(10.f);
+    shape.setFillColor(sf::Color::Green);
+    shape.setPosition(100, 100);
+    selected = false;
 }
 
 Player::~Player(){
 
 }
 
+void Player::setSelected(bool isSelected){
+    selected = isSelected;
+
+}
+
+bool Player::isInside(const sf::FloatRect& selectionArea) const{
+    return selectionArea.intersects(shape.getGlobalBounds());
+}
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
@@ -62,6 +75,15 @@ void Player::move(float seconds){
         _velocity = sf::Vector2f(movementSpeed,0);
         playerSprite.move(_velocity * speed *seconds);
     }
+}
+
+bool Player::isPlayerSelected(){
+    return selected;
+}
+
+void Player::unselectPlayer(bool rightMouseButton){
+    if(rightMouseButton)
+        selected = false;
 }
 
 
