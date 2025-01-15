@@ -47,6 +47,13 @@ void Game::processEvents(){
         }else if(event.type == sf::Event::MouseButtonPressed){
             if(event.mouseButton.button == sf::Mouse::Left){
                 cout<<"Mouse left click"<<endl;
+                //primeiro vértice do retângulo da seleção
+            }
+
+        }else if(event.type == sf::Event::MouseButtonReleased){
+            if(event.mouseButton.button == sf::Mouse::Left){
+                cout<<"Mouse left released"<<endl;
+                //ultimo vértice do retângulo da seleção
             }
         }
     }
