@@ -1,12 +1,12 @@
 #include "Enemy.hpp"
 
 Enemy::Enemy(EnemyType type) : enemytype(type){
-    if(!enemyTexture.loadFromFile("/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/jaco_sprite.png")){
+    if(!enemyTexture.loadFromFile("/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/frame0000.png")){
         return;
     }
     enemySprite.setTexture(enemyTexture);
-    enemySprite.scale(0.25,0.25);
-    enemySprite.setPosition(200,200);
+    enemySprite.scale(0.5,0.5);
+    enemySprite.setPosition(600,240);
 }
 
 Enemy::~Enemy(){
