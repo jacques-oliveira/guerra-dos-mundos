@@ -7,6 +7,8 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 
+using namespace std;
+
 class Game{
 
 public :

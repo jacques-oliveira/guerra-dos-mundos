@@ -4,6 +4,7 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 
+
 Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
     char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
@@ -42,6 +43,10 @@ void Game::processEvents(){
             ){
 
                 _player->isMoving = false;
+            }
+        }else if(event.type == sf::Event::MouseButtonPressed){
+            if(event.mouseButton.button == sf::Mouse::Left){
+                cout<<"Mouse left click"<<endl;
             }
         }
     }
