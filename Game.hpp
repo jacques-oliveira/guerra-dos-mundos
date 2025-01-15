@@ -23,12 +23,19 @@ public :
     Player* _player;
     Enemy* _enemy;
     TileGenerator* tileGen;
+    void setSelected(bool);
 
 private:
     void processEvents();
     void update(sf::Time deltaTime);
     void render();
-
     sf::RenderWindow* _window;
     sf::View view;
+    bool isSelectingPlayer;
+    sf::RectangleShape selectionBox;
+    sf::Vector2f selectionStart;
+    void updateSelection(const sf::Vector2f& current);
+    bool isInside(const sf::FloatRect& selectionArea) const;
+
+
 };
