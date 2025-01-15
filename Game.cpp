@@ -52,20 +52,19 @@ void Game::processEvents(){
             }
         }
         if(event.type == sf::Event::MouseButtonPressed){
-            if(event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == false){
-                cout<<"Mouse left click"<<endl;
-                //primeiro vértice do retângulo da seleção
+            if(event.mouseButton.button == sf::Mouse::Left && selectionBox.getSize().y <= 0.f){
+                cout<<"Start selection"<<endl;
                 sf::Vector2f start = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
                 startSelection(start);
-                //moveSelectedPlayers(destination);
             }else  if (event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == true){
                 sf::Vector2f destination = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
                 //moveSelectedPlayers(destination);
-
-                cout<<"Moving player to destination"<<endl;
+                selectionBox.setSize({0.f,0.f});
+                cout<<"End Selection Moving player to destination"<<endl;
             }
             if(event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
                 _player->unselectPlayer(true);
+                selectionBox.setSize({0.f,0.f});
                 cout<<"Unselect Player"<<endl;
             }
 
