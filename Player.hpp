@@ -31,7 +31,6 @@ private :
     sf::Texture playerTexture;
     sf::Vector2f _velocity;
     bool moveUp,moveDown,moveLeft, moveRight;
-    void move(float);
     bool selected;
     sf::Vector2f destination;
     void updatePositionPlayer(float);

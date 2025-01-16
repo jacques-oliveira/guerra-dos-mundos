@@ -12,7 +12,7 @@ Player::Player(){
     playerSprite.setTexture(playerTexture);
     playerSprite.scale(0.25,0.25);
     playerSprite.setPosition(100,100);
-    this->movementSpeed = 100.f;
+    this->movementSpeed = 150.f;
     life = 100;
 
     shape.setRadius(10.f);
@@ -86,23 +86,6 @@ void Player::updatePositionPlayer(float deltaTime){
 
 const sf::Sprite & Player::getPlayerSprite() const{
     return playerSprite;
-}
-
-void Player::move(float seconds){
-    float speed = 600.0f;
-    if(moveUp){
-        _velocity = sf::Vector2f(0,-movementSpeed);
-        playerSprite.move(_velocity * speed *seconds);
-    }else if(moveDown){
-        _velocity = sf::Vector2f(0,movementSpeed);
-        playerSprite.move(_velocity * speed *seconds);
-    }else if(moveLeft){
-        _velocity = sf::Vector2f(-movementSpeed,0);
-        playerSprite.move(_velocity * speed *seconds);
-    }else if(moveRight){
-        _velocity = sf::Vector2f(movementSpeed,0);
-        playerSprite.move(_velocity * speed *seconds);
-    }
 }
 
 bool Player::isPlayerSelected(){
