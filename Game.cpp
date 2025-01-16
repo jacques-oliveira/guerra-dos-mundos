@@ -52,7 +52,7 @@ void Game::processEvents(){
             }
         }*/
         if(event.type == sf::Event::MouseButtonPressed){
-            if(event.mouseButton.button == sf::Mouse::Left && !_player->isPlayerSelected()){
+            if(event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == false){
                 cout<<"Start selection "<<_player->isPlayerSelected()<<endl;
                 sf::Vector2f start = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
                 startSelection(start);
@@ -63,11 +63,6 @@ void Game::processEvents(){
                 selectionBox.setSize({0.f,0.f});
                 cout<<"Moving player to destination "<<_player->isPlayerSelected()<<endl;
             }
-            // if(event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
-            //     _player->unselectPlayer(true);
-            //     selectionBox.setSize({0.f,0.f});
-            //     cout<<"Unselect Player"<<endl;
-            // }
 
         }else if(event.type == sf::Event::MouseMoved){
             if(isSelectingPlayer){
@@ -76,10 +71,15 @@ void Game::processEvents(){
             }
         }else if(event.type == sf::Event::MouseButtonReleased){
             if(event.mouseButton.button == sf::Mouse::Left){
-                cout<<"Mouse left released"<<endl;
-                //ultimo vértice do retângulo da seleção
-                endSelection();
+                if(isSelectingPlayer){
+                    endSelection();
+                    cout<<"Mouse left released "<<_player->isPlayerSelected()<<endl;
+                }
             }
+        }
+        if(event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
+            _player->unselectPlayer(true);
+            cout<<"Unselect Player"<<endl;
         }
     }
     _player->processEvents();
@@ -144,7 +144,7 @@ void Game:: startSelection(sf::Vector2f& start){
     selectionStart = start;
     selectionBox.setPosition(start);
     selectionBox.setSize({0.f,0.f});
-    _player->setSelected(true);
+    //_player->setSelected(true);
 }
 
 void Game::updateSelection(const sf::Vector2f& current){
