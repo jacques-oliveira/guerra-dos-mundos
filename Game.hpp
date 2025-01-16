@@ -41,4 +41,6 @@ private:
     void moveSelectedPlayers(sf::Vector2f&);
     void configureSelectionBox();
     void configureTileMap();
+    void updateViewSize(sf::View&);
+
 };

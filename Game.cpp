@@ -4,6 +4,7 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 
+constexpr float SIZE(1024.0f);
 
 Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
@@ -81,8 +82,8 @@ void Game::run(int frame_per_seconds){
 
         sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
         view.setCenter(smoothedCenter);
-
         view.move(10,5);
+        updateViewSize(view);
         _window->setView(view);
         timeSinceLastUpdate += clock.restart();
         while(timeSinceLastUpdate > TimePerFrame){
@@ -156,4 +157,9 @@ void Game::endSelection(){
 
 void Game::moveSelectedPlayers(sf::Vector2f& dest){
     _player->setDestination(dest);
+}
+
+void Game::updateViewSize(sf::View& view){
+    float ratio = (float)_window->getSize().y / (float)_window->getSize().x;
+    view.setSize(SIZE, SIZE * ratio);
 }
