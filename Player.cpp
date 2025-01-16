@@ -12,7 +12,7 @@ Player::Player(){
     playerSprite.setTexture(playerTexture);
     playerSprite.scale(0.25,0.25);
     playerSprite.setPosition(100,100);
-    this->movementSpeed = 100.f;
+    this->movementSpeed = 150.f;
     life = 100;
 
     shape.setRadius(10.f);
