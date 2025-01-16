@@ -7,10 +7,7 @@
 
 Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
-    char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
-
-    tileGen = new TileGenerator();
-    tileGen->generateTileMap(path);
+    configureTileMap();
     view = _window->getDefaultView();
     _enemy = new Enemy(Boss);
     _player = new Player();
@@ -120,11 +117,16 @@ void Game::clean(){
 }
 
 void Game::configureSelectionBox(){
-    // Configura o retângulo de seleção
     selectionBox.setFillColor(sf::Color(0, 0, 255, 25)); // Azul translúcido
     selectionBox.setOutlineThickness(1.f);
     selectionBox.setOutlineColor(sf::Color::Blue);
     isSelectingPlayer = false;
+}
+
+void Game::configureTileMap(){
+    char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
+    tileGen = new TileGenerator();
+    tileGen->generateTileMap(path);
 }
 
 void Game:: startSelection(sf::Vector2f& start){

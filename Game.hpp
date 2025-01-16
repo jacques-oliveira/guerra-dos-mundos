@@ -40,4 +40,5 @@ private:
     bool isInside(const sf::FloatRect& selectionArea) const;
     void moveSelectedPlayers(sf::Vector2f&);
     void configureSelectionBox();
+    void configureTileMap();
 };
