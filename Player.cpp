@@ -32,7 +32,7 @@ void Player::setSelected(bool isSelected){
 }
 
 bool Player::isInside(const sf::FloatRect& selectionArea) const{
-    return selectionArea.intersects(shape.getGlobalBounds());
+    return selectionArea.intersects(playerSprite.getGlobalBounds());
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
