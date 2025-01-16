@@ -88,23 +88,6 @@ const sf::Sprite & Player::getPlayerSprite() const{
     return playerSprite;
 }
 
-void Player::move(float seconds){
-    float speed = 600.0f;
-    if(moveUp){
-        _velocity = sf::Vector2f(0,-movementSpeed);
-        playerSprite.move(_velocity * speed *seconds);
-    }else if(moveDown){
-        _velocity = sf::Vector2f(0,movementSpeed);
-        playerSprite.move(_velocity * speed *seconds);
-    }else if(moveLeft){
-        _velocity = sf::Vector2f(-movementSpeed,0);
-        playerSprite.move(_velocity * speed *seconds);
-    }else if(moveRight){
-        _velocity = sf::Vector2f(movementSpeed,0);
-        playerSprite.move(_velocity * speed *seconds);
-    }
-}
-
 bool Player::isPlayerSelected(){
     return selected;
 }

@@ -35,22 +35,7 @@ void Game::processEvents(){
     while(_window->pollEvent(event)){
         if( (event.type == sf::Event::Closed) or ( (event.type == sf::Event::KeyPressed) and (event.key.code == sf::Keyboard::Escape)) ){
             _window->close();
-        }else/* if (event.type == sf::Event::KeyPressed)
-        {
-            if(event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
-                event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right){
-                _player->isMoving = true;
-            }
-        }
-        else if (event.type == sf::Event::KeyReleased)
-        {
-            if(event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
-                event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right
-            ){
-
-                _player->isMoving = false;
-            }
-        }*/
+        }else
         if(event.type == sf::Event::MouseButtonPressed){
             if(event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == false){
                 cout<<"Start selection "<<_player->isPlayerSelected()<<endl;
