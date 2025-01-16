@@ -12,13 +12,14 @@ Player::Player(){
     playerSprite.setTexture(playerTexture);
     playerSprite.scale(0.25,0.25);
     playerSprite.setPosition(100,100);
-    this->movementSpeed = 4.f;
+    this->movementSpeed = 100.f;
     life = 100;
 
     shape.setRadius(10.f);
     shape.setFillColor(sf::Color::Green);
     shape.setPosition(100, 100);
     selected = false;
+    isMoving = false;
 }
 
 Player::~Player(){
@@ -31,7 +32,7 @@ void Player::setSelected(bool isSelected){
 }
 
 bool Player::isInside(const sf::FloatRect& selectionArea) const{
-    return selectionArea.intersects(shape.getGlobalBounds());
+    return selectionArea.intersects(playerSprite.getGlobalBounds());
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -48,12 +49,39 @@ void Player::processEvents(){
 
 void Player::update(sf::Time deltaTime){
 
-    float seconds = deltaTime.asSeconds()*0.1;
+    float seconds = deltaTime.asSeconds();
 
-    // if(isMoving){
-    //
-    // }
-    move(seconds);
+    if(isMoving){
+        updatePositionPlayer(seconds);
+    }
+}
+
+void Player::setDestination(sf::Vector2f& dest){
+    sf::FloatRect bounds= playerSprite.getGlobalBounds();
+    sf::Vector2f spriteCenter(bounds.width/2.f, bounds.height/2.f);
+
+    destination = dest - spriteCenter;
+}
+
+void Player::updatePositionPlayer(float deltaTime){
+    sf::Vector2f currentPosition = playerSprite.getPosition();
+    sf::Vector2f direction = destination - currentPosition;
+
+    float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if(distance > 1.f){
+        direction/= distance;
+        float moveDistance = movementSpeed * deltaTime;
+
+        if (moveDistance >= distance){
+            playerSprite.setPosition(destination);
+            isMoving = false;
+        }else{
+            playerSprite.move(direction * moveDistance);
+        }
+    }else{
+        playerSprite.setPosition(destination);
+        isMoving = false;
+    }
 }
 
 const sf::Sprite & Player::getPlayerSprite() const{
