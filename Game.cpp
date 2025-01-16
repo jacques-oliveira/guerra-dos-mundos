@@ -35,7 +35,7 @@ void Game::processEvents(){
     while(_window->pollEvent(event)){
         if( (event.type == sf::Event::Closed) or ( (event.type == sf::Event::KeyPressed) and (event.key.code == sf::Keyboard::Escape)) ){
             _window->close();
-        }else if (event.type == sf::Event::KeyPressed)
+        }else/* if (event.type == sf::Event::KeyPressed)
         {
             if(event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
                 event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right){
@@ -50,33 +50,30 @@ void Game::processEvents(){
 
                 _player->isMoving = false;
             }
-        }
+        }*/
         if(event.type == sf::Event::MouseButtonPressed){
-            if(event.mouseButton.button == sf::Mouse::Left && selectionBox.getSize().y <= 0.f){
+            if(event.mouseButton.button == sf::Mouse::Left){
                 cout<<"Start selection"<<endl;
                 sf::Vector2f start = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
                 startSelection(start);
-            }else  if (event.mouseButton.button == sf::Mouse::Left && _player->isPlayerSelected() == true){
+            }else  if (event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
                 sf::Vector2f destination = _window->mapPixelToCoords(sf::Mouse::getPosition(*_window));
-                //moveSelectedPlayers(destination);
+                _player->isMoving = true;
+                moveSelectedPlayers(destination);
                 selectionBox.setSize({0.f,0.f});
-                cout<<"End Selection Moving player to destination"<<endl;
+                cout<<"Moving player to destination"<<endl;
             }
-            if(event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
-                _player->unselectPlayer(true);
-                selectionBox.setSize({0.f,0.f});
-                cout<<"Unselect Player"<<endl;
-            }
+            // if(event.mouseButton.button == sf::Mouse::Right && _player->isPlayerSelected()){
+            //     _player->unselectPlayer(true);
+            //     selectionBox.setSize({0.f,0.f});
+            //     cout<<"Unselect Player"<<endl;
+            // }
 
-        }
-
-        if(event.type == sf::Event::MouseMoved){
+        }else if(event.type == sf::Event::MouseMoved){
             if(isSelectingPlayer){
                 updateSelection(_window->mapPixelToCoords(sf::Mouse::getPosition(*_window)));
             }
-        }
-
-        if(event.type == sf::Event::MouseButtonReleased){
+        }else if(event.type == sf::Event::MouseButtonReleased){
             if(event.mouseButton.button == sf::Mouse::Left){
                 cout<<"Mouse left released"<<endl;
                 //ultimo vértice do retângulo da seleção
@@ -167,3 +164,6 @@ void Game::endSelection(){
     _player->setSelected(_player->isInside(selectionArea));
 }
 
+void Game::moveSelectedPlayers(sf::Vector2f& dest){
+    _player->setDestination(dest);
+}

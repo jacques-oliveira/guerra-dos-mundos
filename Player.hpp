@@ -22,6 +22,7 @@ public :
     bool isInside(const sf::FloatRect& selectionArea) const;
     bool isPlayerSelected();
     void unselectPlayer(bool);
+    void setDestination(sf::Vector2f&);
 
 private :
     float life;
@@ -32,4 +33,6 @@ private :
     bool moveUp,moveDown,moveLeft, moveRight;
     void move(float);
     bool selected;
+    sf::Vector2f destination;
+    void updatePositionPlayer(float);
 };

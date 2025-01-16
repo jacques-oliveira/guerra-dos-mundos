@@ -38,6 +38,6 @@ private:
     sf::Vector2f selectionStart;
     void updateSelection(const sf::Vector2f& current);
     bool isInside(const sf::FloatRect& selectionArea) const;
-
+    void moveSelectedPlayers(sf::Vector2f&);
 
 };
