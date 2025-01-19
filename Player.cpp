@@ -16,7 +16,7 @@ Player::Player(){
     life = 100;
 
     shape.setRadius(10.f);
-    shape.setFillColor(sf::Color::Green);
+    shape.setFillColor(sf::Color::Yellow);
     shape.setPosition(100, 100);
     selected = false;
     isMoving = false;

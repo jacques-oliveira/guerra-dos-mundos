@@ -1,13 +1,13 @@
-#ifndef PLAY_STATE_HPP
-#define PLAY_STATE_HPP
+#ifndef FASE_HPP
+#define FASE_HPP
 
 #include "GameState.hpp"
 #include "../Player.hpp"
 
-class PlayState : public GameState{
+class Fase : public GameState{
 public:
-    PlayState(const std::string& levelName);
-    ~PlayState() override = default;
+    Fase(const std::string& levelName);
+    ~Fase() override = default;
 
     void processEvents(sf::RenderWindow & window) override;
     void update() override;

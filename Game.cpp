@@ -4,7 +4,7 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 #include "UI/MainMenuState.hpp"
-#include "UI/PlayState.hpp"
+#include "UI/Fase.hpp"
 
 constexpr float SIZE(1024.0f);
 
@@ -17,6 +17,8 @@ Game::Game()  {
 
     configureSelectionBox();
     states.push(std::make_unique<MainMenuState>());
+    isRunning = false;
+
 }
 
 Game::~Game(){
@@ -65,46 +67,55 @@ void Game::processEvents(){
     }
     _player->processEvents();
 }
-//run
-/*
- * run
+
+// void Game::run(int frame_per_seconds){
+//
+//     sf::Clock clock;
+//     sf::Time timeSinceLastUpdate = sf::Time::Zero;
+//     sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
+//
+//     _window->setFramerateLimit(frame_per_seconds);
+//     _window->setVerticalSyncEnabled(true);
+//
+//     while(_window->isOpen()){
+//         //processEvents();
+//
+//         if(!states.empty()){
+//             auto& currentState = *states.top();
+//             currentState.processEvents(*_window);
+//             bool repaint = false;
+//
+//             // sf::Vector2f playerPosition = _player->getPlayerSprite().getPosition();
+//             // sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+//             // sf::Vector2f currentCenter = view.getCenter();
+//             //
+//             // sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
+//             // view.setCenter(smoothedCenter);
+//             // view.move(10,5);
+//             // updateViewSize(view);
+//             // _window->setView(view);
+//
+//             timeSinceLastUpdate += clock.restart();
+//             while(timeSinceLastUpdate > TimePerFrame){
+//                 timeSinceLastUpdate -= TimePerFrame;
+//                 repaint = true;
+//                 //update(TimePerFrame);
+//                 currentState.update();
+//             }
+//             if(repaint){
+//                 //render();
+//                 handleStateChanges();
+//                 currentState.render(*_window);
+//             }
+//
+//         }else {
+//             isRunning = false;
+//             cout<<"states empty"<<endl;
+//         }
+//     }
+// }
+
 void Game::run(int frame_per_seconds){
-
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
-    sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
-
-    _window->setFramerateLimit(frame_per_seconds);
-    _window->setVerticalSyncEnabled(true);
-
-    while(_window->isOpen()){
-        processEvents();
-        bool repaint = false;
-
-        sf::Vector2f playerPosition = _player->getPlayerSprite().getPosition();
-        sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
-        sf::Vector2f currentCenter = view.getCenter();
-
-        sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
-        view.setCenter(smoothedCenter);
-        view.move(10,5);
-        updateViewSize(view);
-        _window->setView(view);
-        timeSinceLastUpdate += clock.restart();
-        while(timeSinceLastUpdate > TimePerFrame){
-            timeSinceLastUpdate -= TimePerFrame;
-            repaint = true;
-            update(TimePerFrame);
-        }
-        if(repaint){
-            render();
-        }
-
-    }
-}
-*/
-
-void Game::run(int frame){
     while (_window->isOpen() && !states.empty()) {
         auto& currentState = states.top();
 
@@ -115,6 +126,7 @@ void Game::run(int frame){
         handleStateChanges();
     }
 }
+
 void Game::handleStateChanges() {
     auto& currentState = states.top();
 
@@ -125,7 +137,7 @@ void Game::handleStateChanges() {
         }
     } else if (currentState->shouldContinue()) {
         if (dynamic_cast<MainMenuState*>(currentState.get())) {
-           changeState(std::make_unique<PlayState>("Phase 1"));
+           changeState(std::make_unique<Fase>("Phase 1"));
         }/* else if (dynamic_cast<PlayState*>(currentState.get())) {
             changeState(std::make_unique<GameOverState>(true)); // Fim da fase 1
         } else if (dynamic_cast<GameOverState*>(currentState.get())) {
