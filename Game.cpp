@@ -4,7 +4,7 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 #include "UI/MainMenuState.hpp"
-#include "UI/Fase.hpp"
+#include "UI/Fase1.hpp"
 
 constexpr float SIZE(1024.0f);
 
@@ -137,7 +137,7 @@ void Game::handleStateChanges() {
         }
     } else if (currentState->shouldContinue()) {
         if (dynamic_cast<MainMenuState*>(currentState.get())) {
-           changeState(std::make_unique<Fase>("Phase 1"));
+           changeState(std::make_unique<Fase1>("Phase 1"));
         }/* else if (dynamic_cast<PlayState*>(currentState.get())) {
             changeState(std::make_unique<GameOverState>(true)); // Fim da fase 1
         } else if (dynamic_cast<GameOverState*>(currentState.get())) {

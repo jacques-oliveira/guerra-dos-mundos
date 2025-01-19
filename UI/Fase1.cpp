@@ -1,8 +1,8 @@
 
-#include "Fase.hpp"
+#include "Fase1.hpp"
 #include <stdexcept>
 
-Fase::Fase(const std::string& levelName)
+Fase1::Fase1(const std::string& levelName)
 : levelCompleted(false), exitGame(false) {
     if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
         throw std::runtime_error("Erro ao carregar fonte");
@@ -15,7 +15,7 @@ Fase::Fase(const std::string& levelName)
     levelText.setPosition(10, 10);
 }
 
-void Fase::processEvents(sf::RenderWindow& window) {
+void Fase1::processEvents(sf::RenderWindow& window) {
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
@@ -26,22 +26,22 @@ void Fase::processEvents(sf::RenderWindow& window) {
     player.handleInput();
 }
 
-void Fase::update() {
+void Fase1::update() {
     //player.update();
     // Lógica de fase aqui
 }
 
-void Fase::render(sf::RenderWindow& window) {
+void Fase1::render(sf::RenderWindow& window) {
     window.clear();
     window.draw(levelText);
     player.render(window);
     window.display();
 }
 
-bool Fase::shouldContinue() const {
+bool Fase1::shouldContinue() const {
     return levelCompleted;
 }
 
-bool Fase::shouldExit() const {
+bool Fase1::shouldExit() const {
     return exitGame;
 }

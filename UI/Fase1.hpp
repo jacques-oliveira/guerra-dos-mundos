@@ -4,10 +4,10 @@
 #include "GameState.hpp"
 #include "../Player.hpp"
 
-class Fase : public GameState{
+class Fase1 : public GameState{
 public:
-    Fase(const std::string& levelName);
-    ~Fase() override = default;
+    Fase1(const std::string& levelName);
+    ~Fase1() override = default;
 
     void processEvents(sf::RenderWindow & window) override;
     void update() override;
