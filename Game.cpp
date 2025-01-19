@@ -125,7 +125,7 @@ void Game::configureSelectionBox(){
 }
 
 void Game::configureTileMap(){
-    char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
+    char path[100] =  {"Assets/Textures/forest.png\0"};
     tileGen = new TileGenerator();
     tileGen->generateTileMap(path);
 }

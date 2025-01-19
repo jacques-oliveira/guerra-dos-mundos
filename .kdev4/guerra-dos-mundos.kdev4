@@ -1,6 +1,3 @@
-[Buildset]
-BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x02\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00"\x00g\x00u\x00e\x00r\x00r\x00a\x00-\x00d\x00o\x00s\x00-\x00m\x00u\x00n\x00d\x00o\x00s\x00\x00\x00\x0b\x00\x00\x00\x00\x02\x00\x00\x00"\x00g\x00u\x00e\x00r\x00r\x00a\x00-\x00d\x00o\x00s\x00-\x00m\x00u\x00n\x00d\x00o\x00s\x00\x00\x00"\x00g\x00u\x00e\x00r\x00r\x00a\x00-\x00d\x00o\x00s\x00-\x00m\x00u\x00n\x00d\x00o\x00s)
-
 [CMake]
 Build Directory Count=1
 Current Build Directory Index-Host System=0
@@ -14,17 +11,6 @@ Environment Profile=
 Extra Arguments=
 Install Directory=/usr/local
 Runtime=Host System
-
-[CustomDefinesAndIncludes][ProjectPath0]
-Path=.
-parseAmbiguousAsCPP=true
-parserArguments=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c++11
-parserArgumentsC=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c99
-parserArgumentsCuda=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -std=c++11
-parserArgumentsOpenCL=-ferror-limit=100 -fspell-checking -Wdocumentation -Wunused-parameter -Wunreachable-code -Wall -cl-std=CL1.1
-
-[CustomDefinesAndIncludes][ProjectPath0][Compiler]
-Name=Clang
 
 [Launch]
 Launch Configurations=Launch Configuration 0
@@ -45,7 +31,7 @@ External Terminal=konsole --noclose --workdir %workdir -e %exe
 Kill Before Executing Again=4194304
 Project Target=guerra-dos-mundos,guerra-dos-mundos
 Use External Terminal=false
-Working Directory=
+Working Directory=file:///home/jacques/Documents/game-development/guerra-dos-mundos
 isExecutable=false
 
 [Project]

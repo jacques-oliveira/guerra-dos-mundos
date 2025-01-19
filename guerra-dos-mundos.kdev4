@@ -1,3 +1,4 @@
 [Project]
-Name=guerra-dos-mundos
+CreatedFrom=CMakeLists.txt
 Manager=KDevCMakeManager
+Name=guerra-dos-mundos
