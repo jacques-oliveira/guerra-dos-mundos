@@ -10,21 +10,21 @@ constexpr float SIZE(1024.0f);
 
 Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
-    configureTileMap();
-    view = _window->getDefaultView();
-    _enemy = new Enemy(Boss);
-    _player = new Player();
+    //configureTileMap();
+    //view = _window->getDefaultView();
+    //_enemy = new Enemy(Boss);
+    //_player = new Player();
 
-    configureSelectionBox();
+    //configureSelectionBox();
     states.push(std::make_unique<MainMenuState>());
     isRunning = false;
 
 }
 
 Game::~Game(){
-    delete _enemy;
-    delete _player;
-    delete _window;
+    // delete _enemy;
+    // delete _player;
+    // delete _window;
 }
 
 void Game::processEvents(){
@@ -129,36 +129,43 @@ void Game::run(int frame_per_seconds){
 
 void Game::handleStateChanges() {
     auto& currentState = states.top();
-
-    if (currentState->shouldExit()) {
-        states.pop();
-        if (states.empty()) {
-            _window->close();
-        }
-    } else if (currentState->shouldContinue()) {
-        if (dynamic_cast<MainMenuState*>(currentState.get())) {
-           changeState(std::make_unique<Fase1>("Phase 1"));
-        }/* else if (dynamic_cast<PlayState*>(currentState.get())) {
-            changeState(std::make_unique<GameOverState>(true)); // Fim da fase 1
-        } else if (dynamic_cast<GameOverState*>(currentState.get())) {
-            if (currentState->shouldContinue()) {
-                changeState(std::make_unique<PlayState>("Phase 2"));
+    try{
+        if (currentState->shouldExit()) {
+            states.pop();
+            if (states.empty()) {
+                _window->close();
             }
-        }*/
+        } else if (currentState->shouldContinue()) {
+            if (dynamic_cast<MainMenuState*>(currentState.get())) {
+                changeState(std::make_unique<Fase1>("Phase 1"));
+            }/* else if (dynamic_cast<PlayState*>(currentState.get())) {
+                changeState(std::make_unique<GameOverState>(true)); // Fim da fase 1
+            } else if (dynamic_cast<GameOverState*>(currentState.get())) {
+                if (currentState->shouldContinue()) {
+                    changeState(std::make_unique<PlayState>("Phase 2"));
+                }
+            }*/
+            else{
+                throw runtime_error("Estado inválido!");
+            }
+        }
+
+    }catch(exception& ex){
+        cerr <<"Não foi possivel manipulas os estados"<<endl;
     }
 }
 void Game::update(sf::Time deltaTime){
-    _player->update(deltaTime);
+    //_player->update(deltaTime);
 }
 
 void Game::render(){
     _window->clear();
-    tileGen->drawMap(*_window);
-    _window->draw(_enemy->getEnemySprite());
-    _window->draw(_player->getPlayerSprite());
-    if(isSelectingPlayer){
-        _window->draw(selectionBox);
-    }
+    //tileGen->drawMap(*_window);
+    //_window->draw(_enemy->getEnemySprite());
+    //_window->draw(_player->getPlayerSprite());
+    // if(isSelectingPlayer){
+    //     _window->draw(selectionBox);
+    // }
     _window->display();
 }
 
