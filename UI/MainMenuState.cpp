@@ -3,4 +3,9 @@
 
 #include "MainMenuState.hpp"
 
+MainMenuSate::MainMenuSate(): selectedOption(0), continueGame(false), exitGame(false){
+
+}
+
+
 #endif
