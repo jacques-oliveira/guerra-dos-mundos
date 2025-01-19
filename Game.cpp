@@ -4,6 +4,7 @@
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
 #include "UI/MainMenuState.hpp"
+#include "UI/PlayState.hpp"
 
 constexpr float SIZE(1024.0f);
 
@@ -64,7 +65,9 @@ void Game::processEvents(){
     }
     _player->processEvents();
 }
-
+//run
+/*
+ * run
 void Game::run(int frame_per_seconds){
 
     sf::Clock clock;
@@ -99,7 +102,39 @@ void Game::run(int frame_per_seconds){
 
     }
 }
+*/
 
+void Game::run(int frame){
+    while (_window->isOpen() && !states.empty()) {
+        auto& currentState = states.top();
+
+        currentState->processEvents(*_window);
+        currentState->update();
+        currentState->render(*_window);
+
+        handleStateChanges();
+    }
+}
+void Game::handleStateChanges() {
+    auto& currentState = states.top();
+
+    if (currentState->shouldExit()) {
+        states.pop();
+        if (states.empty()) {
+            _window->close();
+        }
+    } else if (currentState->shouldContinue()) {
+        if (dynamic_cast<MainMenuState*>(currentState.get())) {
+           changeState(std::make_unique<PlayState>("Phase 1"));
+        }/* else if (dynamic_cast<PlayState*>(currentState.get())) {
+            changeState(std::make_unique<GameOverState>(true)); // Fim da fase 1
+        } else if (dynamic_cast<GameOverState*>(currentState.get())) {
+            if (currentState->shouldContinue()) {
+                changeState(std::make_unique<PlayState>("Phase 2"));
+            }
+        }*/
+    }
+}
 void Game::update(sf::Time deltaTime){
     _player->update(deltaTime);
 }
@@ -113,6 +148,13 @@ void Game::render(){
         _window->draw(selectionBox);
     }
     _window->display();
+}
+
+void Game::changeState(std::unique_ptr<GameState> newState) {
+    if (!states.empty()) {
+        states.pop();
+    }
+    states.push(std::move(newState));
 }
 
 void Game::clean(){

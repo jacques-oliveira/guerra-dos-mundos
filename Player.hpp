@@ -23,6 +23,9 @@ public :
     bool isPlayerSelected();
     void unselectPlayer(bool);
     void setDestination(sf::Vector2f&);
+    void render(sf::RenderWindow& window);
+    void handleInput();
+
 
 private :
     float life;
@@ -34,4 +37,5 @@ private :
     bool selected;
     sf::Vector2f destination;
     void updatePositionPlayer(float);
+    float speed;
 };

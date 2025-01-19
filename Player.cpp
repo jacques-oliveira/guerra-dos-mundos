@@ -20,6 +20,7 @@ Player::Player(){
     shape.setPosition(100, 100);
     selected = false;
     isMoving = false;
+    speed = 10.f;
 }
 
 Player::~Player(){
@@ -38,6 +39,25 @@ bool Player::isInside(const sf::FloatRect& selectionArea) const{
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(playerSprite, states);
+}
+
+void Player::render(sf::RenderWindow& window) {
+    window.draw(shape);
+}
+
+void Player::handleInput() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        shape.move(0, -speed * 0.016f);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        shape.move(0, speed * 0.016f);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        shape.move(-speed * 0.016f, 0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        shape.move(speed * 0.016f, 0);
+    }
 }
 
 void Player::processEvents(){

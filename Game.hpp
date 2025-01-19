@@ -47,4 +47,5 @@ private:
     std::stack<std::unique_ptr<GameState>> states;
     void changeState(std::unique_ptr<GameState> newState);
     void processStateChanges();
+    void handleStateChanges();
 };
