@@ -9,6 +9,11 @@ class MainMenuSate : public GameState{
 public:
     MainMenuSate();
     ~MainMenuSate() override = default;
+    void processEvents(sf::RenderWindow & window) override;
+    void update() override;
+    void render(sf::RenderWindow & window) override;
+    bool shouldContinue() const override;
+    bool shouldExit() const override;
 
 private:
     sf::Font font;
