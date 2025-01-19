@@ -3,6 +3,7 @@
 #include "Player.hpp"
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
+#include "UI/MainMenuState.hpp"
 
 constexpr float SIZE(1024.0f);
 
@@ -14,6 +15,7 @@ Game::Game()  {
     _player = new Player();
 
     configureSelectionBox();
+    states.push(std::make_unique<MainMenuState>());
 }
 
 Game::~Game(){

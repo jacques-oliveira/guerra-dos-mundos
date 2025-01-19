@@ -2,8 +2,9 @@
 #define MAIN_MENU_STATE_CPP
 
 #include "MainMenuState.hpp"
+#include<stdexcept>
 
-MainMenuSate::MainMenuSate(): selectedOption(0), continueGame(false), exitGame(false){
+MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame(false){
     if(!font.loadFromFile("Assets/Fonts/Good-Game.ttf")){
         throw std::runtime_error("Erro ao carregar fonte");
     }
@@ -23,7 +24,7 @@ MainMenuSate::MainMenuSate(): selectedOption(0), continueGame(false), exitGame(f
     }
 }
 
-void MainMenuSate::processEvents(sf::RenderWindow& window){
+void MainMenuState::processEvents(sf::RenderWindow& window){
     sf::Event event;
     while(window.pollEvent(event)){
         if(event.type == sf::Event::Closed){
@@ -49,10 +50,10 @@ void MainMenuSate::processEvents(sf::RenderWindow& window){
     }
 }
 
-void MainMenuSate::update(){
+void MainMenuState::update(){
 }
 
-void MainMenuSate::render(sf::RenderWindow& window){
+void MainMenuState::render(sf::RenderWindow& window){
     window.clear();
     window.draw(title);
     for(const auto& option: options){
@@ -61,17 +62,17 @@ void MainMenuSate::render(sf::RenderWindow& window){
     window.display();
 }
 
-void MainMenuSate::updateOptionColors(){
+void MainMenuState::updateOptionColors(){
     for(size_t i = 0; i < options.size();++i){
         options[i].setFillColor(i == selectedOption ? sf::Color::Red: sf::Color::White);
     }
 }
 
-bool MainMenuSate::shouldContinue() const{
+bool MainMenuState::shouldContinue() const{
     return continueGame;
 }
 
-bool MainMenuSate::shouldExit() const{
+bool MainMenuState::shouldExit() const{
     return exitGame;
 }
 

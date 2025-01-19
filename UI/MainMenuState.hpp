@@ -5,10 +5,10 @@
 #include <vector>
 #include <string>
 
-class MainMenuSate : public GameState{
+class MainMenuState : public GameState{
 public:
-    MainMenuSate();
-    ~MainMenuSate() override = default;
+    MainMenuState();
+    ~MainMenuState() override = default;
     void processEvents(sf::RenderWindow & window) override;
     void update() override;
     void render(sf::RenderWindow & window) override;
