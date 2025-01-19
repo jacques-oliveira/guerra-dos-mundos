@@ -6,8 +6,9 @@
 #include "Player.hpp"
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
-
-using namespace std;
+#include "UI/GameState.hpp"
+#include <memory>
+#include <stack>
 
 class Game{
 
@@ -43,4 +44,9 @@ private:
     void configureTileMap();
     void updateViewSize(sf::View&);
 
+    std::stack<std::unique_ptr<GameState>> states;
+    void changeState(std::unique_ptr<GameState> newState);
+    void processStateChanges();
+    void handleStateChanges();
+    bool isRunning;
 };

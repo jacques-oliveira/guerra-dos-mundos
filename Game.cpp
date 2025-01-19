@@ -3,6 +3,8 @@
 #include "Player.hpp"
 #include "TileGenerator.hpp"
 #include "Enemy.hpp"
+#include "UI/MainMenuState.hpp"
+#include "UI/Fase1.hpp"
 
 constexpr float SIZE(1024.0f);
 
@@ -14,6 +16,9 @@ Game::Game()  {
     _player = new Player();
 
     configureSelectionBox();
+    states.push(std::make_unique<MainMenuState>());
+    isRunning = false;
+
 }
 
 Game::~Game(){
@@ -63,41 +68,85 @@ void Game::processEvents(){
     _player->processEvents();
 }
 
+// void Game::run(int frame_per_seconds){
+//
+//     sf::Clock clock;
+//     sf::Time timeSinceLastUpdate = sf::Time::Zero;
+//     sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
+//
+//     _window->setFramerateLimit(frame_per_seconds);
+//     _window->setVerticalSyncEnabled(true);
+//
+//     while(_window->isOpen()){
+//         //processEvents();
+//
+//         if(!states.empty()){
+//             auto& currentState = *states.top();
+//             currentState.processEvents(*_window);
+//             bool repaint = false;
+//
+//             // sf::Vector2f playerPosition = _player->getPlayerSprite().getPosition();
+//             // sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+//             // sf::Vector2f currentCenter = view.getCenter();
+//             //
+//             // sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
+//             // view.setCenter(smoothedCenter);
+//             // view.move(10,5);
+//             // updateViewSize(view);
+//             // _window->setView(view);
+//
+//             timeSinceLastUpdate += clock.restart();
+//             while(timeSinceLastUpdate > TimePerFrame){
+//                 timeSinceLastUpdate -= TimePerFrame;
+//                 repaint = true;
+//                 //update(TimePerFrame);
+//                 currentState.update();
+//             }
+//             if(repaint){
+//                 //render();
+//                 handleStateChanges();
+//                 currentState.render(*_window);
+//             }
+//
+//         }else {
+//             isRunning = false;
+//             cout<<"states empty"<<endl;
+//         }
+//     }
+// }
+
 void Game::run(int frame_per_seconds){
+    while (_window->isOpen() && !states.empty()) {
+        auto& currentState = states.top();
 
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
-    sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
+        currentState->processEvents(*_window);
+        currentState->update();
+        currentState->render(*_window);
 
-    _window->setFramerateLimit(frame_per_seconds);
-    _window->setVerticalSyncEnabled(true);
-
-    while(_window->isOpen()){
-        processEvents();
-        bool repaint = false;
-
-        sf::Vector2f playerPosition = _player->getPlayerSprite().getPosition();
-        sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
-        sf::Vector2f currentCenter = view.getCenter();
-
-        sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
-        view.setCenter(smoothedCenter);
-        view.move(10,5);
-        updateViewSize(view);
-        _window->setView(view);
-        timeSinceLastUpdate += clock.restart();
-        while(timeSinceLastUpdate > TimePerFrame){
-            timeSinceLastUpdate -= TimePerFrame;
-            repaint = true;
-            update(TimePerFrame);
-        }
-        if(repaint){
-            render();
-        }
-
+        handleStateChanges();
     }
 }
 
+void Game::handleStateChanges() {
+    auto& currentState = states.top();
+
+    if (currentState->shouldExit()) {
+        states.pop();
+        if (states.empty()) {
+            _window->close();
+        }
+    } else if (currentState->shouldContinue()) {
+        if (dynamic_cast<MainMenuState*>(currentState.get())) {
+           changeState(std::make_unique<Fase1>("Phase 1"));
+        }/* else if (dynamic_cast<PlayState*>(currentState.get())) {
+            changeState(std::make_unique<GameOverState>(true)); // Fim da fase 1
+        } else if (dynamic_cast<GameOverState*>(currentState.get())) {
+            if (currentState->shouldContinue()) {
+                changeState(std::make_unique<PlayState>("Phase 2"));
+            }
+        }*/
+    }
+}
 void Game::update(sf::Time deltaTime){
     _player->update(deltaTime);
 }
@@ -113,6 +162,13 @@ void Game::render(){
     _window->display();
 }
 
+void Game::changeState(std::unique_ptr<GameState> newState) {
+    if (!states.empty()) {
+        states.pop();
+    }
+    states.push(std::move(newState));
+}
+
 void Game::clean(){
 
 }
@@ -125,7 +181,7 @@ void Game::configureSelectionBox(){
 }
 
 void Game::configureTileMap(){
-    char path[100] =  {"/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/forest.png\0"};
+    char path[100] =  {"Assets/Textures/forest.png\0"};
     tileGen = new TileGenerator();
     tileGen->generateTileMap(path);
 }
