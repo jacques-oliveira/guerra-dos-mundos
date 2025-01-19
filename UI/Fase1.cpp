@@ -13,17 +13,51 @@ Fase1::Fase1(const std::string& levelName)
     levelText.setCharacterSize(30);
     levelText.setFillColor(sf::Color::White);
     levelText.setPosition(10, 10);
+    player = new Player();
+    //configureSelectionBox();
+    isRunning = false;
 }
 
-void Fase1::processEvents(sf::RenderWindow& window) {
+void Fase1::processEvents(sf::RenderWindow& _window) {
     sf::Event event;
-    while (window.pollEvent(event)) {
+    while (_window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             exitGame = true;
-            window.close();
+            _window.close();
+
+        }else if(event.type == sf::Event::MouseButtonPressed){
+            if(event.mouseButton.button == sf::Mouse::Left &&
+                player->isPlayerSelected() == false){
+                cout<<"Start selection "<< player->isPlayerSelected()<<endl;
+                sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window));
+                startSelection(start);
+            }else  if (event.mouseButton.button == sf::Mouse::Left && player->isPlayerSelected()){
+                sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window));
+                player->isMoving = true;
+                moveSelectedPlayers(destination);
+                selectionBox.setSize({0.f,0.f});
+                cout<<"Moving player to destination "<<player->isPlayerSelected()<<endl;
+            }
+
+        }else if(event.type == sf::Event::MouseMoved){
+            if(isSelectingPlayer){
+                updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window)));
+                player->setSelected(true);
+            }
+        }else if(event.type == sf::Event::MouseButtonReleased){
+            if(event.mouseButton.button == sf::Mouse::Left){
+                if(isSelectingPlayer){
+                    endSelection();
+                    cout<<"Mouse left released "<<player->isPlayerSelected()<<endl;
+                }
+            }
+        }
+        if(event.mouseButton.button == sf::Mouse::Right && player->isPlayerSelected()){
+            player->unselectPlayer(true);
+            cout<<"Unselect Player"<<endl;
         }
     }
-    player.handleInput();
+    player->handleInput();
 }
 
 void Fase1::update() {
@@ -31,10 +65,34 @@ void Fase1::update() {
     // Lógica de fase aqui
 }
 
+void Fase1::configureSelectionBox(){
+    selectionBox.setFillColor(sf::Color(0, 0, 255, 25)); // Azul translúcido
+    selectionBox.setOutlineThickness(1.f);
+    selectionBox.setOutlineColor(sf::Color::Blue);
+    isSelectingPlayer = false;
+}
+
+void Fase1::startSelection(sf::Vector2f& start){
+    isSelectingPlayer = true;
+    selectionStart = start;
+    selectionBox.setPosition(start);
+    selectionBox.setSize({0.f,0.f});
+}
+
+void Fase1::updateSelection(const sf::Vector2f& current){
+}
+
+void Fase1::endSelection(){
+}
+
+void Fase1::moveSelectedPlayers(sf::Vector2f& dest){
+    player->setDestination(dest);
+}
+
 void Fase1::render(sf::RenderWindow& window) {
     window.clear();
     window.draw(levelText);
-    player.render(window);
+    player->render(window);
     window.display();
 }
 

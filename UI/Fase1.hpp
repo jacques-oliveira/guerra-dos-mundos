@@ -3,6 +3,7 @@
 
 #include "GameState.hpp"
 #include "../Player.hpp"
+#include "../TileGenerator.hpp"
 
 class Fase1 : public GameState{
 public:
@@ -16,12 +17,24 @@ public:
     bool shouldContinue() const override;
     bool shouldExit() const override;
 
+    TileGenerator* tileGen;
+    void setSelected(bool);
+    void startSelection(sf::Vector2f&);
+    void endSelection();
 
 protected:
     sf::Font font;
     sf::Text levelText;
-    Player player;
+    Player* player;
     bool levelCompleted;
     bool exitGame;
+
+    sf::RectangleShape selectionBox;
+    sf::Vector2f selectionStart;
+    void configureSelectionBox();
+    bool isSelectingPlayer;
+    void moveSelectedPlayers(sf::Vector2f&);
+    void updateSelection(const sf::Vector2f& current);
+    bool isRunning;
 };
 #endif
