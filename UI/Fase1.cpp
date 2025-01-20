@@ -2,8 +2,9 @@
 #include "Fase1.hpp"
 #include <stdexcept>
 
-Fase1::Fase1(const std::string& levelName)
-: levelCompleted(false), exitGame(false) {
+constexpr float SIZE(1024.0f);
+
+Fase1::Fase1(const std::string& levelName) : levelCompleted(false), exitGame(false) {
     if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
         throw std::runtime_error("Erro ao carregar fonte");
     }
@@ -57,11 +58,12 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
             cout<<"Unselect Player"<<endl;
         }
     }
-    player->handleInput();
+    //player->handleInput();
+    player->processEvents();
 }
 
 void Fase1::update() {
-    //player.update();
+    //player->update();
     // Lógica de fase aqui
 }
 
@@ -79,16 +81,6 @@ void Fase1::startSelection(sf::Vector2f& start){
     selectionBox.setSize({0.f,0.f});
 }
 
-void Fase1::updateSelection(const sf::Vector2f& current){
-}
-
-void Fase1::endSelection(){
-}
-
-void Fase1::moveSelectedPlayers(sf::Vector2f& dest){
-    player->setDestination(dest);
-}
-
 void Fase1::render(sf::RenderWindow& window) {
     window.clear();
     window.draw(levelText);
@@ -102,4 +94,31 @@ bool Fase1::shouldContinue() const {
 
 bool Fase1::shouldExit() const {
     return exitGame;
+}
+
+void Fase1::updateSelection(const sf::Vector2f& current){
+    sf::Vector2f size = current - selectionStart;
+    selectionBox.setSize(size);
+    selectionBox.setPosition({
+        min(selectionStart.x,  current.x),
+        min(selectionStart.y,current.y)
+    });
+}
+
+void Fase1::endSelection(){
+    isSelectingPlayer = false;
+    sf::FloatRect selectionArea(
+        selectionBox.getPosition(),
+                                selectionBox.getSize()
+    );
+    player->setSelected(player->isInside(selectionArea));
+}
+
+void Fase1::moveSelectedPlayers(sf::Vector2f& dest){
+    player->setDestination(dest);
+}
+
+void Fase1::updateViewSize(sf::View& view, sf::RenderWindow& _window){
+    float ratio = (float)_window.getSize().y / (float)_window.getSize().x;
+    view.setSize(SIZE, SIZE * ratio);
 }

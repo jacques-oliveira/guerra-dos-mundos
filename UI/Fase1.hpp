@@ -33,8 +33,9 @@ protected:
     sf::Vector2f selectionStart;
     void configureSelectionBox();
     bool isSelectingPlayer;
-    void moveSelectedPlayers(sf::Vector2f&);
+    void moveSelectedPlayers(sf::Vector2f& dest);
     void updateSelection(const sf::Vector2f& current);
+    void updateViewSize(sf::View&, sf::RenderWindow&);
     bool isRunning;
 };
 #endif
