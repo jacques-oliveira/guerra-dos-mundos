@@ -2,13 +2,15 @@
 
 # Um game de estratégia estilo RTS, desenvolvido para desktop.
 
-A história se desenrola pela busca constante de recursos após uma contaminação
-mundial por um vírus, muitos abandonaram seus planetas para buscar vida e recursos
+A busca constante por recursos fez o homem habitar o espaço; e após uma contaminação
+mundial por um vírus desconhecido, fez muitos abandonarem seus planetas para buscar vida e recursos
 em outro lugar.
 
-## - Tecnologias
+## - Desenvolvimento - 
+## Engine
   - C++
   - SFML
+## Criação de Assets
   - Krita
   - Blender
   - Inkscape
