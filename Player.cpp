@@ -6,7 +6,7 @@ using namespace std;
 
 Player::Player(){
 
-    if(!playerTexture.loadFromFile("/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/jaco_sprite.png")){
+    if(!playerTexture.loadFromFile("Assets/Textures/jaco_sprite.png")){
         return;
     }
     playerSprite.setTexture(playerTexture);
