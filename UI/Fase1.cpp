@@ -8,7 +8,7 @@ Fase1::Fase1(const std::string& levelName) : levelCompleted(false), exitGame(fal
     if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
         throw std::runtime_error("Erro ao carregar fonte");
     }
-
+    configureTileMap();
     levelText.setFont(font);
     levelText.setString("Playing " + levelName);
     levelText.setCharacterSize(30);
@@ -83,6 +83,7 @@ void Fase1::startSelection(sf::Vector2f& start){
 
 void Fase1::render(sf::RenderWindow& window) {
     window.clear();
+    tileGen->drawMap(window);
     window.draw(levelText);
     player->render(window);
     window.display();
@@ -121,4 +122,10 @@ void Fase1::moveSelectedPlayers(sf::Vector2f& dest){
 void Fase1::updateViewSize(sf::View& view, sf::RenderWindow& _window){
     float ratio = (float)_window.getSize().y / (float)_window.getSize().x;
     view.setSize(SIZE, SIZE * ratio);
+}
+
+void Fase1::configureTileMap(){
+    char path[100] =  {"Assets/Textures/forest.png\0"};
+    tileGen = new TileGenerator();
+    tileGen->generateTileMap(path);
 }

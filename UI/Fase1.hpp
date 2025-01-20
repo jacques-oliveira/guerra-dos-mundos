@@ -32,6 +32,7 @@ protected:
     sf::RectangleShape selectionBox;
     sf::Vector2f selectionStart;
     void configureSelectionBox();
+    void configureTileMap();
     bool isSelectingPlayer;
     void moveSelectedPlayers(sf::Vector2f& dest);
     void updateSelection(const sf::Vector2f& current);
