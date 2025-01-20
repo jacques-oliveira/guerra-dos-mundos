@@ -21,12 +21,6 @@ public :
 
     void run(int frame_per_seconds);
     void clean();
-    Player* _player;
-    Enemy* _enemy;
-    TileGenerator* tileGen;
-    void setSelected(bool);
-    void startSelection(sf::Vector2f&);
-    void endSelection();
 
 private:
     void processEvents();
@@ -35,14 +29,10 @@ private:
     sf::RenderWindow* _window;
     sf::View view;
     bool isSelectingPlayer;
-    sf::RectangleShape selectionBox;
-    sf::Vector2f selectionStart;
-    void updateSelection(const sf::Vector2f& current);
+
     bool isInside(const sf::FloatRect& selectionArea) const;
     void moveSelectedPlayers(sf::Vector2f&);
-    void configureSelectionBox();
-    void configureTileMap();
-    void updateViewSize(sf::View&);
+
 
     std::stack<std::unique_ptr<GameState>> states;
     void changeState(std::unique_ptr<GameState> newState);
