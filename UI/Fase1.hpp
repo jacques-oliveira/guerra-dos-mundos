@@ -8,10 +8,10 @@
 class Fase1 : public Fase{
 public:
     Fase1(const std::string& levelName);
-    ~Fase1() override = default;
+    ~Fase1() ;
 
     void processEvents(sf::RenderWindow & window) override;
-    void update() override;
+    void update(sf::Time deltaTime) override;
     void render(sf::RenderWindow & window) override;
 
 };

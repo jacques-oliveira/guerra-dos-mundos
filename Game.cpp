@@ -10,8 +10,6 @@ Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
 
     states.push(std::make_unique<MainMenuState>());
-    isRunning = false;
-
 }
 
 Game::~Game(){}
@@ -42,7 +40,7 @@ void Game::run(int frame_per_seconds){
         while(timeSinceLastUpdate > TimePerFrame){
             timeSinceLastUpdate -= TimePerFrame;
             repaint = true;
-            currentState->update();
+            currentState->update(TimePerFrame);
             //update(TimePerFrame);
             handleStateChanges();
         }
@@ -83,7 +81,7 @@ void Game::handleStateChanges() {
 }
 void Game::update(sf::Time deltaTime){
     //_player->update(deltaTime);
-    states.top()->update();
+    states.top()->update(deltaTime);
 }
 
 void Game::render(){
