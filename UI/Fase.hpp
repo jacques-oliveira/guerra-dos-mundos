@@ -8,20 +8,25 @@
 class Fase : public GameState{
 public:
     Fase(const std::string& levelName);
-    virtual ~Fase() = default;
+    ~Fase();
 
-    void processEvents(sf::RenderWindow & window) override;
-    void update() override;
-    void render(sf::RenderWindow & window) override;
+    void processEvents(sf::RenderWindow & window) override = 0;
+    void update() override = 0;
+    void render(sf::RenderWindow & window) override = 0;
+
+    bool shouldContinue() const override;
+    bool shouldExit() const override;
+
     TileGenerator* tileGen;
-    virtual void setSelected(bool) = 0;
-    virtual void startSelection(sf::Vector2f&) = 0;
-    virtual void endSelection() = 0;
+    void setSelected(bool);
+    void startSelection(sf::Vector2f&);
+    void endSelection();
 
 protected:
     sf::Font font;
     sf::Text levelText;
     Player* player;
+    std::string levelName;
     bool levelCompleted;
     bool  exitGame;
 
