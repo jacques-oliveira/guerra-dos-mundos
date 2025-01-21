@@ -28,11 +28,6 @@ private:
     void render();
     sf::RenderWindow* _window;
     sf::View view;
-    bool isSelectingPlayer;
-
-    bool isInside(const sf::FloatRect& selectionArea) const;
-    void moveSelectedPlayers(sf::Vector2f&);
-
 
     std::stack<std::unique_ptr<GameState>> states;
     void changeState(std::unique_ptr<GameState> newState);

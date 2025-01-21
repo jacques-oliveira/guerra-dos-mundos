@@ -5,7 +5,9 @@ constexpr float SIZE(1024.0f);
 Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false){
     configureTileMap();
     configureSelectionBox();
-    isRunning = false;
+
+    isSelectingPlayer = false;
+
 }
 
 Fase::~Fase(){
@@ -30,7 +32,7 @@ void Fase::updateSelection(const sf::Vector2f& current){
     selectionBox.setSize(size);
     selectionBox.setPosition({
         min(selectionStart.x,  current.x),
-                             min(selectionStart.y,current.y)
+        min(selectionStart.y,current.y)
     });
 }
 
@@ -38,7 +40,7 @@ void Fase::endSelection(){
     isSelectingPlayer = false;
     sf::FloatRect selectionArea(
         selectionBox.getPosition(),
-                                selectionBox.getSize()
+        selectionBox.getSize()
     );
     player->setSelected(player->isInside(selectionArea));
 }

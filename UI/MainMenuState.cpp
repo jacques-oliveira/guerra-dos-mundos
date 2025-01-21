@@ -50,7 +50,7 @@ void MainMenuState::processEvents(sf::RenderWindow& window){
     }
 }
 
-void MainMenuState::update(){
+void MainMenuState::update(sf::Time deltaTime){
 }
 
 void MainMenuState::render(sf::RenderWindow& window){

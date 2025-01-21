@@ -11,7 +11,7 @@ public:
     ~Fase();
 
     void processEvents(sf::RenderWindow & window) override = 0;
-    void update() override = 0;
+    void update(sf::Time deltaTime) override = 0;
     void render(sf::RenderWindow & window) override = 0;
 
     bool shouldContinue() const override;
@@ -39,6 +39,6 @@ protected:
     void updateSelection(const sf::Vector2f& current);
     void updateViewSize(sf::View&, sf::RenderWindow&);
     bool isRunning;
-
+    bool isInside(const sf::FloatRect& selectionArea) const;
 };
 #endif
