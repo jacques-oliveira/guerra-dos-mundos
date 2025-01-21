@@ -4,22 +4,25 @@
 
 Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
 
-
     if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
         throw std::runtime_error("Erro ao carregar fonte");
     }
     levelName = _levelName;
     levelCompleted = false;
     exitGame = false;
-    //configureTileMap();
+
     levelText.setFont(font);
     levelText.setString("Playing " + levelName);
     levelText.setCharacterSize(30);
     levelText.setFillColor(sf::Color::White);
     levelText.setPosition(10, 10);
     player = new Player();
-    //configureSelectionBox();
+    isRunning = false;
 
+}
+
+Fase1::~Fase1(){
+    delete player;
 }
 
 void Fase1::processEvents(sf::RenderWindow& _window) {
@@ -53,7 +56,9 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
                 if(isSelectingPlayer){
                     endSelection();
                     cout<<"Mouse left released "<<player->isPlayerSelected()<<endl;
+                    selectionBox.setSize({0,0});
                 }
+
             }
         }
         if(event.mouseButton.button == sf::Mouse::Right && player->isPlayerSelected()){
@@ -65,8 +70,8 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
     player->processEvents();
 }
 
-void Fase1::update() {
-    //player->update();
+void Fase1::update(sf::Time deltaTime) {
+    player->update(deltaTime);
     // Lógica de fase aqui
 }
 
@@ -74,6 +79,7 @@ void Fase1::render(sf::RenderWindow& window) {
     window.clear();
     tileGen->drawMap(window);
     window.draw(*player);
+    window.draw(selectionBox);
     window.draw(levelText);
     player->render(window);
     window.display();

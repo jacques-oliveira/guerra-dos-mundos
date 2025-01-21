@@ -10,7 +10,7 @@ public:
     MainMenuState();
     ~MainMenuState() override = default;
     void processEvents(sf::RenderWindow & window) override;
-    void update() override;
+    void update(sf::Time deltaTime) override;
     void render(sf::RenderWindow & window) override;
     bool shouldContinue() const override;
     bool shouldExit() const override;
