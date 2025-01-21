@@ -11,7 +11,7 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     levelName = _levelName;
     levelCompleted = false;
     exitGame = false;
-    configureTileMap();
+    //configureTileMap();
     levelText.setFont(font);
     levelText.setString("Playing " + levelName);
     levelText.setCharacterSize(30);
@@ -19,7 +19,7 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     levelText.setPosition(10, 10);
     player = new Player();
     //configureSelectionBox();
-    isRunning = false;
+
 }
 
 void Fase1::processEvents(sf::RenderWindow& _window) {
@@ -73,6 +73,7 @@ void Fase1::update() {
 void Fase1::render(sf::RenderWindow& window) {
     window.clear();
     tileGen->drawMap(window);
+    window.draw(*player);
     window.draw(levelText);
     player->render(window);
     window.display();
