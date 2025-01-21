@@ -1,33 +1,29 @@
-#ifndef FASE1_HPP
-#define FASE1_HPP
+#ifndef FASE_HPP
+#define FASE_HPP
 
 #include "GameState.hpp"
-#include "../Player.hpp"
 #include "../TileGenerator.hpp"
+#include "../Player.hpp"
 
-class Fase1 : public GameState{
+class Fase : public GameState{
 public:
-    Fase1(const std::string& levelName);
-    ~Fase1() override = default;
+    Fase(const std::string& levelName);
+    virtual ~Fase() = default;
 
     void processEvents(sf::RenderWindow & window) override;
     void update() override;
     void render(sf::RenderWindow & window) override;
-
-    bool shouldContinue() const override;
-    bool shouldExit() const override;
-
     TileGenerator* tileGen;
-    void setSelected(bool);
-    void startSelection(sf::Vector2f&);
-    void endSelection();
+    virtual void setSelected(bool) = 0;
+    virtual void startSelection(sf::Vector2f&) = 0;
+    virtual void endSelection() = 0;
 
 protected:
     sf::Font font;
     sf::Text levelText;
     Player* player;
     bool levelCompleted;
-    bool exitGame;
+    bool  exitGame;
 
     sf::RectangleShape selectionBox;
     sf::Vector2f selectionStart;
@@ -38,5 +34,6 @@ protected:
     void updateSelection(const sf::Vector2f& current);
     void updateViewSize(sf::View&, sf::RenderWindow&);
     bool isRunning;
+
 };
 #endif
