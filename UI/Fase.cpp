@@ -10,9 +10,6 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
 
 }
 
-Fase::~Fase(){
-
-}
 void Fase::startSelection(sf::Vector2f& start){
     isSelectingPlayer = true;
     selectionStart = start;
