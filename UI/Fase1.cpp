@@ -23,10 +23,12 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
 
 Fase1::~Fase1(){
     delete player;
+    delete window;
 }
 
 void Fase1::processEvents(sf::RenderWindow& _window) {
     sf::Event event;
+    window = &_window;
     while (_window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             exitGame = true;
@@ -72,7 +74,17 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
 
 void Fase1::update(sf::Time deltaTime) {
     player->update(deltaTime);
-    // Lógica de fase aqui
+    sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
+    sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+    sf::Vector2f currentCenter = view.getCenter();
+
+    sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
+    view.setCenter(smoothedCenter);
+    view.move(10,5);
+    float ratio = (float)window->getSize().y / (float)window->getSize().x;
+    setViewSize(ratio);
+    window->setView(view);
+
 }
 
 void Fase1::render(sf::RenderWindow& window) {

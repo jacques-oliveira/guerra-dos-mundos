@@ -27,8 +27,6 @@ private:
     void update(sf::Time deltaTime);
     void render();
     sf::RenderWindow* _window;
-    sf::View view;
-
     std::stack<std::unique_ptr<GameState>> states;
     void changeState(std::unique_ptr<GameState> newState);
     void processStateChanges();
