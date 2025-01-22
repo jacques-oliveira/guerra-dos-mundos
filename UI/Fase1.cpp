@@ -24,6 +24,7 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
 
 Fase1::~Fase1(){
     delete player;
+    delete enemy;
     delete window;
 }
 
