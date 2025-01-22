@@ -17,12 +17,14 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     levelText.setFillColor(sf::Color::White);
     levelText.setPosition(10, 10);
     player = new Player();
+    enemy = new Enemy(Boss);
     isRunning = false;
 
 }
 
 Fase1::~Fase1(){
     delete player;
+    delete enemy;
     delete window;
 }
 
@@ -91,6 +93,7 @@ void Fase1::render(sf::RenderWindow& window) {
     window.clear();
     tileGen->drawMap(window);
     window.draw(*player);
+    window.draw(enemy->getEnemySprite());
     window.draw(selectionBox);
     window.draw(levelText);
     player->render(window);

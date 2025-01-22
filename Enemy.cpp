@@ -1,7 +1,7 @@
 #include "Enemy.hpp"
 
 Enemy::Enemy(EnemyType type) : enemytype(type){
-    if(!enemyTexture.loadFromFile("/home/jacques/Documents/game-development/guerra-dos-mundos/Assets/Textures/frame0000.png")){
+    if(!enemyTexture.loadFromFile("Assets/Textures/frame0000.png")){
         return;
     }
     enemySprite.setTexture(enemyTexture);
