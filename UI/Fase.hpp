@@ -37,8 +37,11 @@ protected:
     bool isSelectingPlayer;
     void moveSelectedPlayers(sf::Vector2f& dest);
     void updateSelection(const sf::Vector2f& current);
-    void updateViewSize(sf::View&, sf::RenderWindow&);
+    void updateViewSize(sf::View& view, sf::RenderWindow& window);
     bool isRunning;
     bool isInside(const sf::FloatRect& selectionArea) const;
+    sf::View view;
+    void setViewSize(float);
+    sf::RenderWindow * window;
 };
 #endif

@@ -49,11 +49,6 @@ void Fase::moveSelectedPlayers(sf::Vector2f& dest){
     player->setDestination(dest);
 }
 
-void Fase::updateViewSize(sf::View& view, sf::RenderWindow& _window){
-    float ratio = (float)_window.getSize().y / (float)_window.getSize().x;
-    view.setSize(SIZE, SIZE * ratio);
-}
-
 void Fase::configureTileMap(){
     char path[100] =  {"Assets/Textures/forest.png\0"};
     tileGen = new TileGenerator();
@@ -68,4 +63,13 @@ bool Fase::shouldExit() const {
     return exitGame;
 }
 
+void Fase::setViewSize(float ratio){
+    view.setSize(SIZE, SIZE * ratio);
+}
+
+
+void Fase::updateViewSize(sf::View& view, sf::RenderWindow& window){
+    float ratio = (float)window.getSize().y / (float)window.getSize().x;
+    view.setSize(SIZE, SIZE * ratio);
+}
 
