@@ -10,10 +10,11 @@ Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
 
     states.push(std::make_unique<MainMenuState>());
+    isRunning = false;
 }
 
 Game::~Game(){
-    delete _window;
+    clean();
 }
 
 void Game::processEvents(){
@@ -113,6 +114,10 @@ void Game::changeState(std::unique_ptr<GameState> newState) {
 }
 
 void Game::clean(){
-
+    delete _window;
+    _window = nullptr;
+    while(!states.empty()){
+        states.pop();
+    }
 }
 
