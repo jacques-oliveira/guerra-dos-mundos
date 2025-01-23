@@ -12,7 +12,9 @@ Game::Game()  {
     states.push(std::make_unique<MainMenuState>());
 }
 
-Game::~Game(){}
+Game::~Game(){
+    delete _window;
+}
 
 void Game::processEvents(){
     while (_window->isOpen() && !states.empty()) {
@@ -81,7 +83,11 @@ void Game::handleStateChanges() {
 }
 void Game::update(sf::Time deltaTime){
     //_player->update(deltaTime);
-    states.top()->update(deltaTime);
+    try{
+        states.top()->update(deltaTime);
+    }catch(exception&){
+        cerr<<"Erro ao atualizar game."<<endl;
+    }
 }
 
 void Game::render(){
@@ -96,10 +102,14 @@ void Game::render(){
 }
 
 void Game::changeState(std::unique_ptr<GameState> newState) {
-    if (!states.empty()) {
-        states.pop();
+    try{
+        if (!states.empty()) {
+            states.pop();
+        }
+        states.push(std::move(newState));
+    }catch(exception&){
+        cerr<<"Erro na mudança de estado"<<endl;
     }
-    states.push(std::move(newState));
 }
 
 void Game::clean(){
