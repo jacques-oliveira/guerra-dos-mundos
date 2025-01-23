@@ -72,17 +72,22 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
 }
 
 void Fase1::update(sf::Time deltaTime) {
-    player->update(deltaTime);
-    sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
-    sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
-    sf::Vector2f currentCenter = view.getCenter();
+    try{
+        player->update(deltaTime);
+        sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
+        sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+        sf::Vector2f currentCenter = view.getCenter();
 
-    sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
-    view.setCenter(smoothedCenter);
-    view.move(10,5);
-    float ratio = (float)window->getSize().y / (float)window->getSize().x;
-    setViewSize(ratio);
-    window->setView(view);
+        sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
+        view.setCenter(smoothedCenter);
+        view.move(10,5);
+        float ratio = (float)window->getSize().y / (float)window->getSize().x;
+        setViewSize(ratio);
+        window->setView(view);
+
+    }catch(exception&){
+        cerr<<"Falha ao atualizar Fase"<<endl;
+    }
 
 
 }
