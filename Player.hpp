@@ -12,7 +12,7 @@ public :
 
     template<typename ...Args>
     void setPosition(Args&& ... args);
-    sf::CircleShape shape;
+    sf::CircleShape selectShape;
     void update(sf::Time deltaTime);
     bool isMoving;
     float movementSpeed;
@@ -38,4 +38,5 @@ private :
     sf::Vector2f destination;
     void updatePositionPlayer(float);
     float speed;
+    void bindSelectShape();
 };
