@@ -10,6 +10,20 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
 
 }
 
+Fase::~Fase(){
+    if (player) {
+        delete player;
+        player = nullptr;
+    }
+    if (enemy) {
+        delete enemy;
+        enemy = nullptr;
+    }
+    if (tileGen) {
+        delete tileGen;
+        tileGen = nullptr;
+    }
+}
 void Fase::startSelection(sf::Vector2f& start){
     isSelectingPlayer = true;
     selectionStart = start;

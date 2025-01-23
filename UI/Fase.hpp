@@ -9,7 +9,7 @@
 class Fase : public GameState{
 public:
     Fase(const std::string& levelName);
-    virtual ~Fase() override = default;
+    virtual ~Fase() override;
 
     void processEvents(sf::RenderWindow & window) override = 0;
     void update(sf::Time deltaTime) override = 0;
