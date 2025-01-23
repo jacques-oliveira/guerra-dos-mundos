@@ -23,18 +23,6 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
 }
 
 Fase1::~Fase1(){
-    if (player) {
-        delete player;
-        player = nullptr;
-    }
-    if (enemy) {
-        delete enemy;
-        enemy = nullptr;
-    }
-    if (tileGen) {
-        delete tileGen;
-        tileGen = nullptr;
-    }
 }
 
 void Fase1::processEvents(sf::RenderWindow& _window) {
