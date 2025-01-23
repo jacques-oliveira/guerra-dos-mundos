@@ -88,14 +88,19 @@ void Fase1::update(sf::Time deltaTime) {
 }
 
 void Fase1::render(sf::RenderWindow& window) {
-    window.clear();
-    tileGen->drawMap(window);
-    window.draw(*player);
-    window.draw(enemy->getEnemySprite());
-    window.draw(selectionBox);
-    player->render(window);
-    window.setView(uiView);
+    try{
+        window.clear();
+        tileGen->drawMap(window);
+        window.draw(*player);
+        window.draw(enemy->getEnemySprite());
+        window.draw(selectionBox);
+        player->render(window);
+        window.setView(uiView);
 
-    window.draw(levelText);
-    window.display();
+        window.draw(levelText);
+        window.display();
+
+    }catch(exception&){
+        cerr<<"Falha ao renderizar estado"<<endl;
+    }
 }
