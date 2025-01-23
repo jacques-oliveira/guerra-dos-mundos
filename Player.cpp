@@ -15,9 +15,9 @@ Player::Player(){
     this->movementSpeed = 150.f;
     life = 100;
 
-    shape.setRadius(10.f);
-    shape.setFillColor(sf::Color::Yellow);
-    shape.setPosition(100, 100);
+    selectShape.setRadius(10.f);
+    selectShape.setFillColor(sf::Color::Yellow);
+    bindSelectShape();
     selected = false;
     isMoving = false;
     speed = 10.f;
@@ -42,22 +42,22 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 void Player::render(sf::RenderWindow& window) {
-    window.draw(shape);
+    window.draw(selectShape);
 }
 
 void Player::handleInput() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        shape.move(0, -speed * 0.016f);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        shape.move(0, speed * 0.016f);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        shape.move(-speed * 0.016f, 0);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        shape.move(speed * 0.016f, 0);
-    }
+    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    //     shape.move(0, -speed * 0.016f);
+    // }
+    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    //     shape.move(0, speed * 0.016f);
+    // }
+    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    //     shape.move(-speed * 0.016f, 0);
+    // }
+    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    //     shape.move(speed * 0.016f, 0);
+    // }
 }
 
 void Player::processEvents(){
@@ -94,6 +94,7 @@ void Player::updatePositionPlayer(float deltaTime){
 
         if (moveDistance >= distance){
             playerSprite.setPosition(destination);
+
             isMoving = false;
         }else{
             playerSprite.move(direction * moveDistance);
@@ -102,6 +103,7 @@ void Player::updatePositionPlayer(float deltaTime){
         playerSprite.setPosition(destination);
         isMoving = false;
     }
+    bindSelectShape();
 }
 
 const sf::Sprite & Player::getPlayerSprite() const{
@@ -117,5 +119,8 @@ void Player::unselectPlayer(bool rightMouseButton){
         selected = false;
 }
 
+void Player::bindSelectShape(){
+    selectShape.setPosition(playerSprite.getPosition().x + 60, playerSprite.getPosition().y - 20);
+}
 
 
