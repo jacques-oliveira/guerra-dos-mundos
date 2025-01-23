@@ -40,10 +40,10 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
             if(event.mouseButton.button == sf::Mouse::Left &&
                 player->isPlayerSelected() == false){
                 cout<<"Start selection "<< player->isPlayerSelected()<<endl;
-                sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window));
+                sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
                 startSelection(start);
             }else  if (event.mouseButton.button == sf::Mouse::Left && player->isPlayerSelected()){
-                sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window));
+                sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
                 player->isMoving = true;
                 moveSelectedPlayers(destination);
                 selectionBox.setSize({0.f,0.f});
@@ -52,7 +52,7 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
 
         }else if(event.type == sf::Event::MouseMoved){
             if(isSelectingPlayer){
-                updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window)));
+                updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window),view));
                 player->setSelected(true);
             }
         }else if(event.type == sf::Event::MouseButtonReleased){
@@ -87,6 +87,7 @@ void Fase1::update(sf::Time deltaTime) {
     setViewSize(ratio);
     window->setView(view);
 
+
 }
 
 void Fase1::render(sf::RenderWindow& window) {
@@ -95,7 +96,9 @@ void Fase1::render(sf::RenderWindow& window) {
     window.draw(*player);
     window.draw(enemy->getEnemySprite());
     window.draw(selectionBox);
-    window.draw(levelText);
     player->render(window);
+    window.setView(uiView);
+
+    window.draw(levelText);
     window.display();
 }

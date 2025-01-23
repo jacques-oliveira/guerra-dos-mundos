@@ -43,6 +43,7 @@ protected:
     bool isRunning;
     bool isInside(const sf::FloatRect& selectionArea) const;
     sf::View view;
+    sf::View uiView;
     void setViewSize(float);
     sf::RenderWindow * window;
 };
