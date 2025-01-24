@@ -63,8 +63,8 @@ void Game::run(int frame_per_seconds){
 }
 
 void Game::handleStateChanges() {
-    auto& currentState = states.top();
     try{
+        auto& currentState = states.top();
         if (currentState->shouldExit()) {
             states.pop();
             if (states.empty()) {
