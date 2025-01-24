@@ -26,49 +26,54 @@ Fase1::~Fase1(){
 }
 
 void Fase1::processEvents(sf::RenderWindow& _window) {
-    sf::Event event;
-    window = &_window;
-    while (_window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            exitGame = true;
-            _window.close();
+    try{
+        sf::Event event;
+        window = &_window;
+        while (_window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                exitGame = true;
+                _window.close();
 
-        }else if(event.type == sf::Event::MouseButtonPressed){
-            if(event.mouseButton.button == sf::Mouse::Left &&
-                player->isPlayerSelected() == false){
-                cout<<"Start selection "<< player->isPlayerSelected()<<endl;
-                sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                startSelection(start);
-            }else  if (event.mouseButton.button == sf::Mouse::Left && player->isPlayerSelected()){
-                sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                player->isMoving = true;
-                moveSelectedPlayers(destination);
-                selectionBox.setSize({0.f,0.f});
-                cout<<"Moving player to destination "<<player->isPlayerSelected()<<endl;
-            }
-
-        }else if(event.type == sf::Event::MouseMoved){
-            if(isSelectingPlayer){
-                updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window),view));
-                player->setSelected(true);
-            }
-        }else if(event.type == sf::Event::MouseButtonReleased){
-            if(event.mouseButton.button == sf::Mouse::Left){
-                if(isSelectingPlayer){
-                    endSelection();
-                    cout<<"Mouse left released "<<player->isPlayerSelected()<<endl;
-                    selectionBox.setSize({0,0});
+            }else if(event.type == sf::Event::MouseButtonPressed){
+                if(event.mouseButton.button == sf::Mouse::Left &&
+                    player->isPlayerSelected() == false){
+                    cout<<"Start selection "<< player->isPlayerSelected()<<endl;
+                    sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+                    startSelection(start);
+                }else  if (event.mouseButton.button == sf::Mouse::Left && player->isPlayerSelected()){
+                    sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+                    player->isMoving = true;
+                    moveSelectedPlayers(destination);
+                    selectionBox.setSize({0.f,0.f});
+                    cout<<"Moving player to destination "<<player->isPlayerSelected()<<endl;
                 }
 
+            }else if(event.type == sf::Event::MouseMoved){
+                if(isSelectingPlayer){
+                    updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window),view));
+                    player->setSelected(true);
+                }
+            }else if(event.type == sf::Event::MouseButtonReleased){
+                if(event.mouseButton.button == sf::Mouse::Left){
+                    if(isSelectingPlayer){
+                        endSelection();
+                        cout<<"Mouse left released "<<player->isPlayerSelected()<<endl;
+                        selectionBox.setSize({0,0});
+                    }
+
+                }
+            }
+            if(event.mouseButton.button == sf::Mouse::Right && player->isPlayerSelected()){
+                player->unselectPlayer(true);
+                cout<<"Unselect Player"<<endl;
             }
         }
-        if(event.mouseButton.button == sf::Mouse::Right && player->isPlayerSelected()){
-            player->unselectPlayer(true);
-            cout<<"Unselect Player"<<endl;
-        }
+        //player->handleInput();
+        player->processEvents();
+
+    }catch(exception&){
+        cerr<<"Erro ao tratar processo Fase1"<<endl;
     }
-    //player->handleInput();
-    player->processEvents();
 }
 
 void Fase1::update(sf::Time deltaTime) {

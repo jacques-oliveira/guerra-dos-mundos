@@ -18,40 +18,47 @@ Game::~Game(){
 }
 
 void Game::processEvents(){
-    while (_window->isOpen() && !states.empty()) {
-        auto& currentState = states.top();
-        currentState->processEvents(*_window);
+    try{
+        while (_window->isOpen() && !states.empty()) {
+            auto& currentState = states.top();
+            currentState->processEvents(*_window);
+        }
+    }catch(exception& e){
+        cerr<<"Erro ao processar Game Events"<<e.what()<<endl;
     }
 }
 
 void Game::run(int frame_per_seconds){
+    try{
+        sf::Clock clock;
+        sf::Time timeSinceLastUpdate = sf::Time::Zero;
+        sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
 
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
-    sf::Time TimePerFrame = sf::seconds(1.f/frame_per_seconds);
+        _window->setFramerateLimit(frame_per_seconds);
+        _window->setVerticalSyncEnabled(true);
 
-    _window->setFramerateLimit(frame_per_seconds);
-    _window->setVerticalSyncEnabled(true);
+        while(_window->isOpen() && !states.empty()){
+            auto& currentState = states.top();
+            currentState->processEvents(*_window);
+            bool repaint = false;
 
-    while(_window->isOpen() && !states.empty()){
-        auto& currentState = states.top();
-        currentState->processEvents(*_window);
-        bool repaint = false;
+            timeSinceLastUpdate += clock.restart();
 
-        timeSinceLastUpdate += clock.restart();
+            while(timeSinceLastUpdate > TimePerFrame){
+                timeSinceLastUpdate -= TimePerFrame;
+                repaint = true;
+                currentState->update(TimePerFrame);
+                //update(TimePerFrame);
+                handleStateChanges();
+            }
+            if(repaint){
+                //render();
+                currentState->render(*_window);
+            }
 
-        while(timeSinceLastUpdate > TimePerFrame){
-            timeSinceLastUpdate -= TimePerFrame;
-            repaint = true;
-            currentState->update(TimePerFrame);
-            //update(TimePerFrame);
-            handleStateChanges();
         }
-        if(repaint){
-            //render();
-            currentState->render(*_window);
-        }
-
+    }catch(exception& e){
+        cerr<<"Erro ao executar método run no Game.cpp "<<e.what()<<endl;
     }
 }
 
@@ -78,16 +85,16 @@ void Game::handleStateChanges() {
             }
         }
 
-    }catch(exception& ex){
-        cerr <<"Não foi possivel manipulas os estados"<<endl;
+    }catch(exception& e){
+        cerr <<"Não foi possivel manipulas os estados "<<e.what()<<endl;
     }
 }
 void Game::update(sf::Time deltaTime){
     //_player->update(deltaTime);
     try{
         states.top()->update(deltaTime);
-    }catch(exception&){
-        cerr<<"Erro ao atualizar game."<<endl;
+    }catch(exception& e){
+        cerr<<"Erro ao atualizar game."<<e.what()<<endl;
     }
 }
 
@@ -108,16 +115,20 @@ void Game::changeState(std::unique_ptr<GameState> newState) {
             states.pop();
         }
         states.push(std::move(newState));
-    }catch(exception&){
-        cerr<<"Erro na mudança de estado"<<endl;
+    }catch(exception& e){
+        cerr<<"Erro na mudança de estado "<<e.what()<<endl;
     }
 }
 
 void Game::clean(){
-    delete _window;
-    _window = nullptr;
-    while(!states.empty()){
-        states.pop();
+    try{
+        delete _window;
+        _window = nullptr;
+        while(!states.empty()){
+            states.pop();
+        }
+    }catch(exception& e){
+        cerr<<"Erro: "<<e.what()<<endl;
     }
 }
 
