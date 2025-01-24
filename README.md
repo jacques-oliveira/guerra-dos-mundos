@@ -8,10 +8,10 @@ em outro lugar.
 
 ## - Desenvolvimento - 
 ## Engine
-  - C++
-  - SFML
+  - C++ (11+)
+  - SFML (2.6.2-1)
 ## Criação de Assets
+  - Blender (4.3)
   - Krita
-  - Blender
   - Inkscape
   
