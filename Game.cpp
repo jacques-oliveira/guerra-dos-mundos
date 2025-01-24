@@ -18,9 +18,13 @@ Game::~Game(){
 }
 
 void Game::processEvents(){
-    while (_window->isOpen() && !states.empty()) {
-        auto& currentState = states.top();
-        currentState->processEvents(*_window);
+    try{
+        while (_window->isOpen() && !states.empty()) {
+            auto& currentState = states.top();
+            currentState->processEvents(*_window);
+        }
+    }catch(exception& e){
+        cerr<<"Erro ao processar Game Events"<<e.what()<<endl;
     }
 }
 
