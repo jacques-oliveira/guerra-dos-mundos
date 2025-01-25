@@ -18,6 +18,8 @@ Game::~Game(){
 }
 
 void Game::processEvents(){
+    sf::Event event;
+
     try{
         while (_window->isOpen() && !states.empty()) {
             auto& currentState = states.top();
@@ -41,22 +43,23 @@ void Game::run(int frame_per_seconds){
             auto& currentState = states.top();
             currentState->processEvents(*_window, isRunning);
 
-            if(*isRunning == false){
+            if(*isRunning == true){
+                bool repaint = false;
+
+                timeSinceLastUpdate += clock.restart();
+
+                while(timeSinceLastUpdate > TimePerFrame && isRunning){
+                    timeSinceLastUpdate -= TimePerFrame;
+                    repaint = true;
+                    currentState->update(TimePerFrame);
+                    //update(TimePerFrame);
+                    handleStateChanges();
+                }
+                if(repaint && *isRunning){
+                    render(*currentState);
+                }
+            }else{
                 return;
-            }
-            bool repaint = false;
-
-            timeSinceLastUpdate += clock.restart();
-
-            while(timeSinceLastUpdate > TimePerFrame && isRunning){
-                timeSinceLastUpdate -= TimePerFrame;
-                repaint = true;
-                currentState->update(TimePerFrame);
-                //update(TimePerFrame);
-                handleStateChanges();
-            }
-            if(repaint){
-                render(*currentState);
             }
 
         }
@@ -71,6 +74,7 @@ void Game::handleStateChanges() {
         if (currentState->shouldExit()) {
             states.pop();
             if (states.empty()) {
+                *isRunning = false;
                 _window->close();
             }
         } else if (currentState->shouldContinue()) {
