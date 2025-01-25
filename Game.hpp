@@ -25,11 +25,11 @@ public :
 private:
     void processEvents();
     void update(sf::Time deltaTime);
-    void render();
+    void render(GameState&);
     sf::RenderWindow* _window;
     std::stack<std::unique_ptr<GameState>> states;
     void changeState(std::unique_ptr<GameState> newState);
     void processStateChanges();
     void handleStateChanges();
-    bool isRunning;
+    bool * isRunning;
 };

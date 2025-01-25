@@ -11,7 +11,7 @@ public:
     Fase(const std::string& levelName);
     virtual ~Fase() override;
 
-    void processEvents(sf::RenderWindow & window) override = 0;
+    void processEvents(sf::RenderWindow & window, bool*) override = 0;
     void update(sf::Time deltaTime) override = 0;
     void render(sf::RenderWindow & window) override = 0;
 
@@ -30,7 +30,7 @@ protected:
     Enemy * enemy;
     std::string levelName;
     bool levelCompleted;
-    bool  exitGame;
+    bool exitGame;
 
     sf::RectangleShape selectionBox;
     sf::Vector2f selectionStart;
@@ -40,7 +40,6 @@ protected:
     void moveSelectedPlayers(sf::Vector2f& dest);
     void updateSelection(const sf::Vector2f& current);
     void updateViewSize(sf::View& view, sf::RenderWindow& window);
-    bool isRunning;
     bool isInside(const sf::FloatRect& selectionArea) const;
     sf::View view;
     sf::View uiView;

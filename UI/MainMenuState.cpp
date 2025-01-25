@@ -24,12 +24,15 @@ MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame
     }
 }
 
-void MainMenuState::processEvents(sf::RenderWindow& window){
+void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
     sf::Event event;
     while(window.pollEvent(event)){
         if(event.type == sf::Event::Closed){
             exitGame=true;
-            window.close();
+            if(shouldExit()){
+                *isRunning = false;
+                window.close();
+            }
         }else if(event.type == sf::Event::KeyPressed){
             if(event.key.code == sf::Keyboard::Up){
                 selectedOption= (selectedOption - 1 + options.size()) % options.size();

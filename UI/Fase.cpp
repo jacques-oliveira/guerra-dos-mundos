@@ -5,7 +5,7 @@ constexpr float SIZE(1024.0f);
 Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false){
     configureTileMap();
     configureSelectionBox();
-
+    exitGame =false;
     isSelectingPlayer = false;
 
 }

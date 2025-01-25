@@ -9,7 +9,6 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     }
     levelName = _levelName;
     levelCompleted = false;
-    exitGame = false;
 
     levelText.setFont(font);
     levelText.setString("Playing " + levelName);
@@ -18,21 +17,22 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     levelText.setPosition(10, 10);
     player = new Player();
     enemy = new Enemy(Boss);
-    isRunning = false;
-
 }
 
 Fase1::~Fase1(){
 }
 
-void Fase1::processEvents(sf::RenderWindow& _window) {
+void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
     try{
         sf::Event event;
         window = &_window;
         while (_window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 exitGame = true;
-                _window.close();
+                if(shouldExit()){
+                    *isRunning = false;
+                    window->close();
+                }
 
             }else if(event.type == sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button == sf::Mouse::Left &&
