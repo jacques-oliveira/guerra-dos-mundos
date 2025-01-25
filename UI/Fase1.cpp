@@ -78,23 +78,29 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
 
 void Fase1::update(sf::Time deltaTime) {
     try{
-        player->update(deltaTime);
-        sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
-        sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
-        sf::Vector2f currentCenter = view.getCenter();
+        if(player != nullptr){
+            player->update(deltaTime);
+            sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
+            sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+            sf::Vector2f currentCenter = view.getCenter();
 
-        sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
-        view.setCenter(smoothedCenter);
-        view.move(10,5);
-        float ratio = (float)window->getSize().y / (float)window->getSize().x;
-        setViewSize(ratio);
-        window->setView(view);
+            sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
+            view.setCenter(smoothedCenter);
+            view.move(10,5);
+            if(window != nullptr){
+                float ratio = (float)window->getSize().y / (float)window->getSize().x;
+                setViewSize(ratio);
+                window->setView(view);
+            }else{
+                cerr<<"Window não foi inicializado"<<endl;
+            }
+        }else{
+            cerr<<"Player não foi inicializado"<<endl;
+        }
 
-    }catch(exception&){
-        cerr<<"Falha ao atualizar Fase"<<endl;
+    }catch(exception& e){
+        cerr<<"Falha ao atualizar Fase "<<e.what()<<endl;
     }
-
-
 }
 
 void Fase1::render(sf::RenderWindow& window) {
