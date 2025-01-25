@@ -10,7 +10,7 @@ Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
 
     states.push(std::make_unique<MainMenuState>());
-    isRunning = false;
+    isRunning = new bool(true);
 }
 
 Game::~Game(){
@@ -18,10 +18,12 @@ Game::~Game(){
 }
 
 void Game::processEvents(){
+    sf::Event event;
+
     try{
         while (_window->isOpen() && !states.empty()) {
             auto& currentState = states.top();
-            currentState->processEvents(*_window);
+            currentState->processEvents(*_window,isRunning);
         }
     }catch(exception& e){
         cerr<<"Erro ao processar Game Events"<<e.what()<<endl;
@@ -39,21 +41,25 @@ void Game::run(int frame_per_seconds){
 
         while(_window->isOpen() && !states.empty()){
             auto& currentState = states.top();
-            currentState->processEvents(*_window);
-            bool repaint = false;
+            currentState->processEvents(*_window, isRunning);
 
-            timeSinceLastUpdate += clock.restart();
+            if(*isRunning == true){
+                bool repaint = false;
 
-            while(timeSinceLastUpdate > TimePerFrame){
-                timeSinceLastUpdate -= TimePerFrame;
-                repaint = true;
-                currentState->update(TimePerFrame);
-                //update(TimePerFrame);
-                handleStateChanges();
-            }
-            if(repaint){
-                //render();
-                currentState->render(*_window);
+                timeSinceLastUpdate += clock.restart();
+
+                while(timeSinceLastUpdate > TimePerFrame && isRunning){
+                    timeSinceLastUpdate -= TimePerFrame;
+                    repaint = true;
+                    currentState->update(TimePerFrame);
+                    //update(TimePerFrame);
+                    handleStateChanges();
+                }
+                if(repaint && *isRunning){
+                    render(*currentState);
+                }
+            }else{
+                return;
             }
 
         }
@@ -68,6 +74,7 @@ void Game::handleStateChanges() {
         if (currentState->shouldExit()) {
             states.pop();
             if (states.empty()) {
+                *isRunning = false;
                 _window->close();
             }
         } else if (currentState->shouldContinue()) {
@@ -98,15 +105,8 @@ void Game::update(sf::Time deltaTime){
     }
 }
 
-void Game::render(){
-    _window->clear();
-    //tileGen->drawMap(*_window);
-    //_window->draw(_enemy->getEnemySprite());
-    //_window->draw(_player->getPlayerSprite());
-    // if(isSelectingPlayer){
-    //     _window->draw(selectionBox);
-    // }
-    _window->display();
+void Game::render(GameState& currentState){
+    currentState.render(*_window);
 }
 
 void Game::changeState(std::unique_ptr<GameState> newState) {
@@ -124,6 +124,8 @@ void Game::clean(){
     try{
         delete _window;
         _window = nullptr;
+        delete isRunning;
+        isRunning = nullptr;
         while(!states.empty()){
             states.pop();
         }
