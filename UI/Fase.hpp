@@ -30,7 +30,7 @@ protected:
     Enemy * enemy;
     std::string levelName;
     bool levelCompleted;
-    bool  exitGame;
+    bool exitGame;
 
     sf::RectangleShape selectionBox;
     sf::Vector2f selectionStart;
