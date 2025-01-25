@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 #include <SFML/Graphics.hpp>
 
@@ -40,3 +41,4 @@ private :
     float speed;
     void bindSelectShape();
 };
+#endif
