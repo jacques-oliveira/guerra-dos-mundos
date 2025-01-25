@@ -9,7 +9,7 @@ class MainMenuState : public GameState{
 public:
     MainMenuState();
     ~MainMenuState() override = default;
-    void processEvents(sf::RenderWindow & window) override;
+    void processEvents(sf::RenderWindow & window, bool * isRunning) override;
     void update(sf::Time deltaTime) override;
     void render(sf::RenderWindow & window) override;
     bool shouldContinue() const override;

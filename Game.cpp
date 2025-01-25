@@ -10,7 +10,7 @@ Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
 
     states.push(std::make_unique<MainMenuState>());
-    isRunning = true;
+    isRunning = new bool(true);
 }
 
 Game::~Game(){
@@ -21,7 +21,7 @@ void Game::processEvents(){
     try{
         while (_window->isOpen() && !states.empty()) {
             auto& currentState = states.top();
-            currentState->processEvents(*_window);
+            currentState->processEvents(*_window,isRunning);
         }
     }catch(exception& e){
         cerr<<"Erro ao processar Game Events"<<e.what()<<endl;
@@ -39,7 +39,11 @@ void Game::run(int frame_per_seconds){
 
         while(_window->isOpen() && !states.empty()){
             auto& currentState = states.top();
-            currentState->processEvents(*_window);
+            currentState->processEvents(*_window, isRunning);
+
+            if(*isRunning == false){
+                return;
+            }
             bool repaint = false;
 
             timeSinceLastUpdate += clock.restart();
@@ -116,6 +120,8 @@ void Game::clean(){
     try{
         delete _window;
         _window = nullptr;
+        delete isRunning;
+        isRunning = nullptr;
         while(!states.empty()){
             states.pop();
         }

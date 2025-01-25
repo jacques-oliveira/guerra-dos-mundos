@@ -31,5 +31,5 @@ private:
     void changeState(std::unique_ptr<GameState> newState);
     void processStateChanges();
     void handleStateChanges();
-    bool isRunning;
+    bool * isRunning;
 };

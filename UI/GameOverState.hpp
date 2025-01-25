@@ -8,7 +8,7 @@ public:
     GameOverState();
     virtual ~GameOverState() = default;
 
-    void processEvents(sf::RenderWindow & window) override;
+    void processEvents(sf::RenderWindow & window, bool*) override;
     void update(sf::Time deltaTime) override;
     void render(sf::RenderWindow & window) override;
 private:

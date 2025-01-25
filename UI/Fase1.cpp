@@ -17,14 +17,12 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     levelText.setPosition(10, 10);
     player = new Player();
     enemy = new Enemy(Boss);
-    isRunning = false;
-
 }
 
 Fase1::~Fase1(){
 }
 
-void Fase1::processEvents(sf::RenderWindow& _window) {
+void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
     try{
         sf::Event event;
         window = &_window;
@@ -32,6 +30,7 @@ void Fase1::processEvents(sf::RenderWindow& _window) {
             if (event.type == sf::Event::Closed) {
                 exitGame = true;
                 if(shouldExit()){
+                    *isRunning = false;
                     window->close();
                 }
 

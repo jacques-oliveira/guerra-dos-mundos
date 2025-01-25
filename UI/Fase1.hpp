@@ -10,7 +10,7 @@ public:
     Fase1(const std::string& levelName);
     ~Fase1() ;
 
-    void processEvents(sf::RenderWindow & window) override;
+    void processEvents(sf::RenderWindow & window, bool * isRunning) override;
     void update(sf::Time deltaTime) override;
     void render(sf::RenderWindow & window) override;
 
