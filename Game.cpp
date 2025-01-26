@@ -1,10 +1,5 @@
 #include <iostream>
 #include "Game.hpp"
-#include "Player.hpp"
-#include "TileGenerator.hpp"
-#include "Enemy.hpp"
-#include "UI/MainMenuState.hpp"
-#include "UI/Fase1.hpp"
 
 Game::Game()  {
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");

@@ -2,7 +2,6 @@
 #define FASE1_HPP
 
 #include "Fase.hpp"
-#include "../Player.hpp"
 #include "../TileGenerator.hpp"
 
 class Fase1 : public Fase{
