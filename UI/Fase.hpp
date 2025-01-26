@@ -3,7 +3,7 @@
 
 #include "GameState.hpp"
 #include "../TileGenerator.hpp"
-#include "../Player.hpp"
+#include "../Player/Player.hpp"
 #include "../Enemy.hpp"
 
 class Fase : public GameState{
