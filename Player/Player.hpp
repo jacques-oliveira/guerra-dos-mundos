@@ -2,6 +2,7 @@
 #define PLAYER_HPP
 
 #include <SFML/Graphics.hpp>
+#include "PlayerState.hpp"
 
 class Player : public sf::Drawable{
 public :
