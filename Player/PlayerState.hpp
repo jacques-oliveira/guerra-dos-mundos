@@ -2,9 +2,10 @@
 #define PLAYERSTATE_HPP
 
 enum PlayerState{
-    walkLeft,
+    Idle,
     walkRight,
-    walkUp,
-    walkDown
+    walkLeft,
+    walkDown,
+    walkUp
 };
 #endif

@@ -1,17 +1,16 @@
 #include <iostream>
 #include "Player.hpp"
-//#include "PlayerState.hpp"
 #include <cmath>
 
 using namespace std;
 
 Player::Player(){
 
-    if(!playerTexture.loadFromFile("Assets/Textures/jaco_sprite.png")){
-        return;
-    }
-    playerSprite.setTexture(playerTexture);
-    playerSprite.scale(0.25,0.25);
+    // if(!playerTexture.loadFromFile("Assets/Textures/jaco_sprite.png")){
+    //     return;
+    // }
+    //playerSprite.setTexture(playerTexture);
+    playerSprite.scale(2.0,2.0);
     playerSprite.setPosition(100,100);
     this->movementSpeed = 150.f;
     life = 100;
@@ -22,6 +21,23 @@ Player::Player(){
     selected = false;
     isMoving = false;
     speed = 10.f;
+    if(!
+    spriteSheet.loadFromFile("Assets/Textures/player-sprite.png")){
+        return;
+    }
+
+    animations.resize(5);
+
+    for(int i = 0; i < 5; ++i){
+        animations[i].setSpriteSheet(spriteSheet);
+        loadAnimation(animations[i],8,i);
+    }
+
+    currentState = Idle;
+
+    setState(currentState);
+    playerSprite.setTexture(animations[currentState].getTexture());
+    playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
 }
 
 Player::~Player(){
@@ -74,7 +90,11 @@ void Player::update(sf::Time deltaTime){
 
     if(isMoving){
         updatePositionPlayer(seconds);
+    }else{
+        setState(Idle);
     }
+        animations[currentState].update();
+        playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
 }
 
 void Player::setDestination(sf::Vector2f& dest){
@@ -93,8 +113,14 @@ void Player::updatePositionPlayer(float deltaTime){
         direction/= distance;
         float moveDistance = movementSpeed * deltaTime;
 
+            if(abs(direction.x) > abs(direction.y)){
+                setState(direction.x > 0 ? walkRight : walkLeft);
+            }else{
+                setState(direction.y > 0 ? walkDown : walkUp);
+            }
         if (moveDistance >= distance){
             playerSprite.setPosition(destination);
+
 
             isMoving = false;
         }else{
@@ -103,6 +129,7 @@ void Player::updatePositionPlayer(float deltaTime){
     }else{
         playerSprite.setPosition(destination);
         isMoving = false;
+        setState(Idle);
     }
     bindSelectShape();
 }
@@ -123,5 +150,20 @@ void Player::unselectPlayer(bool rightMouseButton){
 void Player::bindSelectShape(){
     selectShape.setPosition(playerSprite.getPosition().x + 60, playerSprite.getPosition().y - 20);
 }
+
+void Player::loadAnimation(Animation& animation, int framecount, int row){
+    for(int i = 0; i < framecount; ++i){
+        animation.addFrame(sf::IntRect(i * 64, row * 64, 64, 64));
+    }
+}
+
+void Player::setState(PlayerState state){
+    if(currentState != state){
+        currentState = state;
+        playerSprite.setTexture(animations[currentState].getTexture());
+        playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
+    }
+}
+
 
 

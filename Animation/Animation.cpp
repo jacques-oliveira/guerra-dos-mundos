@@ -1,7 +1,9 @@
 #include "Animation.hpp"
 
 Animation::Animation(float frameSpeed) : currentFrame(0), frameSpeed(frameSpeed),
-spriteSheet(nullptr){}
+spriteSheet(nullptr){
+    clock.restart();
+}
 
 void Animation::setSpriteSheet(const sf::Texture& texture){
     spriteSheet = &texture;

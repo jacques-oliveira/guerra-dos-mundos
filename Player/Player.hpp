@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayerState.hpp"
+#include "../Animation/Animation.hpp"
 
 class Player : public sf::Drawable{
 public :
@@ -29,6 +30,7 @@ public :
     void handleInput();
 
 
+
 private :
     float life;
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
@@ -41,5 +43,10 @@ private :
     void updatePositionPlayer(float);
     float speed;
     void bindSelectShape();
+    std::vector<Animation> animations;
+    void loadAnimation(Animation& animation, int framecount, int row);
+    void setState(PlayerState state);
+    sf::Texture spriteSheet;
+    PlayerState currentState;
 };
 #endif
