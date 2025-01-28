@@ -113,17 +113,15 @@ void Player::updatePositionPlayer(float deltaTime){
         direction/= distance;
         float moveDistance = movementSpeed * deltaTime;
 
+        if (moveDistance >= distance){
+            playerSprite.setPosition(destination);
+            isMoving = false;
+        }else{
             if(abs(direction.x) > abs(direction.y)){
                 setState(direction.x > 0 ? walkRight : walkLeft);
             }else{
                 setState(direction.y > 0 ? walkDown : walkUp);
             }
-        if (moveDistance >= distance){
-            playerSprite.setPosition(destination);
-
-
-            isMoving = false;
-        }else{
             playerSprite.move(direction * moveDistance);
         }
     }else{
