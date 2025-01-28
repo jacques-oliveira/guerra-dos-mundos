@@ -24,5 +24,6 @@ private:
     bool exitGame;
 
     void updateOptionColors();
+    void initMenu();
 };
 #endif

@@ -10,19 +10,7 @@ MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame
         throw std::runtime_error("Erro ao carregar fonte");
     }
 
-    title.setFont(font);
-    title.setString("Game Menu");
-    title.setCharacterSize(50);
-    title.setFillColor(sf::Color::White);
-    title.setPosition(200,100);
-
-    std::vector<std::string> optionsTexts={"Play","Exit"};
-    for(size_t i = 0; i < optionsTexts.size(); ++i){
-        sf::Text option(optionsTexts[i], font, 30);
-        option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
-        option.setPosition(200,200 + i * 50);
-        options.push_back(option);
-    }
+    initMenu();
 }
 
 void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
@@ -82,6 +70,23 @@ bool MainMenuState::shouldContinue() const{
 
 bool MainMenuState::shouldExit() const{
     return exitGame;
+}
+
+void MainMenuState::initMenu(){
+
+    title.setFont(font);
+    title.setString("Game Menu");
+    title.setCharacterSize(50);
+    title.setFillColor(sf::Color::White);
+    title.setPosition(200,100);
+
+    std::vector<std::string> optionsTexts={"Play","Exit"};
+    for(size_t i = 0; i < optionsTexts.size(); ++i){
+        sf::Text option(optionsTexts[i], font, 30);
+        option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
+        option.setPosition(200,200 + i * 50);
+        options.push_back(option);
+    }
 }
 
 #endif
