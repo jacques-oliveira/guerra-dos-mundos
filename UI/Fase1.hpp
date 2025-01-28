@@ -13,5 +13,7 @@ public:
     void update(sf::Time deltaTime) override;
     void render(sf::RenderWindow & window) override;
 
+private:
+    void initLevel(std::string);
 };
 #endif
