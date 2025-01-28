@@ -7,16 +7,8 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
         throw std::runtime_error("Erro ao carregar fonte");
     }
-    levelName = _levelName;
-    levelCompleted = false;
 
-    levelText.setFont(font);
-    levelText.setString("Playing " + levelName);
-    levelText.setCharacterSize(30);
-    levelText.setFillColor(sf::Color::White);
-    levelText.setPosition(10, 10);
-    player = new Player();
-    enemy = new Enemy(Boss);
+    initLevel(_levelName);
 }
 
 Fase1::~Fase1(){
@@ -119,4 +111,17 @@ void Fase1::render(sf::RenderWindow& window) {
     }catch(exception&){
         cerr<<"Falha ao renderizar estado"<<endl;
     }
+}
+
+void Fase1::initLevel(std::string _levelName){
+    levelName = _levelName;
+    levelCompleted = false;
+
+    levelText.setFont(font);
+    levelText.setString("Playing " + levelName);
+    levelText.setCharacterSize(30);
+    levelText.setFillColor(sf::Color::White);
+    levelText.setPosition(10, 10);
+    player = new Player();
+    enemy = new Enemy(Boss);
 }
