@@ -3,6 +3,7 @@
 
 #include "MainMenuState.hpp"
 #include<stdexcept>
+#include <iostream>
 
 MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame(false){
     if(!font.loadFromFile("Assets/Fonts/Good-Game.ttf")){
@@ -26,30 +27,34 @@ MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame
 
 void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
     sf::Event event;
-    while(window.pollEvent(event)){
-        if(event.type == sf::Event::Closed){
-            exitGame=true;
-            if(shouldExit()){
-                *isRunning = false;
-                window.close();
-            }
-        }else if(event.type == sf::Event::KeyPressed){
-            if(event.key.code == sf::Keyboard::Up){
-                selectedOption= (selectedOption - 1 + options.size()) % options.size();
-                updateOptionColors();
-            }else if(event.key.code == sf::Keyboard::Down){
-                selectedOption= (selectedOption + 1) % options.size();
-                updateOptionColors();
-            }else if(event.key.code == sf::Keyboard::Enter){
-                if(selectedOption == 0){
-                    continueGame = true;
-                }else if(selectedOption ==1){
-                    exitGame =true;
+    try{
+        while(window.pollEvent(event)){
+            if(event.type == sf::Event::Closed){
+                exitGame=true;
+                if(shouldExit()){
+                    *isRunning = false;
                     window.close();
                 }
+            }else if(event.type == sf::Event::KeyPressed){
+                if(event.key.code == sf::Keyboard::Up){
+                    selectedOption= (selectedOption - 1 + options.size()) % options.size();
+                    updateOptionColors();
+                }else if(event.key.code == sf::Keyboard::Down){
+                    selectedOption= (selectedOption + 1) % options.size();
+                    updateOptionColors();
+                }else if(event.key.code == sf::Keyboard::Enter){
+                    if(selectedOption == 0){
+                        continueGame = true;
+                    }else if(selectedOption ==1){
+                        exitGame =true;
+                        window.close();
+                    }
+                }
             }
-        }
 
+        }
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao processar Menu"<<e.what()<<std::endl;
     }
 }
 
