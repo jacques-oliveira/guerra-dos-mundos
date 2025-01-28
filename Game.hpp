@@ -22,7 +22,7 @@ public :
     Game();
     ~Game();
 
-    void run(int frame_per_seconds);
+    void run();
     void clean();
 
 private:
@@ -35,4 +35,5 @@ private:
     void processStateChanges();
     void handleStateChanges();
     bool * isRunning;
+    const short frame_per_seconds;
 };

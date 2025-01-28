@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
 
-Game::Game()  {
+Game::Game() : frame_per_seconds(60){
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
 
     states.push(std::make_unique<MainMenuState>());
@@ -25,7 +25,7 @@ void Game::processEvents(){
     }
 }
 
-void Game::run(int frame_per_seconds){
+void Game::run(){
     try{
         sf::Clock clock;
         sf::Time timeSinceLastUpdate = sf::Time::Zero;
