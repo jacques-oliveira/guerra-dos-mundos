@@ -38,10 +38,12 @@ Player::Player(){
     setState(currentState);
     playerSprite.setTexture(animations[currentState].getTexture());
     playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
+    initPlayer();
 }
 
 Player::~Player(){
-
+    delete playerHealth;
+    playerHealth = nullptr;
 }
 
 void Player::setSelected(bool isSelected){
@@ -60,6 +62,8 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Player::render(sf::RenderWindow& window) {
     window.draw(selectShape);
+    //playerHealth->draw(window);
+    playerHealth->draw(window);
 }
 
 void Player::handleInput() {
@@ -130,6 +134,7 @@ void Player::updatePositionPlayer(float deltaTime){
         setState(Idle);
     }
     bindSelectShape();
+    playerHealth->setPosition( playerSprite.getGlobalBounds());
 }
 
 const sf::Sprite & Player::getPlayerSprite() const{
@@ -161,6 +166,12 @@ void Player::setState(PlayerState state){
         playerSprite.setTexture(animations[currentState].getTexture());
         playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
     }
+}
+
+void Player::initPlayer(){
+    playerHealth = new HealthBar(80,10);
+    playerHealth->setPosition( playerSprite.getGlobalBounds());
+    playerHealth->setHealth(0.95f);
 }
 
 

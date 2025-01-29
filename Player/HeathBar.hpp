@@ -9,7 +9,7 @@ public:
     HealthBar(float width, float height);
     ~HealthBar();
 
-    void setPosition(float x, float y);
+    void setPosition(const sf::FloatRect& globalBounds);
     void setHealth(float healthValue);
     void draw(sf::RenderWindow& window);
 
