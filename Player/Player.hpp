@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "PlayerState.hpp"
 #include "../Animation/Animation.hpp"
+#include "HeathBar.hpp"
 
 class Player : public sf::Drawable{
 public :
@@ -48,5 +49,8 @@ private :
     void setState(PlayerState state);
     sf::Texture spriteSheet;
     PlayerState currentState;
+    HealthBar * playerHealth;
+    void initPlayer();
+
 };
 #endif
