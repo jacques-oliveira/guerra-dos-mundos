@@ -29,7 +29,7 @@ public :
     void setDestination(sf::Vector2f&);
     void render(sf::RenderWindow& window);
     void handleInput();
-
+    bool mouseLeftEvent;
 
 
 private :

@@ -14,10 +14,7 @@ Player::Player(){
     playerSprite.setPosition(100,100);
     this->movementSpeed = 150.f;
     life = 100;
-
-    selectShape.setRadius(10.f);
-    selectShape.setFillColor(sf::Color::Yellow);
-    bindSelectShape();
+    mouseLeftEvent = false;
     selected = false;
     isMoving = false;
     speed = 10.f;
@@ -48,7 +45,6 @@ Player::~Player(){
 
 void Player::setSelected(bool isSelected){
     selected = isSelected;
-
 }
 
 bool Player::isInside(const sf::FloatRect& selectionArea) const{
@@ -57,11 +53,12 @@ bool Player::isInside(const sf::FloatRect& selectionArea) const{
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    target.draw(selectShape,states);
     target.draw(playerSprite, states);
 }
 
 void Player::render(sf::RenderWindow& window) {
-    window.draw(selectShape);
+    //window.draw(selectShape);
     //playerHealth->draw(window);
     playerHealth->draw(window);
 }
@@ -86,6 +83,7 @@ void Player::processEvents(){
     moveDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S);
     moveLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A);
     moveRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+
 }
 
 void Player::update(sf::Time deltaTime){
@@ -97,8 +95,13 @@ void Player::update(sf::Time deltaTime){
     }else{
         setState(Idle);
     }
-        animations[currentState].update();
-        playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
+    animations[currentState].update();
+    playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
+    if(mouseLeftEvent){
+        selectShape.setRadius(60.f);
+    }else{
+        selectShape.setRadius(0.f);
+    }
 }
 
 void Player::setDestination(sf::Vector2f& dest){
@@ -142,16 +145,19 @@ const sf::Sprite & Player::getPlayerSprite() const{
 }
 
 bool Player::isPlayerSelected(){
+    mouseLeftEvent =  selected;
     return selected;
 }
 
 void Player::unselectPlayer(bool rightMouseButton){
-    if(rightMouseButton)
+    if(rightMouseButton){
         selected = false;
+        mouseLeftEvent = false;
+    }
 }
 
 void Player::bindSelectShape(){
-    selectShape.setPosition(playerSprite.getPosition().x + 60, playerSprite.getPosition().y - 20);
+    selectShape.setPosition(playerSprite.getPosition().x, playerSprite.getLocalBounds().height + playerSprite.getGlobalBounds().top + 10.f);
 }
 
 void Player::loadAnimation(Animation& animation, int framecount, int row){
@@ -172,6 +178,13 @@ void Player::initPlayer(){
     playerHealth = new HealthBar(80,10);
     playerHealth->setPosition( playerSprite.getGlobalBounds());
     playerHealth->setHealth(0.95f);
+
+    selectShape.setFillColor(sf::Color::Transparent);
+    selectShape.setOutlineThickness(15.0f);
+    selectShape.setOutlineColor(sf::Color::Green);
+    selectShape.setScale(1,0.5f);
+
+    bindSelectShape();
 }
 
 
