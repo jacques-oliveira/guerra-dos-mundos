@@ -14,7 +14,7 @@ Player::Player(){
     playerSprite.setPosition(100,100);
     this->movementSpeed = 150.f;
     life = 100;
-
+    mouseLeftEvent = false;
     selected = false;
     isMoving = false;
     speed = 10.f;
@@ -45,7 +45,6 @@ Player::~Player(){
 
 void Player::setSelected(bool isSelected){
     selected = isSelected;
-
 }
 
 bool Player::isInside(const sf::FloatRect& selectionArea) const{
@@ -84,6 +83,7 @@ void Player::processEvents(){
     moveDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S);
     moveLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A);
     moveRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+
 }
 
 void Player::update(sf::Time deltaTime){
@@ -95,8 +95,13 @@ void Player::update(sf::Time deltaTime){
     }else{
         setState(Idle);
     }
-        animations[currentState].update();
-        playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
+    animations[currentState].update();
+    playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
+    if(mouseLeftEvent){
+        selectShape.setRadius(60.f);
+    }else{
+        selectShape.setRadius(0.f);
+    }
 }
 
 void Player::setDestination(sf::Vector2f& dest){
@@ -140,12 +145,15 @@ const sf::Sprite & Player::getPlayerSprite() const{
 }
 
 bool Player::isPlayerSelected(){
+    mouseLeftEvent =  selected;
     return selected;
 }
 
 void Player::unselectPlayer(bool rightMouseButton){
-    if(rightMouseButton)
+    if(rightMouseButton){
         selected = false;
+        mouseLeftEvent = false;
+    }
 }
 
 void Player::bindSelectShape(){
@@ -170,11 +178,12 @@ void Player::initPlayer(){
     playerHealth = new HealthBar(80,10);
     playerHealth->setPosition( playerSprite.getGlobalBounds());
     playerHealth->setHealth(0.95f);
-    selectShape.setRadius(60.f);
+
     selectShape.setFillColor(sf::Color::Transparent);
     selectShape.setOutlineThickness(15.0f);
     selectShape.setOutlineColor(sf::Color::Green);
     selectShape.setScale(1,0.5f);
+
     bindSelectShape();
 }
 
