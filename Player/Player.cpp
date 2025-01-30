@@ -149,7 +149,7 @@ void Player::unselectPlayer(bool rightMouseButton){
 }
 
 void Player::bindSelectShape(){
-    selectShape.setPosition(playerSprite.getPosition().x, playerSprite.getLocalBounds().height+playerSprite.getGlobalBounds().top);
+    selectShape.setPosition(playerSprite.getPosition().x, playerSprite.getLocalBounds().height + playerSprite.getGlobalBounds().top + 10.f);
 }
 
 void Player::loadAnimation(Animation& animation, int framecount, int row){
