@@ -15,9 +15,6 @@ Player::Player(){
     this->movementSpeed = 150.f;
     life = 100;
 
-    selectShape.setRadius(10.f);
-    selectShape.setFillColor(sf::Color::Yellow);
-    bindSelectShape();
     selected = false;
     isMoving = false;
     speed = 10.f;
@@ -57,11 +54,12 @@ bool Player::isInside(const sf::FloatRect& selectionArea) const{
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    target.draw(selectShape,states);
     target.draw(playerSprite, states);
 }
 
 void Player::render(sf::RenderWindow& window) {
-    window.draw(selectShape);
+    //window.draw(selectShape);
     //playerHealth->draw(window);
     playerHealth->draw(window);
 }
@@ -151,7 +149,7 @@ void Player::unselectPlayer(bool rightMouseButton){
 }
 
 void Player::bindSelectShape(){
-    selectShape.setPosition(playerSprite.getPosition().x + 60, playerSprite.getPosition().y - 20);
+    selectShape.setPosition(playerSprite.getPosition().x, playerSprite.getLocalBounds().height+playerSprite.getGlobalBounds().top);
 }
 
 void Player::loadAnimation(Animation& animation, int framecount, int row){
@@ -172,6 +170,12 @@ void Player::initPlayer(){
     playerHealth = new HealthBar(80,10);
     playerHealth->setPosition( playerSprite.getGlobalBounds());
     playerHealth->setHealth(0.95f);
+    selectShape.setRadius(60.f);
+    selectShape.setFillColor(sf::Color::Transparent);
+    selectShape.setOutlineThickness(15.0f);
+    selectShape.setOutlineColor(sf::Color::Green);
+    selectShape.setScale(1,0.5f);
+    bindSelectShape();
 }
 
 
