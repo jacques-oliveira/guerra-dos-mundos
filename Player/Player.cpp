@@ -6,14 +6,6 @@ using namespace std;
 
 Player::Player(float posx, float posy){
 
-    // if(!playerTexture.loadFromFile("Assets/Textures/jaco_sprite.png")){
-    //     return;
-    // }
-    //playerSprite.setTexture(playerTexture);
-    playerSprite.scale(2.0,2.0);
-    playerSprite.setPosition(posx,posy);
-    this->movementSpeed = 150.f;
-    life = 100;
     mouseLeftEvent = false;
     selected = false;
     isMoving = false;
@@ -35,7 +27,7 @@ Player::Player(float posx, float posy){
     setState(currentState);
     playerSprite.setTexture(animations[currentState].getTexture());
     playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
-    initPlayer();
+    initPlayer(posx, posy);
 }
 
 Player::~Player(){
@@ -174,17 +166,29 @@ void Player::setState(PlayerState state){
     }
 }
 
-void Player::initPlayer(){
-    playerHealth = new HealthBar(80,10);
-    playerHealth->setPosition( playerSprite.getGlobalBounds());
-    playerHealth->setHealth(0.95f);
+void Player::initPlayer(float posx, float posy){
 
-    selectShape.setFillColor(sf::Color::Transparent);
-    selectShape.setOutlineThickness(15.0f);
-    selectShape.setOutlineColor(sf::Color::Green);
-    selectShape.setScale(1,0.5f);
+    if(!isnan(posx) && !isnan(posy)){
+        try{
+            playerSprite.scale(2.0,2.0);
+            playerSprite.setPosition(posx, posy);
+            this->movementSpeed = 150.f;
+            life = 100;
+            playerHealth = new HealthBar(80,10);
+            playerHealth->setPosition( playerSprite.getGlobalBounds());
+            playerHealth->setHealth(0.95f);
 
-    bindSelectShape();
+            selectShape.setFillColor(sf::Color::Transparent);
+            selectShape.setOutlineThickness(15.0f);
+            selectShape.setOutlineColor(sf::Color::Green);
+            selectShape.setScale(1,0.5f);
+
+            bindSelectShape();
+        }catch(exception& e){
+            cerr<<"Valores inválidos para criar o player"<<e.what()<<endl;
+        }
+    }
+
 }
 
 

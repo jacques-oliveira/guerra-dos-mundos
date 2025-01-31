@@ -50,7 +50,7 @@ private :
     sf::Texture spriteSheet;
     PlayerState currentState;
     HealthBar * playerHealth;
-    void initPlayer();
+    void initPlayer(float posx, float posy);
 
 };
 #endif
