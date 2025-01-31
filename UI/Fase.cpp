@@ -61,9 +61,13 @@ void Fase::moveSelectedPlayers(sf::Vector2f& dest){
 }
 
 void Fase::configureTileMap(){
-    char path[100] =  {"Assets/Textures/forest.png\0"};
-    tileGen = new TileGenerator();
-    tileGen->generateTileMap(path);
+    try{
+        char path[100] =  {"Assets/Textures/forest.png\0"};
+        tileGen = new TileGenerator();
+        tileGen->generateTileMap(path);
+    }catch(exception& e){
+        cerr<<"Erro ao configurar tilemap"<<e.what()<<endl;
+    }
 }
 
 bool Fase::shouldContinue() const {
