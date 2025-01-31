@@ -32,10 +32,14 @@ void Fase::startSelection(sf::Vector2f& start){
 }
 
 void Fase::configureSelectionBox(){
-    selectionBox.setFillColor(sf::Color(0, 0, 255, 25)); // Azul translúcido
-    selectionBox.setOutlineThickness(1.f);
-    selectionBox.setOutlineColor(sf::Color::Blue);
-    isSelectingPlayer = false;
+    try{
+        selectionBox.setFillColor(sf::Color(0, 0, 255, 25)); // Azul translúcido
+        selectionBox.setOutlineThickness(1.f);
+        selectionBox.setOutlineColor(sf::Color::Blue);
+        isSelectingPlayer = false;
+    }catch(exception& e){
+        cerr<<"Erro ao configurar selectionBox"<<e.what()<<endl;
+    }
 }
 
 void Fase::updateSelection(const sf::Vector2f& current){
