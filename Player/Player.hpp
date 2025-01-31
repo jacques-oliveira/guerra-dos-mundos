@@ -11,7 +11,7 @@ public :
     Player(const Player&) = delete;
     Player& operator = (const Player&) = delete;
 
-    Player();
+    Player(float posx, float posy);
     ~Player();
 
     template<typename ...Args>

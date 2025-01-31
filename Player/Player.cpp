@@ -4,14 +4,14 @@
 
 using namespace std;
 
-Player::Player(){
+Player::Player(float posx, float posy){
 
     // if(!playerTexture.loadFromFile("Assets/Textures/jaco_sprite.png")){
     //     return;
     // }
     //playerSprite.setTexture(playerTexture);
     playerSprite.scale(2.0,2.0);
-    playerSprite.setPosition(100,100);
+    playerSprite.setPosition(posx,posy);
     this->movementSpeed = 150.f;
     life = 100;
     mouseLeftEvent = false;
