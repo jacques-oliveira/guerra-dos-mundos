@@ -50,12 +50,17 @@ void MainMenuState::update(sf::Time deltaTime){
 }
 
 void MainMenuState::render(sf::RenderWindow& window){
-    window.clear();
-    window.draw(title);
-    for(const auto& option: options){
-        window.draw(option);
+    try{
+        window.clear();
+        window.draw(title);
+        for(const auto& option: options){
+            window.draw(option);
+        }
+        window.display();
+
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao renderizar menu"<<e.what()<<std::endl;
     }
-    window.display();
 }
 
 void MainMenuState::updateOptionColors(){
@@ -73,19 +78,22 @@ bool MainMenuState::shouldExit() const{
 }
 
 void MainMenuState::initMenu(){
+    try{
+        title.setFont(font);
+        title.setString("Game Menu");
+        title.setCharacterSize(50);
+        title.setFillColor(sf::Color::White);
+        title.setPosition(200,100);
 
-    title.setFont(font);
-    title.setString("Game Menu");
-    title.setCharacterSize(50);
-    title.setFillColor(sf::Color::White);
-    title.setPosition(200,100);
-
-    std::vector<std::string> optionsTexts={"Play","Exit"};
-    for(size_t i = 0; i < optionsTexts.size(); ++i){
-        sf::Text option(optionsTexts[i], font, 30);
-        option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
-        option.setPosition(200,200 + i * 50);
-        options.push_back(option);
+        std::vector<std::string> optionsTexts={"Play","Exit"};
+        for(size_t i = 0; i < optionsTexts.size(); ++i){
+            sf::Text option(optionsTexts[i], font, 30);
+            option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
+            option.setPosition(200,200 + i * 50);
+            options.push_back(option);
+        }
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
     }
 }
 
