@@ -11,7 +11,7 @@ public :
     Player(const Player&) = delete;
     Player& operator = (const Player&) = delete;
 
-    Player();
+    Player(float posx, float posy);
     ~Player();
 
     template<typename ...Args>
@@ -50,7 +50,7 @@ private :
     sf::Texture spriteSheet;
     PlayerState currentState;
     HealthBar * playerHealth;
-    void initPlayer();
+    void initPlayer(float posx, float posy);
 
 };
 #endif
