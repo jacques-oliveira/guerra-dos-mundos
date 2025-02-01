@@ -4,12 +4,13 @@ Enemy::Enemy(EnemyType type) : enemytype(type){
     if(!enemyTexture.loadFromFile("Assets/Textures/frame0000.png")){
         return;
     }
-    collider = new Collider(sf::Vector2f(500,205));
     enemySprite.setTexture(enemyTexture);
     //enemySprite.scale(0.5,0.5);
     enemySprite.setPosition(600,240);
-
-    collider->setPosition(sf::Vector2f(600,240));
+    collider = new Collider(sf::Vector2f(120,80));
+    collider->setPosition(sf::Vector2f(
+        enemySprite.getGlobalBounds().getPosition().x + collider->colliderShape().getGlobalBounds().width/2,
+        enemySprite.getPosition().y + enemySprite.getTextureRect().height*0.60f));
 }
 
 Enemy::~Enemy(){
