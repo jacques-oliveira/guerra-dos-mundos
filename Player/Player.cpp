@@ -49,6 +49,7 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(selectShape,states);
     target.draw(playerSprite, states);
+    target.draw(collider->colliderShape());
 }
 
 void Player::render(sf::RenderWindow& window) {
@@ -92,7 +93,7 @@ void Player::update(sf::Time deltaTime){
     animations[currentState].update();
     playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
     if(mouseLeftEvent){
-        selectShape.setRadius(60.f);
+        selectShape.setRadius(25.f);
     }else{
         selectShape.setRadius(0.f);
     }
@@ -151,7 +152,7 @@ void Player::unselectPlayer(bool rightMouseButton){
 }
 
 void Player::bindSelectShape(){
-    selectShape.setPosition(playerSprite.getPosition().x, playerSprite.getLocalBounds().height + playerSprite.getGlobalBounds().top + 10.f);
+    selectShape.setPosition(playerSprite.getPosition().x + playerSprite.getTextureRect().width*0.1, playerSprite.getPosition().y + playerSprite.getTextureRect().height*0.65);
 }
 
 void Player::loadAnimation(Animation& animation, int framecount, int row){
@@ -172,17 +173,19 @@ void Player::initPlayer(float posx, float posy){
 
     if(!isnan(posx) && !isnan(posy)){
         try{
-            playerSprite.scale(2.0,2.0);
-            collider = new Collider(sf::Vector2f(50,50));
+            //playerSprite.scale(2.0,2.0);
+            collider = new Collider(sf::Vector2f(50,25));
             playerSprite.setPosition(posx, posy);
+            collider->setPosition(sf::Vector2f(playerSprite.getPosition().x,
+                                  playerSprite.getPosition().y  + 35.f));
             this->movementSpeed = 150.f;
             life = 100;
-            playerHealth = new HealthBar(80,10);
+            playerHealth = new HealthBar(40,8);
             playerHealth->setPosition( playerSprite.getGlobalBounds());
             playerHealth->setHealth(0.95f);
 
             selectShape.setFillColor(sf::Color::Transparent);
-            selectShape.setOutlineThickness(15.0f);
+            selectShape.setOutlineThickness(5.5f);
             selectShape.setOutlineColor(sf::Color::Green);
             selectShape.setScale(1,0.5f);
 

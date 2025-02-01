@@ -6,8 +6,9 @@
 class Collider : public Collidable{
 public:
     Collider(sf::Vector2f size);
-    void setPosition(sf::Vector2f& position);
+    void setPosition(const sf::Vector2f& position);
     const sf::RectangleShape & getCollider() const override;
+    sf::RectangleShape colliderShape();
 private:
     sf::RectangleShape collider;
 };
