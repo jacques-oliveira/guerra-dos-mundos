@@ -202,4 +202,15 @@ void Player::updateColliderPosition(){
                                        playerSprite.getPosition().y  + 35.f));
 }
 
+bool Player::checkCollision(const Collidable& other) const{
+    return collider->getCollider().getGlobalBounds().intersects(other.getCollider().getGlobalBounds());
+}
+
+void Player::resolveCollision(const Collidable& other){
+    if(checkCollision(other)){
+        cout<<"Collision"<<endl;
+        playerSprite.setPosition(playerSprite.getPosition());
+    }
+}
+
 

@@ -72,6 +72,7 @@ void Fase1::update(sf::Time deltaTime) {
     try{
         if(player != nullptr){
             player->update(deltaTime);
+            player->resolveCollision(*enemy->collider);
             sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
             sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
             sf::Vector2f currentCenter = view.getCenter();
@@ -100,7 +101,7 @@ void Fase1::render(sf::RenderWindow& window) {
         window.clear();
         tileGen->drawMap(window);
         window.draw(*player);
-        window.draw(enemy->getEnemySprite());
+        enemy->render(window);
         window.draw(selectionBox);
         player->render(window);
         window.setView(uiView);
