@@ -133,6 +133,7 @@ void Player::updatePositionPlayer(float deltaTime){
     }
     bindSelectShape();
     playerHealth->setPosition( playerSprite.getGlobalBounds());
+    updateColliderPosition();
 }
 
 const sf::Sprite & Player::getPlayerSprite() const{
@@ -176,8 +177,7 @@ void Player::initPlayer(float posx, float posy){
             //playerSprite.scale(2.0,2.0);
             collider = new Collider(sf::Vector2f(50,25));
             playerSprite.setPosition(posx, posy);
-            collider->setPosition(sf::Vector2f(playerSprite.getPosition().x,
-                                  playerSprite.getPosition().y  + 35.f));
+            updateColliderPosition();
             this->movementSpeed = 150.f;
             life = 100;
             playerHealth = new HealthBar(40,8);
@@ -197,5 +197,9 @@ void Player::initPlayer(float posx, float posy){
 
 }
 
+void Player::updateColliderPosition(){
+    collider->setPosition(sf::Vector2f(playerSprite.getPosition().x,
+                                       playerSprite.getPosition().y  + 35.f));
+}
 
 
