@@ -93,7 +93,7 @@ void Player::update(sf::Time deltaTime){
     animations[currentState].update();
     playerSprite.setTextureRect(animations[currentState].getCurrentFrame());
     if(mouseLeftEvent){
-        selectShape.setRadius(60.f);
+        selectShape.setRadius(25.f);
     }else{
         selectShape.setRadius(0.f);
     }
@@ -152,7 +152,7 @@ void Player::unselectPlayer(bool rightMouseButton){
 }
 
 void Player::bindSelectShape(){
-    selectShape.setPosition(playerSprite.getPosition().x, playerSprite.getLocalBounds().height + playerSprite.getGlobalBounds().top + 10.f);
+    selectShape.setPosition(playerSprite.getPosition().x + playerSprite.getTextureRect().width*0.1, playerSprite.getPosition().y + playerSprite.getTextureRect().height*0.65);
 }
 
 void Player::loadAnimation(Animation& animation, int framecount, int row){
@@ -185,7 +185,7 @@ void Player::initPlayer(float posx, float posy){
             playerHealth->setHealth(0.95f);
 
             selectShape.setFillColor(sf::Color::Transparent);
-            selectShape.setOutlineThickness(15.0f);
+            selectShape.setOutlineThickness(5.5f);
             selectShape.setOutlineColor(sf::Color::Green);
             selectShape.setScale(1,0.5f);
 
