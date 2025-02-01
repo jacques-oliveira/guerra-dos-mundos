@@ -5,6 +5,7 @@
 #include "PlayerState.hpp"
 #include "../Animation/Animation.hpp"
 #include "HeathBar.hpp"
+#include "../Collision/Collider.hpp"
 
 class Player : public sf::Drawable{
 public :
@@ -30,7 +31,8 @@ public :
     void render(sf::RenderWindow& window);
     void handleInput();
     bool mouseLeftEvent;
-
+    Collider * collider;
+    bool checkCollision(const Collidable& other) const;
 
 private :
     float life;
@@ -51,6 +53,6 @@ private :
     PlayerState currentState;
     HealthBar * playerHealth;
     void initPlayer(float posx, float posy);
-
+    void updateColliderPosition();
 };
 #endif
