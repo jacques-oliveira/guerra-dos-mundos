@@ -30,7 +30,8 @@ public :
     void render(sf::RenderWindow& window);
     void handleInput();
     bool mouseLeftEvent;
-
+    sf::RectangleShape collider;
+    bool checkCollision() const;
 
 private :
     float life;
@@ -51,6 +52,6 @@ private :
     PlayerState currentState;
     HealthBar * playerHealth;
     void initPlayer(float posx, float posy);
-
+    void updateColliderPosition();
 };
 #endif
