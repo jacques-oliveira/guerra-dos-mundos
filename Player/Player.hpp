@@ -33,6 +33,7 @@ public :
     bool mouseLeftEvent;
     Collider * collider;
     bool checkCollision(const Collidable& other) const;
+    void resolveCollision(const Collidable& other);
 
 private :
     float life;
