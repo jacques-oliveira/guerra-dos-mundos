@@ -7,11 +7,15 @@ Collider::Collider(sf::Vector2f size){
     collider.setOutlineThickness(1.f);
 }
 
-void Collider::setPosition(sf::Vector2f& position){
+void Collider::setPosition(const sf::Vector2f& position){
     collider.setPosition(position);
 }
 
 const sf::RectangleShape & Collider::getCollider() const{
+    return collider;
+}
+
+sf::RectangleShape Collider::colliderShape(){
     return collider;
 }
 

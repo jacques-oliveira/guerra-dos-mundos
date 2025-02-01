@@ -49,6 +49,7 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(selectShape,states);
     target.draw(playerSprite, states);
+    target.draw(collider->colliderShape());
 }
 
 void Player::render(sf::RenderWindow& window) {
@@ -172,9 +173,11 @@ void Player::initPlayer(float posx, float posy){
 
     if(!isnan(posx) && !isnan(posy)){
         try{
-            playerSprite.scale(2.0,2.0);
-            collider = new Collider(sf::Vector2f(50,50));
+            //playerSprite.scale(2.0,2.0);
+            collider = new Collider(sf::Vector2f(50,25));
             playerSprite.setPosition(posx, posy);
+            collider->setPosition(sf::Vector2f(playerSprite.getPosition().x,
+                                  playerSprite.getPosition().y  + 35.f));
             this->movementSpeed = 150.f;
             life = 100;
             playerHealth = new HealthBar(80,10);
