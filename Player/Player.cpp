@@ -180,7 +180,7 @@ void Player::initPlayer(float posx, float posy){
                                   playerSprite.getPosition().y  + 35.f));
             this->movementSpeed = 150.f;
             life = 100;
-            playerHealth = new HealthBar(80,10);
+            playerHealth = new HealthBar(40,8);
             playerHealth->setPosition( playerSprite.getGlobalBounds());
             playerHealth->setHealth(0.95f);
 
