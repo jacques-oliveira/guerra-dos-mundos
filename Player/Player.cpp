@@ -33,6 +33,8 @@ Player::Player(float posx, float posy){
 Player::~Player(){
     delete playerHealth;
     playerHealth = nullptr;
+    delete collider;
+    collider = nullptr;
 }
 
 void Player::setSelected(bool isSelected){
@@ -171,6 +173,7 @@ void Player::initPlayer(float posx, float posy){
     if(!isnan(posx) && !isnan(posy)){
         try{
             playerSprite.scale(2.0,2.0);
+            collider = new Collider(sf::Vector2f(50,50));
             playerSprite.setPosition(posx, posy);
             this->movementSpeed = 150.f;
             life = 100;
