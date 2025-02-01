@@ -198,7 +198,7 @@ void Player::initPlayer(float posx, float posy){
 }
 
 void Player::updateColliderPosition(){
-    collider->setPosition(sf::Vector2f(playerSprite.getPosition().x,
+    collider->setPosition(sf::Vector2f(playerSprite.getPosition().x + playerSprite.getTextureRect().width*0.1,
                                        playerSprite.getPosition().y  + 35.f));
 }
 
