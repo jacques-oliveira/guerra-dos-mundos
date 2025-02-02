@@ -13,7 +13,7 @@ public :
     Player(const Player&) = delete;
     Player& operator = (const Player&) = delete;
 
-    Player(float posx, float posy);
+    Player(float posx, float posy, CharacterType characterType);
     ~Player();
 
     template<typename ...Args>

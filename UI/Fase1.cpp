@@ -123,6 +123,6 @@ void Fase1::initLevel(std::string _levelName){
     levelText.setCharacterSize(30);
     levelText.setFillColor(sf::Color::White);
     levelText.setPosition(10, 10);
-    player = new Player(100,100);
+    player = new Player(100,100,Soldier);
     enemy = new Enemy(Soldier);
 }
