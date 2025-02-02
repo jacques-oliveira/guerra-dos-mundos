@@ -59,25 +59,10 @@ void Player::render(sf::RenderWindow& window) {
 }
 
 void Player::handleInput() {
-    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-    //     shape.move(0, -speed * 0.016f);
-    // }
-    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-    //     shape.move(0, speed * 0.016f);
-    // }
-    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-    //     shape.move(-speed * 0.016f, 0);
-    // }
-    // if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-    //     shape.move(speed * 0.016f, 0);
-    // }
+
 }
 
 void Player::processEvents(){
-    moveUp = sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W);
-    moveDown = sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S);
-    moveLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-    moveRight = sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D);
 
 }
 
@@ -213,13 +198,12 @@ void Player::resolveCollision(const Collidable& other){
         sf::FloatRect otherBounds = other.getCollider().getGlobalBounds();
 
         if (playerBounds.intersects(otherBounds)) {
-            // Calcular a sobreposição
+
             float overlapLeft = playerBounds.left + playerBounds.width - otherBounds.left;
             float overlapRight = otherBounds.left + otherBounds.width - playerBounds.left;
             float overlapTop = playerBounds.top + playerBounds.height - otherBounds.top;
             float overlapBottom = otherBounds.top + otherBounds.height - playerBounds.top;
 
-            // Ajustar a posição do player com base na menor sobreposição
             if (overlapLeft < overlapRight && overlapLeft < overlapTop && overlapLeft < overlapBottom) {
                 playerSprite.move(-overlapLeft, 0.f);
             } else if (overlapRight < overlapLeft && overlapRight < overlapTop && overlapRight < overlapBottom) {
