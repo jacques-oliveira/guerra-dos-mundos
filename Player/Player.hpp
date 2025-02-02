@@ -6,13 +6,14 @@
 #include "../Animation/Animation.hpp"
 #include "HeathBar.hpp"
 #include "../Collision/Collider.hpp"
+#include "../Character/CharacterType.hpp"
 
 class Player : public sf::Drawable{
 public :
     Player(const Player&) = delete;
     Player& operator = (const Player&) = delete;
 
-    Player(float posx, float posy);
+    Player(float posx, float posy, CharacterType characterType);
     ~Player();
 
     template<typename ...Args>

@@ -3,24 +3,20 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "./Collision/Collider.hpp"
-enum EnemyType{
-    Boss,
-    Soldier,
-    Guardian
-};
+#include "./Character/CharacterType.hpp"
 
 class Enemy : sf::Drawable{
 public:
-    Enemy(EnemyType e);
+    Enemy(CharacterType type);
     ~Enemy();
-    const EnemyType enemytype;
+    const CharacterType characterType;
     sf::Sprite getEnemySprite();
     Collider * collider;
     bool checkCollision(const Collidable& other) const;
     void render(sf::RenderWindow& window);
 
 private:
-    EnemyType getEnemytype();
+    CharacterType getEnemytype();
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::Sprite enemySprite;
     sf::Texture enemyTexture;
