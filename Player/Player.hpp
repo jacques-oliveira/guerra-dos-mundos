@@ -6,6 +6,7 @@
 #include "../Animation/Animation.hpp"
 #include "HeathBar.hpp"
 #include "../Collision/Collider.hpp"
+#include "../Character/CharacterType.hpp"
 
 class Player : public sf::Drawable{
 public :
