@@ -55,5 +55,6 @@ private :
     HealthBar * playerHealth;
     void initPlayer(float posx, float posy);
     void updateColliderPosition();
+    sf::Vector2f previousPosition;
 };
 #endif
