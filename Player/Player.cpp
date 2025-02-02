@@ -84,9 +84,9 @@ void Player::processEvents(){
 void Player::update(sf::Time deltaTime){
 
     float seconds = deltaTime.asSeconds();
-
     if(isMoving){
         updatePositionPlayer(seconds);
+        previousPosition = playerSprite.getPosition();
     }else{
         setState(Idle);
     }
@@ -209,7 +209,27 @@ bool Player::checkCollision(const Collidable& other) const{
 void Player::resolveCollision(const Collidable& other){
     if(checkCollision(other)){
         cout<<"Collision"<<endl;
-        playerSprite.setPosition(playerSprite.getPosition());
+        sf::FloatRect playerBounds = collider->getCollider().getGlobalBounds();
+        sf::FloatRect otherBounds = other.getCollider().getGlobalBounds();
+
+        if (playerBounds.intersects(otherBounds)) {
+            // Calcular a sobreposição
+            float overlapLeft = playerBounds.left + playerBounds.width - otherBounds.left;
+            float overlapRight = otherBounds.left + otherBounds.width - playerBounds.left;
+            float overlapTop = playerBounds.top + playerBounds.height - otherBounds.top;
+            float overlapBottom = otherBounds.top + otherBounds.height - playerBounds.top;
+
+            // Ajustar a posição do player com base na menor sobreposição
+            if (overlapLeft < overlapRight && overlapLeft < overlapTop && overlapLeft < overlapBottom) {
+                playerSprite.move(-overlapLeft, 0.f);
+            } else if (overlapRight < overlapLeft && overlapRight < overlapTop && overlapRight < overlapBottom) {
+                playerSprite.move(overlapRight, 0.f);
+            } else if (overlapTop < overlapLeft && overlapTop < overlapRight && overlapTop < overlapBottom) {
+                playerSprite.move(0.f, -overlapTop);
+            } else if (overlapBottom < overlapLeft && overlapBottom < overlapRight && overlapBottom < overlapTop) {
+                playerSprite.move(0.f, overlapBottom);
+            }
+        }
     }
 }
 
