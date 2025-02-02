@@ -1,6 +1,6 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(EnemyType type) : enemytype(type){
+Enemy::Enemy(CharacterType type) : characterType(type){
     if(!enemyTexture.loadFromFile("Assets/Textures/frame0000.png")){
         return;
     }
@@ -18,8 +18,8 @@ Enemy::~Enemy(){
     collider = nullptr;
 }
 
-EnemyType Enemy::getEnemytype(){
-    return enemytype;
+CharacterType Enemy::getEnemytype(){
+    return characterType;
 }
 
 void Enemy::draw(sf::RenderTarget& target, sf::RenderStates states) const{
