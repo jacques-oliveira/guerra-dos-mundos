@@ -2,6 +2,9 @@
 #define FABRICAJOGADOR_HPP
 
 #include "../Player/Player.hpp"
+#include "../Character/Solider.hpp"
+#include "../Character/Extractor.hpp"
+#include "../Character/CharacterType.hpp"
 
 class FabricaJogador{
 public:

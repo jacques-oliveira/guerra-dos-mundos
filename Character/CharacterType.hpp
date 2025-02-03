@@ -2,12 +2,12 @@
 #define CHARACTERTYPE_HPP
 
 enum CharacterType{
-    Soldier,
-    Extractor,
-    Flyter,
-    Healer,
-    LongAttack,
-    ShortAttack,
-    Hybrid
+    SoldierType,
+    ExtractorType,
+    FlyterType,
+    HealerType,
+    LongAttackType,
+    ShortAttackType,
+    HybridType
 };
 #endif
