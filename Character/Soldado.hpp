@@ -3,10 +3,10 @@
 
 #include "../Player/Player.hpp"
 
-class Soldier : public Player{
+class Soldado : public Player{
 public:
-    Soldier(float posx, float posy, CharacterType type);
-    ~Soldier();
+    Soldado(float posx, float posy, CharacterType type);
+    ~Soldado();
 
 };
 #endif
