@@ -100,7 +100,7 @@ void Fase1::render(sf::RenderWindow& window) {
     try{
         window.clear();
         tileGen->drawMap(window);
-        window.draw(*player);
+        //window.draw(*player);
         enemy->render(window);
         window.draw(selectionBox);
         player->render(window);

@@ -15,5 +15,6 @@ public:
 
 private:
     void initLevel(std::string);
+    std::vector<Player> players;
 };
 #endif
