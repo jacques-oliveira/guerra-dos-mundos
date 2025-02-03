@@ -53,8 +53,6 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 void Player::render(sf::RenderWindow& window) {
-    //window.draw(selectShape);
-    //playerHealth->draw(window);
     playerHealth->draw(window);
 }
 
