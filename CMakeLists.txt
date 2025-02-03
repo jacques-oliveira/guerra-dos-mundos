@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(guerra-dos-mundos)
 
-add_executable(guerra-dos-mundos main.cpp Game.cpp Player/Player.cpp TileGenerator.cpp TileBlock.cpp Enemy.cpp UI/MainMenuState.cpp UI/Fase1.cpp UI/GameState.cpp UI/GameOverState.cpp UI/Fase.cpp Animation/Animation.cpp Player/HealthBar.cpp Collision/Collider.cpp )
+add_executable(guerra-dos-mundos main.cpp Game.cpp Player/Player.cpp TileGenerator.cpp TileBlock.cpp Enemy.cpp UI/MainMenuState.cpp UI/Fase1.cpp UI/GameState.cpp UI/GameOverState.cpp UI/Fase.cpp Animation/Animation.cpp Player/HealthBar.cpp Collision/Collider.cpp Character/Soldado.cpp)
 
 install(TARGETS guerra-dos-mundos RUNTIME DESTINATION bin)
 
