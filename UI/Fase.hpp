@@ -5,6 +5,7 @@
 #include "../TileGenerator.hpp"
 #include "../Player/Player.hpp"
 #include "../Enemy.hpp"
+#include "../Character/Soldado.hpp"
 
 class Fase : public GameState{
 public:
@@ -26,7 +27,7 @@ public:
 protected:
     sf::Font font;
     sf::Text levelText;
-    Player* player;
+    Soldado* player;
     Enemy * enemy;
     std::string levelName;
     bool levelCompleted;
