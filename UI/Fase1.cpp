@@ -44,11 +44,17 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
                     if(isSelectingPlayer){
                         sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
                         updateSelection(destination);
+                        if(player->isInside(selectionBox.getGlobalBounds())){
+                            player->setSelected(true);
+                            cout<<"Selecionado "<<player->isPlayerSelected()<<endl;
+                        }
                     }
                 }
                 if(event.type == sf::Event::MouseButtonReleased){
                     endSelection();
-
+                }
+                if(event.mouseButton.button == sf::Mouse::Right){
+                    player->unselectPlayer(true);
                 }
             }
         }

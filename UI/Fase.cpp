@@ -54,7 +54,6 @@ void Fase::updateSelection(const sf::Vector2f& current){
 }
 
 void Fase::endSelection(){
-    isSelectingPlayer = false;
     sf::FloatRect selectionArea(
         selectionBox.getPosition(),
         selectionBox.getSize()
@@ -63,6 +62,7 @@ void Fase::endSelection(){
         player->setSelected(player->isInside(selectionArea));
     }
     selectionBox.setSize({0,0});
+    isSelectingPlayer = false;
     cout<<"seleção finalizada"<<endl;
 
 }
