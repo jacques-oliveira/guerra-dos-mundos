@@ -27,7 +27,7 @@ public:
 protected:
     sf::Font font;
     sf::Text levelText;
-    Soldado* player;
+    //Soldado* player;
     Enemy * enemy;
     std::string levelName;
     bool levelCompleted;
@@ -46,5 +46,6 @@ protected:
     sf::View uiView;
     void setViewSize(float);
     sf::RenderWindow * window;
+    std::vector<Player*> players;
 };
 #endif

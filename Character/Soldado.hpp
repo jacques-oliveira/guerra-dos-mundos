@@ -8,5 +8,7 @@ public:
     Soldado(float posx, float posy, CharacterType type);
     ~Soldado();
 
+    void gritoAtaque();
+private:
 };
 #endif
