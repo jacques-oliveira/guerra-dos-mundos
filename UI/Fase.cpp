@@ -25,6 +25,7 @@ Fase::~Fase(){
     // }
 }
 void Fase::startSelection(sf::Vector2f& start){
+    cout<<"iniciando seleção"<<endl;
     isSelectingPlayer = true;
     selectionStart = start;
     selectionBox.setPosition(start);
@@ -43,6 +44,7 @@ void Fase::configureSelectionBox(){
 }
 
 void Fase::updateSelection(const sf::Vector2f& current){
+    cout<<"atualizando seleção"<<endl;
     sf::Vector2f size = current - selectionStart;
     selectionBox.setSize(size);
     selectionBox.setPosition({
@@ -60,6 +62,9 @@ void Fase::endSelection(){
     for(auto& player : players){
         player->setSelected(player->isInside(selectionArea));
     }
+    selectionBox.setSize({0,0});
+    cout<<"seleção finalizada"<<endl;
+
 }
 
 void Fase::moveSelectedPlayers(sf::Vector2f& dest){
