@@ -7,6 +7,7 @@
 #include "HeathBar.hpp"
 #include "../Collision/Collider.hpp"
 #include "../Character/CharacterType.hpp"
+#include <iostream>
 
 class Player : public sf::Drawable{
 public :
