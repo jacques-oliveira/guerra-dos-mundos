@@ -3,7 +3,7 @@
 
 enum CharacterType{
     SoldierType,
-    ExtractorType,
+    ColetorType,
     FlyterType,
     HealerType,
     LongAttackType,

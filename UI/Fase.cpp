@@ -11,18 +11,18 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
 }
 
 Fase::~Fase(){
-    if (player) {
-        delete player;
-        player = nullptr;
-    }
-    if (enemy) {
-        delete enemy;
-        enemy = nullptr;
-    }
-    if (tileGen) {
-        delete tileGen;
-        tileGen = nullptr;
-    }
+    // if (player) {
+    //     delete player;
+    //     player = nullptr;
+    // }
+    // if (enemy) {
+    //     delete enemy;
+    //     enemy = nullptr;
+    // }
+    // if (tileGen) {
+    //     delete tileGen;
+    //     tileGen = nullptr;
+    // }
 }
 void Fase::startSelection(sf::Vector2f& start){
     isSelectingPlayer = true;
@@ -57,11 +57,15 @@ void Fase::endSelection(){
         selectionBox.getPosition(),
         selectionBox.getSize()
     );
-    player->setSelected(player->isInside(selectionArea));
+    for(auto& player : players){
+        player->setSelected(player->isInside(selectionArea));
+    }
 }
 
 void Fase::moveSelectedPlayers(sf::Vector2f& dest){
-    player->setDestination(dest);
+    for(auto& player : players){
+        player->setDestination(dest);
+    }
 }
 
 void Fase::configureTileMap(){

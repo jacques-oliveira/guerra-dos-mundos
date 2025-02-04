@@ -1,12 +1,12 @@
 #include "FabricaJogador.hpp"
 
-Player * FabricaJogador::criarJogador(CharacterType type){
+Player * FabricaJogador::criarJogador(float posx, float posy, CharacterType type){
 
     switch(type){
         case SoldierType:
-            return new class Soldado(100,100,SoldierType);
-        case ExtractorType:
-            return new class Extractor(50,100,ExtractorType);
+            return new class Soldado(posx,posy,SoldierType);
+        case ColetorType:
+            return new class Coletor(posx,posy,ColetorType);
         default:
             return nullptr;
     }

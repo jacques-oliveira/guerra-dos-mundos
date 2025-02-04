@@ -8,6 +8,13 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
         throw std::runtime_error("Erro ao carregar fonte");
     }
 
+    Player* soldado = FabricaJogador::criarJogador(100,50,SoldierType);
+    Player* soldado2 = FabricaJogador::criarJogador(280,80,SoldierType);
+    Player* soldado3 = FabricaJogador::criarJogador(100,150,SoldierType);
+    players.push_back(soldado);
+    players.push_back(soldado2);
+    players.push_back(soldado3);
+    dynamic_cast<Soldado*>(soldado)->gritoAtaque();
     initLevel(_levelName);
 }
 
@@ -26,42 +33,44 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
                     window->close();
                 }
 
-            }else if(event.type == sf::Event::MouseButtonPressed){
-                if(event.mouseButton.button == sf::Mouse::Left &&
-                    player->isPlayerSelected() == false){
-                    cout<<"Start selection "<< player->isPlayerSelected()<<endl;
-                    sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                    startSelection(start);
-                }else  if (event.mouseButton.button == sf::Mouse::Left && player->isPlayerSelected()){
-                    sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                    player->isMoving = true;
-                    moveSelectedPlayers(destination);
-                    selectionBox.setSize({0.f,0.f});
-                    cout<<"Moving player to destination "<<player->isPlayerSelected()<<endl;
-                }
-
-            }else if(event.type == sf::Event::MouseMoved){
-                if(isSelectingPlayer){
-                    updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window),view));
-                    player->setSelected(true);
-                }
-            }else if(event.type == sf::Event::MouseButtonReleased){
-                if(event.mouseButton.button == sf::Mouse::Left){
-                    if(isSelectingPlayer){
-                        endSelection();
-                        cout<<"Mouse left released "<<player->isPlayerSelected()<<endl;
-                        selectionBox.setSize({0,0});
+            }
+            for(auto& player : players){
+                if(event.type == sf::Event::MouseButtonPressed){
+                    if(event.mouseButton.button == sf::Mouse::Left &&
+                        player->isPlayerSelected() == false){
+                        cout<<"Start selection "<< player->isPlayerSelected()<<endl;
+                        sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+                        startSelection(start);
+                    }else  if (event.mouseButton.button == sf::Mouse::Left && player->isPlayerSelected()){
+                        sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+                        player->isMoving = true;
+                        moveSelectedPlayers(destination);
+                        selectionBox.setSize({0.f,0.f});
+                        cout<<"Moving player to destination "<<player->isPlayerSelected()<<endl;
                     }
 
+                }else if(event.type == sf::Event::MouseMoved){
+                    if(isSelectingPlayer){
+                        updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window),view));
+                        player->setSelected(true);
+                    }
+                }else if(event.type == sf::Event::MouseButtonReleased){
+                    if(event.mouseButton.button == sf::Mouse::Left){
+                        if(isSelectingPlayer){
+                            endSelection();
+                            cout<<"Mouse left released "<<player->isPlayerSelected()<<endl;
+                            selectionBox.setSize({0,0});
+                        }
+
+                    }
                 }
-            }
-            if(event.mouseButton.button == sf::Mouse::Right && player->isPlayerSelected()){
-                player->unselectPlayer(true);
-                cout<<"Unselect Player"<<endl;
+                if(event.mouseButton.button == sf::Mouse::Right && player->isPlayerSelected()){
+                    player->unselectPlayer(true);
+                    cout<<"Unselect Player"<<endl;
+                }
+                player->processEvents();
             }
         }
-        //player->handleInput();
-        player->processEvents();
 
     }catch(exception&){
         cerr<<"Erro ao tratar processo Fase1"<<endl;
@@ -70,25 +79,27 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
 
 void Fase1::update(sf::Time deltaTime) {
     try{
-        if(player != nullptr){
-            player->update(deltaTime);
-            player->resolveCollision(*enemy->collider);
-            sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
-            sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
-            sf::Vector2f currentCenter = view.getCenter();
+        for(auto& player : players){
+            if(player != nullptr){
+                player->update(deltaTime);
+                player->resolveCollision(*enemy->collider);
+                sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
+                sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+                sf::Vector2f currentCenter = view.getCenter();
 
-            sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
-            view.setCenter(smoothedCenter);
-            view.move(10,5);
-            if(window != nullptr){
-                float ratio = (float)window->getSize().y / (float)window->getSize().x;
-                setViewSize(ratio);
-                window->setView(view);
+                sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
+                view.setCenter(smoothedCenter);
+                view.move(10,5);
+                if(window != nullptr){
+                    float ratio = (float)window->getSize().y / (float)window->getSize().x;
+                    setViewSize(ratio);
+                    window->setView(view);
+                }else{
+                    cerr<<"Window não foi inicializado"<<endl;
+                }
             }else{
-                cerr<<"Window não foi inicializado"<<endl;
+                cerr<<"Player não foi inicializado"<<endl;
             }
-        }else{
-            cerr<<"Player não foi inicializado"<<endl;
         }
 
     }catch(exception& e){
@@ -100,10 +111,12 @@ void Fase1::render(sf::RenderWindow& window) {
     try{
         window.clear();
         tileGen->drawMap(window);
-        window.draw(*player);
+        for(auto& p : players){
+            p->render(window);
+        }
         enemy->render(window);
         window.draw(selectionBox);
-        player->render(window);
+        //player->render(window);
         window.setView(uiView);
 
         window.draw(levelText);
@@ -123,6 +136,6 @@ void Fase1::initLevel(std::string _levelName){
     levelText.setCharacterSize(30);
     levelText.setFillColor(sf::Color::White);
     levelText.setPosition(10, 10);
-    player = new Soldado(100,100,SoldierType);
+    //player = new Soldado(100,100,SoldierType);
     enemy = new Enemy(SoldierType);
 }

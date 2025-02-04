@@ -3,6 +3,7 @@
 
 #include "Fase.hpp"
 #include "../TileGenerator.hpp"
+#include "../Factory/FabricaJogador.hpp"
 
 class Fase1 : public Fase{
 public:
@@ -15,5 +16,6 @@ public:
 
 private:
     void initLevel(std::string);
+
 };
 #endif
