@@ -8,6 +8,7 @@
 #include "../Collision/Collider.hpp"
 #include "../Character/CharacterType.hpp"
 #include <iostream>
+#include <random>
 
 class Player : public sf::Drawable{
 public :
