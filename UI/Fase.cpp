@@ -70,6 +70,7 @@ void Fase::endSelection(){
 void Fase::moveSelectedPlayers(sf::Vector2f& dest){
     for(auto& player : players){
         player->setDestination(dest);
+        player->isMoving =true;
     }
 }
 
