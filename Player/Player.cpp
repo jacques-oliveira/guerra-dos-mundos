@@ -89,7 +89,13 @@ void Player::setDestination(sf::Vector2f& dest){
     sf::FloatRect bounds= playerSprite.getGlobalBounds();
     sf::Vector2f spriteCenter(bounds.width/2.f, bounds.height/2.f);
 
-    destination = dest - spriteCenter;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> dis(-50.f,50.f);
+
+    sf::Vector2f randomOffset(dis(gen),dis(gen));
+
+    destination = dest - spriteCenter + randomOffset;
 }
 
 void Player::updatePositionPlayer(float deltaTime){
