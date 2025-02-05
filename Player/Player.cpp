@@ -42,7 +42,9 @@ void Player::setSelected(bool isSelected){
 }
 
 bool Player::isInside(const sf::FloatRect& selectionArea) const{
-    return selectionArea.intersects(playerSprite.getGlobalBounds());
+    bool intersecao =  selectionArea.intersects(playerSprite.getGlobalBounds());
+    cout<<"interseção do player"<<intersecao<<endl;
+    return intersecao;
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -114,6 +116,7 @@ void Player::updatePositionPlayer(float deltaTime){
         playerSprite.setPosition(destination);
         isMoving = false;
         setState(Idle);
+        cout<<"seleção "<<selected<<endl;
     }
     bindSelectShape();
     playerHealth->setPosition( playerSprite.getGlobalBounds());
