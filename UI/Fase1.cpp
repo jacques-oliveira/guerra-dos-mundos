@@ -34,42 +34,45 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
                 }
 
             }
-            for(auto& player : players){
-                if(event.type == sf::Event::MouseButtonPressed){
-                    if(event.mouseButton.button == sf::Mouse::Left &&
-                        player->isPlayerSelected() == false){
-                        cout<<"Start selection "<< player->isPlayerSelected()<<endl;
-                        sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                        startSelection(start);
-                    }else  if (event.mouseButton.button == sf::Mouse::Left && player->isPlayerSelected()){
-                        sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                        player->isMoving = true;
-                        moveSelectedPlayers(destination);
-                        selectionBox.setSize({0.f,0.f});
-                        cout<<"Moving player to destination "<<player->isPlayerSelected()<<endl;
-                    }
 
-                }else if(event.type == sf::Event::MouseMoved){
-                    if(isSelectingPlayer){
-                        updateSelection(_window.mapPixelToCoords(sf::Mouse::getPosition(_window),view));
-                        player->setSelected(true);
-                    }
-                }else if(event.type == sf::Event::MouseButtonReleased){
-                    if(event.mouseButton.button == sf::Mouse::Left){
-                        if(isSelectingPlayer){
-                            endSelection();
-                            cout<<"Mouse left released "<<player->isPlayerSelected()<<endl;
-                            selectionBox.setSize({0,0});
+            if(event.type == sf::Event::MouseButtonPressed){
+
+                sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+                startSelection(start);
+
+            }else if(sf::Event::MouseMoved){
+                if(isSelectingPlayer){
+                    sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+                    updateSelection(destination);
+
+                    for(auto& player : players){
+                        if(player->isInside(selectionBox.getGlobalBounds())){
+                            player->setSelected(true);
+                            cout<<"Selecionado "<<player->isPlayerSelected()<<endl;
                         }
+                    }
 
+                }
+            }
+            if(event.type == sf::Event::MouseButtonReleased){
+                endSelection();
+            }
+            if(event.mouseButton.button == sf::Mouse::Right){
+                for (auto& player : players) {
+                    player->unselectPlayer(true);
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window), view);
+                for (auto& player : players) {
+                    if (player->isPlayerSelected()) {
+                        //player->setDestination(destination);
+
+                        moveSelectedPlayers(destination);
                     }
                 }
-                if(event.mouseButton.button == sf::Mouse::Right && player->isPlayerSelected()){
-                    player->unselectPlayer(true);
-                    cout<<"Unselect Player"<<endl;
-                }
-                player->processEvents();
             }
+
         }
 
     }catch(exception&){

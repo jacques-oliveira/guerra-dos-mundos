@@ -214,6 +214,7 @@ void Player::resolveCollision(const Collidable& other){
             }
         }
     }
+    updateColliderPosition();
 }
 
 
