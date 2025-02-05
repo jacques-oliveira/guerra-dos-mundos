@@ -11,18 +11,14 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
 }
 
 Fase::~Fase(){
-    // if (player) {
-    //     delete player;
-    //     player = nullptr;
-    // }
-    // if (enemy) {
-    //     delete enemy;
-    //     enemy = nullptr;
-    // }
-    // if (tileGen) {
-    //     delete tileGen;
-    //     tileGen = nullptr;
-    // }
+    if (enemy) {
+        delete enemy;
+        enemy = nullptr;
+    }
+    if (tileGen) {
+        delete tileGen;
+        tileGen = nullptr;
+    }
 }
 void Fase::startSelection(sf::Vector2f& start){
     cout<<"iniciando seleção"<<endl;
@@ -66,7 +62,6 @@ void Fase::endSelection(){
 void Fase::moveSelectedPlayers(sf::Vector2f& dest){
     for(auto& player : players){
         player->setDestination(dest);
-
     }
 }
 
@@ -91,7 +86,6 @@ bool Fase::shouldExit() const {
 void Fase::setViewSize(float ratio){
     view.setSize(SIZE, SIZE * ratio);
 }
-
 
 void Fase::updateViewSize(sf::View& view, sf::RenderWindow& window){
     float ratio = (float)window.getSize().y / (float)window.getSize().x;

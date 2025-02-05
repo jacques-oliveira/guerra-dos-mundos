@@ -20,7 +20,6 @@ public:
     bool shouldExit() const override;
 
     TileGenerator* tileGen;
-    void setSelected(bool);
     void startSelection(sf::Vector2f&);
     void endSelection();
 
