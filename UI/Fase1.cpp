@@ -19,10 +19,12 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
 }
 
 Fase1::~Fase1(){
-    for(auto& player : players){
-        delete player;
+    if(!players.empty()){
+        for(auto& player : players){
+            delete player;
+        }
+        players.clear();
     }
-    players.clear();
 }
 
 void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
