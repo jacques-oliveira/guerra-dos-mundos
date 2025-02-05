@@ -66,8 +66,6 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
                 sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window), view);
                 for (auto& player : players) {
                     if (player->isPlayerSelected()) {
-                        //player->setDestination(destination);
-
                         moveSelectedPlayers(destination);
                     }
                 }
