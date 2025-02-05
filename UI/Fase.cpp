@@ -58,19 +58,15 @@ void Fase::endSelection(){
         selectionBox.getPosition(),
         selectionBox.getSize()
     );
-    for(auto& player : players){
-        player->setSelected(player->isInside(selectionArea));
-    }
     selectionBox.setSize({0,0});
     isSelectingPlayer = false;
     cout<<"seleção finalizada"<<endl;
-
 }
 
 void Fase::moveSelectedPlayers(sf::Vector2f& dest){
     for(auto& player : players){
         player->setDestination(dest);
-        player->isMoving =true;
+
     }
 }
 
