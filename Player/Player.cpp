@@ -173,7 +173,7 @@ void Player::initPlayer(float posx, float posy){
             updateColliderPosition();
             this->movementSpeed = 150.f;
             life = 100;
-            playerHealth = new HealthBar(40,8);
+            playerHealth = new HealthBar(40,6);
             playerHealth->setPosition( playerSprite.getGlobalBounds());
             playerHealth->setHealth(0.95f);
 
