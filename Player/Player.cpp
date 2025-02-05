@@ -114,6 +114,7 @@ void Player::updatePositionPlayer(float deltaTime){
         playerSprite.setPosition(destination);
         isMoving = false;
         setState(Idle);
+        cout<<"seleção "<<selected<<endl;
     }
     bindSelectShape();
     playerHealth->setPosition( playerSprite.getGlobalBounds());
