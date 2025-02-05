@@ -19,6 +19,10 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
 }
 
 Fase1::~Fase1(){
+    for(auto& player : players){
+        delete player;
+    }
+    players.clear();
 }
 
 void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
@@ -32,7 +36,6 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
                     *isRunning = false;
                     window->close();
                 }
-
             }
 
             if(event.type == sf::Event::MouseButtonPressed){
@@ -119,9 +122,7 @@ void Fase1::render(sf::RenderWindow& window) {
         }
         enemy->render(window);
         window.draw(selectionBox);
-        //player->render(window);
         window.setView(uiView);
-
         window.draw(levelText);
         window.display();
 
