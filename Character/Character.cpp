@@ -6,8 +6,8 @@ Character::Character(){
 Character::~Character(){
 }
 
-float Character::getHealth(){
-    return health;
+float Character::obterBarraVida(){
+    return barraVida;
 }
 
 
