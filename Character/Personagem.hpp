@@ -10,11 +10,11 @@
 
 using namespace std;
 
-class Character : public sf::Drawable{
+class Personagem : public sf::Drawable{
 
 public:
-    Character();
-    ~Character();
+    Personagem();
+    ~Personagem();
 
     string patente;
     sf::CircleShape circuloSelecao;
