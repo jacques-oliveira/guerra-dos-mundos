@@ -1,7 +1,7 @@
 #ifndef FASE_HPP
 #define FASE_HPP
 
-#include "GameState.hpp"
+#include "../Estados/GameState.hpp"
 #include "../TileGenerator.hpp"
 #include "../Player/Player.hpp"
 #include "../Enemy.hpp"
