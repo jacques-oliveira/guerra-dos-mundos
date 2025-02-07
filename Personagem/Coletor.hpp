@@ -5,7 +5,7 @@
 
 class Coletor : public Player{
 public:
-    Coletor(float posx, float posy, CharacterType type);
+    Coletor(float posx, float posy, TipoPersonagem tipo);
     ~Coletor();
     void coletarRecurso();
 };

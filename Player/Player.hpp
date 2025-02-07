@@ -6,7 +6,7 @@
 #include "../Animation/Animation.hpp"
 #include "HeathBar.hpp"
 #include "../Collision/Collider.hpp"
-#include "../Character/CharacterType.hpp"
+#include "../Personagem/TipoPersonagem.hpp"
 #include <iostream>
 #include <random>
 
@@ -15,7 +15,7 @@ public :
     Player(const Player&) = delete;
     Player& operator = (const Player&) = delete;
 
-    Player(float posx, float posy, CharacterType characterType);
+    Player(float posx, float posy, TipoPersonagem tipo);
     ~Player();
 
     template<typename ...Args>

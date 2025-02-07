@@ -5,7 +5,7 @@
 
 class Soldado : public Player{
 public:
-    Soldado(float posx, float posy, CharacterType type);
+    Soldado(float posx, float posy, TipoPersonagem tipo);
     ~Soldado();
 
     void gritoAtaque();

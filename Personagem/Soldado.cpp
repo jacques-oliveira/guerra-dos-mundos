@@ -1,6 +1,6 @@
 #include "Soldado.hpp"
 
-Soldado::Soldado(float posx, float posy, CharacterType type) : Player(posx, posy, type){
+Soldado::Soldado(float posx, float posy, TipoPersonagem tipo) : Player(posx, posy, tipo){
 
 }
 

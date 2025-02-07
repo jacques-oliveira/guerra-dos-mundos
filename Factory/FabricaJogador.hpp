@@ -2,15 +2,15 @@
 #define FABRICAJOGADOR_HPP
 
 #include "../Player/Player.hpp"
-#include "../Character/Soldado.hpp"
-#include "../Character/Coletor.hpp"
-#include "../Character/CharacterType.hpp"
+#include "../Personagem/Soldado.hpp"
+#include "../Personagem/Coletor.hpp"
+#include "../Personagem/TipoPersonagem.hpp"
 
 class FabricaJogador{
 public:
-    static Player* criarJogador(float posx, float posy,CharacterType type);
+    static Player* criarJogador(float posx, float posy,TipoPersonagem tipo);
 private:
-    bool possuiRecurso(CharacterType type) const;
-    void gastarRecurso(CharacterType type);
+    bool possuiRecurso(TipoPersonagem tipo) const;
+    void gastarRecurso(TipoPersonagem tipo);
 };
 #endif

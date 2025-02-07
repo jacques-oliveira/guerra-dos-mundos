@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "Player/Player.hpp"
-#include "TileGenerator.hpp"
-#include "Enemy.hpp"
-#include "UI/GameState.hpp"
-#include "UI/MainMenuState.hpp"
-#include "UI/Fase1.hpp"
+#include "../Player/Player.hpp"
+#include "../GeradorMapa/TileGenerator.hpp"
+#include "../Enemy.hpp"
+#include "../Estados/GameState.hpp"
+#include "../Estados/MainMenuState.hpp"
+#include "../Fases/Fase1.hpp"
 #include <memory>
 
 #include <stack>

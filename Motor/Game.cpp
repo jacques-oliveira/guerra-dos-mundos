@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Game.hpp"
+#include "../Motor/Game.hpp"
 
 Game::Game() : frame_per_seconds(60){
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
