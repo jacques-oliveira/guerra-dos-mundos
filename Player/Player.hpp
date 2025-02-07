@@ -43,7 +43,7 @@ private :
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::Sprite playerSprite;
     sf::Texture playerTexture;
-    sf::Vector2f _velocity;
+    //sf::Vector2f _velocity;
     bool moveUp,moveDown,moveLeft, moveRight;
     bool selected;
     sf::Vector2f destination;

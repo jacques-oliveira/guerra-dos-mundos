@@ -7,5 +7,6 @@ class Coletor : public Player{
 public:
     Coletor(float posx, float posy, CharacterType type);
     ~Coletor();
+    void coletarRecurso();
 };
 #endif
