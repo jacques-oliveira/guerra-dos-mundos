@@ -6,4 +6,9 @@ Coletor::Coletor(float posx, float posy, CharacterType type): Player(posx, posy,
 Coletor::~Coletor(){
 }
 
+void Coletor::coletarRecurso(){
+    std::cout<<"Coleta iniciada!"<<std::endl;
+}
+
+
 

@@ -10,6 +10,11 @@ project(guerra-dos-mundos)
 add_executable(guerra-dos-mundos main.cpp Game.cpp Player/Player.cpp TileGenerator.cpp TileBlock.cpp Enemy.cpp UI/MainMenuState.cpp UI/Fase1.cpp UI/GameState.cpp UI/GameOverState.cpp UI/Fase.cpp Animation/Animation.cpp Player/HealthBar.cpp Collision/Collider.cpp Character/Soldado.cpp Factory/FabricaJogador.cpp Character/Coletor.cpp)
 
 install(TARGETS guerra-dos-mundos RUNTIME DESTINATION bin)
+ add_custom_command(
+    TARGET guerra-dos-mundos POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/Assets $<TARGET_FILE_DIR:guerra-dos-mundos>/Assets/
+ )
 
 target_link_libraries(
     guerra-dos-mundos
