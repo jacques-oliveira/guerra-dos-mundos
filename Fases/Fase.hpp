@@ -1,11 +1,11 @@
 #ifndef FASE_HPP
 #define FASE_HPP
 
-#include "GameState.hpp"
-#include "../TileGenerator.hpp"
+#include "../Estados/GameState.hpp"
+#include "../GeradorMapa/TileGenerator.hpp"
 #include "../Player/Player.hpp"
 #include "../Enemy.hpp"
-#include "../Character/Soldado.hpp"
+#include "../Personagem/Soldado.hpp"
 
 class Fase : public GameState{
 public:

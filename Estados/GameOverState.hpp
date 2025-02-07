@@ -1,7 +1,7 @@
 #ifndef GAMEOVER_STATE_HPP
 #define GAMEOVER_STATE_HPP
+#include "../Estados/GameState.hpp"
 
-#include "GameState.hpp"
 
 class GameOverState : public GameState{
 public:
