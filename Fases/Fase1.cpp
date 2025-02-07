@@ -5,7 +5,7 @@
 Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
 
     if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
-        throw std::runtime_error("Erro ao carregar fonte");
+        throw std::runtime_error("Erro ao carregar fonte Fase1");
     }
 
     Player* soldado = FabricaJogador::criarJogador(100,50,SoldierType);

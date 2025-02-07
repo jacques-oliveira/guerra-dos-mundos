@@ -4,7 +4,7 @@
 TileGenerator::TileGenerator(){
     tileWidth = 64;
     tileHeight = 64;
-    txtMapFile = loadTileTxtMatrix("/home/jacques/Documents/game-development/guerra-dos-mundos/tilemap-fase1.txt");
+    txtMapFile = loadTileTxtMatrix("Fases/mapa-bits-fase1.txt");
 }
 
 TileGenerator::~TileGenerator(){
