@@ -2,7 +2,7 @@
 #define FASE1_HPP
 
 #include "Fase.hpp"
-#include "../TileGenerator.hpp"
+#include "../GeradorMapa/TileGenerator.hpp"
 #include "../Factory/FabricaJogador.hpp"
 
 class Fase1 : public Fase{

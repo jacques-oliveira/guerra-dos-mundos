@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Motor/Game.hpp"
-#include "TileGenerator.hpp"
+#include "GeradorMapa/TileGenerator.hpp"
 
 int main(int argc, char **argv) {
 

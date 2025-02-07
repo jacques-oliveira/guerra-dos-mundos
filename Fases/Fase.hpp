@@ -2,7 +2,7 @@
 #define FASE_HPP
 
 #include "../Estados/GameState.hpp"
-#include "../TileGenerator.hpp"
+#include "../GeradorMapa/TileGenerator.hpp"
 #include "../Player/Player.hpp"
 #include "../Enemy.hpp"
 #include "../Character/Soldado.hpp"
