@@ -8,9 +8,9 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
         throw std::runtime_error("Erro ao carregar fonte Fase1");
     }
 
-    Player* soldado = FabricaJogador::criarJogador(100,50,SoldierType);
-    Player* soldado2 = FabricaJogador::criarJogador(280,80,SoldierType);
-    Player* soldado3 = FabricaJogador::criarJogador(100,150,SoldierType);
+    Player* soldado = FabricaJogador::criarJogador(100,50,Tipo_Soldado);
+    Player* soldado2 = FabricaJogador::criarJogador(280,80,Tipo_Soldado);
+    Player* soldado3 = FabricaJogador::criarJogador(100,150,Tipo_Coletor);
     players.push_back(soldado);
     players.push_back(soldado2);
     players.push_back(soldado3);
@@ -143,5 +143,5 @@ void Fase1::initLevel(std::string _levelName){
     levelText.setFillColor(sf::Color::White);
     levelText.setPosition(10, 10);
     //player = new Soldado(100,100,SoldierType);
-    enemy = new Enemy(SoldierType);
+    enemy = new Enemy(Tipo_Soldado);
 }

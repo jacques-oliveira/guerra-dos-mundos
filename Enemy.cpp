@@ -1,6 +1,6 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(CharacterType type) : characterType(type){
+Enemy::Enemy(TipoPersonagem tipo) : characterType(tipo){
     if(!enemyTexture.loadFromFile("Assets/Textures/frame0000.png")){
         return;
     }
@@ -18,7 +18,7 @@ Enemy::~Enemy(){
     collider = nullptr;
 }
 
-CharacterType Enemy::getEnemytype(){
+TipoPersonagem Enemy::getEnemytype(){
     return characterType;
 }
 

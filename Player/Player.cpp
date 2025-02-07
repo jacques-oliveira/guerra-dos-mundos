@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Player::Player(float posx, float posy,CharacterType characterType){
+Player::Player(float posx, float posy,TipoPersonagem tipo){
 
     mouseLeftEvent = false;
     selected = false;
