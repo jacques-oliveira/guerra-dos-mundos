@@ -134,14 +134,18 @@ void Fase1::render(sf::RenderWindow& window) {
 }
 
 void Fase1::initLevel(std::string _levelName){
-    levelName = _levelName;
-    levelCompleted = false;
+    try{
+        levelName = _levelName;
+        levelCompleted = false;
 
-    levelText.setFont(font);
-    levelText.setString("Playing " + levelName);
-    levelText.setCharacterSize(30);
-    levelText.setFillColor(sf::Color::White);
-    levelText.setPosition(10, 10);
-    //player = new Soldado(100,100,SoldierType);
-    enemy = new Enemy(Tipo_Soldado);
+        levelText.setFont(font);
+        levelText.setString("Playing " + levelName);
+        levelText.setCharacterSize(30);
+        levelText.setFillColor(sf::Color::White);
+        levelText.setPosition(10, 10);
+        //player = new Soldado(100,100,SoldierType);
+        enemy = new Enemy(Tipo_Soldado);
+    }catch(exception& e){
+        cerr<<"Falha ao iniciar Fase1"<<e.what()<<endl;
+    }
 }

@@ -2,6 +2,7 @@
 #define GAME_STATE_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class GameState{
 public:
@@ -11,7 +12,10 @@ public:
     virtual void render(sf::RenderWindow& window) = 0;
     virtual bool shouldContinue() const = 0;
     virtual bool shouldExit() const = 0;
+protected:
+    sf::Music musicaAmbiente;
 private:
+
 };
 #endif
 

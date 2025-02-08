@@ -16,6 +16,5 @@ public:
 
 private:
     void initLevel(std::string);
-
 };
 #endif

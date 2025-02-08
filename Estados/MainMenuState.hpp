@@ -25,5 +25,6 @@ private:
 
     void updateOptionColors();
     void initMenu();
+
 };
 #endif
