@@ -21,4 +21,5 @@ target_link_libraries(
     -lsfml-graphics
     -lsfml-window
     -lsfml-system
+    -lsfml-audio
 )
