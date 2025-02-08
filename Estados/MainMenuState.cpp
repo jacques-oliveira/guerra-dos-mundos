@@ -92,6 +92,11 @@ void MainMenuState::initMenu(){
             option.setPosition(200,200 + i * 50);
             options.push_back(option);
         }
+        if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
+            throw std::runtime_error("Falha ao carregar musica ambiente");
+        }
+        musicaAmbiente.play();
+        musicaAmbiente.setLoop(true);
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
     }
