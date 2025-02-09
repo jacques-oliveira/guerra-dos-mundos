@@ -17,11 +17,8 @@ public:
 
 private:
     sf::Font font;
-    sf::Font fontSubMenu;
-    sf::Text subTitulo;
-    sf::Text motivoTitulo;
     sf::Texture texturaTituloMenu;
-    sf::Sprite spriteTituloMenu;
+
     sf::Texture texturaPainelMenu;
     sf::Sprite spritePainelMenu;
 
