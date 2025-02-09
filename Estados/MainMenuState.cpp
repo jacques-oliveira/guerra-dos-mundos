@@ -86,11 +86,18 @@ bool MainMenuState::shouldExit() const{
 void MainMenuState::initMenu(){
     try{
         title.setFont(font);
-        title.setString("Game Menu");
+        title.setString("GUERRA DOS MUNDOS");
         title.setCharacterSize(50);
         title.setFillColor(sf::Color::White);
-        title.setPosition(200,100);
+        sf::FloatRect titleRect =title.getGlobalBounds();
 
+        unsigned int larguraTela = 1024;
+        unsigned int alturaTela = 768;
+
+        title.setOrigin(titleRect.left + titleRect.width/2.f, titleRect.top + titleRect.height*2);
+        title.setPosition(larguraTela/2.f, alturaTela/2.f);
+
+        title.setOutlineThickness(2.f);
         std::vector<std::string> optionsTexts={"Play","Exit"};
         for(size_t i = 0; i < optionsTexts.size(); ++i){
             sf::Text option(optionsTexts[i], font, 30);
