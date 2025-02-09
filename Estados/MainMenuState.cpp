@@ -6,14 +6,6 @@
 #include <iostream>
 
 MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame(false){
-    if(!font.loadFromFile("Assets/Fonts/Good-Game.ttf")){
-        throw std::runtime_error("Erro ao carregar fonte");
-    }
-
-    if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
-        throw std::runtime_error("Erro ao carregar plano de fundo");
-    }
-    spriteAmbienteMenu.setTexture(texturaAmbienteMenu);
 
     initMenu();
 }
@@ -85,14 +77,24 @@ bool MainMenuState::shouldExit() const{
 
 void MainMenuState::initMenu(){
     try{
+        larguraTela = 1024;
+        alturaTela = 768;
+
+        if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
+            throw std::runtime_error("Erro ao carregar fonte");
+        }
+
+        if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
+            throw std::runtime_error("Erro ao carregar plano de fundo");
+        }
+
+        spriteAmbienteMenu.setTexture(texturaAmbienteMenu);
         title.setFont(font);
         title.setString("GUERRA DOS MUNDOS");
         title.setCharacterSize(50);
         title.setFillColor(sf::Color::White);
         sf::FloatRect titleRect =title.getGlobalBounds();
 
-        unsigned int larguraTela = 1024;
-        unsigned int alturaTela = 768;
 
         title.setOrigin(titleRect.left + titleRect.width/2.f, titleRect.top + titleRect.height*2);
         title.setPosition(larguraTela/2.f, alturaTela/2.f);

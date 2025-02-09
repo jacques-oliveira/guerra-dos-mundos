@@ -18,6 +18,8 @@ public:
 private:
     sf::Font font;
     sf::Text title;
+    sf::Text subTitulo;
+    sf::Text motivoTitulo;
     std::vector<sf::Text> options;
     int selectedOption;
     bool continueGame;
@@ -27,6 +29,8 @@ private:
     void initMenu();
     sf::Texture texturaAmbienteMenu;
     sf::Sprite spriteAmbienteMenu;
+    unsigned short larguraTela;
+    unsigned short alturaTela;
 
 };
 #endif
