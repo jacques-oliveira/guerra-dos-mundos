@@ -10,6 +10,9 @@ MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame
         throw std::runtime_error("Erro ao carregar fonte");
     }
 
+    if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
+        throw std::runtime_error("Erro ao carregar plano de fundo");
+    }
     initMenu();
 }
 
@@ -52,6 +55,7 @@ void MainMenuState::update(sf::Time deltaTime){
 void MainMenuState::render(sf::RenderWindow& window){
     try{
         window.clear();
+        window.draw(sf::Sprite(texturaAmbienteMenu));
         window.draw(title);
         for(const auto& option: options){
             window.draw(option);

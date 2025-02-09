@@ -25,6 +25,7 @@ private:
 
     void updateOptionColors();
     void initMenu();
+    sf::Texture texturaAmbienteMenu;
 
 };
 #endif
