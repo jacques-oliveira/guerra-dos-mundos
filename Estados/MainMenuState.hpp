@@ -17,9 +17,14 @@ public:
 
 private:
     sf::Font font;
-    sf::Text title;
+    sf::Font fontSubMenu;
     sf::Text subTitulo;
     sf::Text motivoTitulo;
+    sf::Texture texturaTituloMenu;
+    sf::Sprite spriteTituloMenu;
+    sf::Texture texturaPainelMenu;
+    sf::Sprite spritePainelMenu;
+
     std::vector<sf::Text> options;
     int selectedOption;
     bool continueGame;

@@ -50,7 +50,9 @@ void MainMenuState::render(sf::RenderWindow& window){
     try{
         window.clear();
         window.draw(spriteAmbienteMenu);
-        window.draw(title);
+        window.draw(spritePainelMenu);
+        window.draw(spriteTituloMenu);
+        window.draw(subTitulo);
         for(const auto& option: options){
             window.draw(option);
         }
@@ -84,23 +86,49 @@ void MainMenuState::initMenu(){
             throw std::runtime_error("Erro ao carregar fonte");
         }
 
+        if(!fontSubMenu.loadFromFile("Assets/Fonts/NotoSansMono-Thin.ttf")){
+            throw std::runtime_error("Erro ao carregar fonte");
+        }
+
         if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
             throw std::runtime_error("Erro ao carregar plano de fundo");
         }
 
+        if(!texturaTituloMenu.loadFromFile("Assets/Textures/titulo-menu.png")){
+            throw std::runtime_error("Erro ao carregar plano de fundo");
+        }
+
+        if(!texturaPainelMenu.loadFromFile("Assets/Textures/painel-menu.png")){
+            throw std::runtime_error("Erro ao carregar plano de fundo");
+        }
+
         spriteAmbienteMenu.setTexture(texturaAmbienteMenu);
-        title.setFont(font);
-        title.setString("GUERRA DOS MUNDOS");
-        title.setCharacterSize(50);
-        title.setFillColor(sf::Color::White);
-        sf::FloatRect titleRect =title.getGlobalBounds();
+        spriteTituloMenu.setTexture(texturaTituloMenu);
+        spritePainelMenu.setTexture(texturaPainelMenu);
+        // title.setFont(font);
+        subTitulo.setFont(fontSubMenu);
+        motivoTitulo.setFont(font);
+        short tamanhoFonte = 70;
+        sf::Color corFont = sf::Color::White;
+
+        // title.setString("GUERRA DOS MUNDOS");
+        // title.setCharacterSize(tamanhoFonte);
+        // title.setFillColor(corFont);
+        // sf::FloatRect titleRect =title.getGlobalBounds();
+        // title.setOrigin(titleRect.left + titleRect.width/2.f, titleRect.top + titleRect.height*2);
+        // title.setPosition(larguraTela/2.f, alturaTela/2.f);
+        // title.setOutlineThickness(2.f);
+
+        subTitulo.setString("EM BUSCA DO DESCONHECIDO");
+        subTitulo.setCharacterSize(25);
+        subTitulo.setFillColor(sf::Color::White);
+        sf::FloatRect subTituloRect = subTitulo.getGlobalBounds();
+        subTitulo.setOrigin(subTituloRect.left + subTituloRect.width/2, subTituloRect.top + subTituloRect.height* 2);
+        subTitulo.setPosition(larguraTela/2.f, alturaTela/2.f + spriteTituloMenu.getPosition().y + subTituloRect.height*3);
 
 
-        title.setOrigin(titleRect.left + titleRect.width/2.f, titleRect.top + titleRect.height*2);
-        title.setPosition(larguraTela/2.f, alturaTela/2.f);
-
-        title.setOutlineThickness(2.f);
         std::vector<std::string> optionsTexts={"Play","Exit"};
+
         for(size_t i = 0; i < optionsTexts.size(); ++i){
             sf::Text option(optionsTexts[i], font, 30);
             option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
