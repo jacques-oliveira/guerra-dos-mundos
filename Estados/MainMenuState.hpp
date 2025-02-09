@@ -26,6 +26,7 @@ private:
     void updateOptionColors();
     void initMenu();
     sf::Texture texturaAmbienteMenu;
+    sf::Sprite spriteAmbienteMenu;
 
 };
 #endif
