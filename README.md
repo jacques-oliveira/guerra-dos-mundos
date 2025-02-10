@@ -3,9 +3,9 @@
 ## Aplicação desktop v. 1.0.0
   - Estratégia (estilo RTS)
     
-A busca constante por recursos fez o homem habitar o espaço; e após uma contaminação
-mundial por uma entidade desconhecida, fez muitos abandonarem seus planetas em busca de vida e recursos.
-Assim começa a conquista do desconhecido.
+Após uma contaminação mundial por uma entidade desconhecida, quase sem fontes de energia, 
+fez o homem habitar o espaço, trilhando uma busca constante por recursos. Assim começa a
+conquista do desconhecido.
 
 <p align="left">
   <img src="https://github.com/user-attachments/assets/5f6fc64b-0a6a-4948-b9fc-db8160fc1430" height="500px"/>
