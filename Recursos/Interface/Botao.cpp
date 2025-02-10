@@ -24,7 +24,9 @@ void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
         std::cout<<"textura normal"<<std::endl;
     }
 
-    if( (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) || (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)) && limites.contains(posicaoMouse.x, posicaoMouse.y)){
+    if( (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
+        (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)) &&
+        limites.contains(posicaoMouse.x, posicaoMouse.y)){
         formaBotao.setTexture(texturaSelecioando);
         cliqueEnter = true;
         std::cout<<"Enter"<<std::endl;
