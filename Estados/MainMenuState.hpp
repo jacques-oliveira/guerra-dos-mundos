@@ -4,10 +4,11 @@
 #include "GameState.hpp"
 #include <vector>
 #include <string>
+#include "../Recursos/Interface/Botao.hpp"
 
 class MainMenuState : public GameState{
 public:
-    MainMenuState();
+    MainMenuState(sf::RenderWindow& _window);
     ~MainMenuState() override = default;
     void processEvents(sf::RenderWindow & window, bool * isRunning) override;
     void update(sf::Time deltaTime) override;
@@ -17,14 +18,27 @@ public:
 
 private:
     sf::Font font;
-    sf::Text title;
+    sf::Texture texturaTituloMenu;
+
+    sf::Texture texturaPainelMenu;
+    sf::Sprite spritePainelMenu;
+    sf::Texture texturaBotaoJogarNormal;
+    sf::Texture texturaBotaoJogarSelecionado;
+    sf::Texture texturaBotaoSairNormal;
+    sf::Texture texturaBotaoSairSelecionado;
     std::vector<sf::Text> options;
     int selectedOption;
     bool continueGame;
     bool exitGame;
 
     void updateOptionColors();
-    void initMenu();
+    void initMenu(sf::RenderWindow& _window);
+    sf::Texture texturaAmbienteMenu;
+    sf::Sprite spriteAmbienteMenu;
+    unsigned short larguraTela;
+    unsigned short alturaTela;
+    std::vector<Botao> botoes;
+    void carregarRecursos();
 
 };
 #endif
