@@ -12,26 +12,26 @@ Botao::~Botao(){
 }
 
 void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
-    sf::Vector2i posicaoMouse = sf::Mouse::getPosition(window);
-    sf::FloatRect limites = getTransform().transformRect(formaBotao.getGlobalBounds());
+    try{
+        sf::Vector2i posicaoMouse = sf::Mouse::getPosition(window);
+        sf::FloatRect limites = getTransform().transformRect(formaBotao.getGlobalBounds());
 
 
-    if(limites.contains(posicaoMouse.x, posicaoMouse.y)){
-        formaBotao.setTexture(texturaSelecaoMouse);
-        std::cout<<"textura seleção"<<std::endl;
-    }else{
-        formaBotao.setTexture(texturaNormal);
-        std::cout<<"textura normal"<<std::endl;
+        if(limites.contains(posicaoMouse.x, posicaoMouse.y)){
+            formaBotao.setTexture(texturaSelecaoMouse);
+        }else{
+            formaBotao.setTexture(texturaNormal);
+        }
+
+        if( (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
+            (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)) &&
+            limites.contains(posicaoMouse.x, posicaoMouse.y)){
+            formaBotao.setTexture(texturaSelecioando);
+            cliqueEnter = true;
+        }
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao atualizar botão menu"<<std::endl;
     }
-
-    if( (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
-        (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)) &&
-        limites.contains(posicaoMouse.x, posicaoMouse.y)){
-        formaBotao.setTexture(texturaSelecioando);
-        cliqueEnter = true;
-        std::cout<<"Enter"<<std::endl;
-    }
-
 }
 
 void Botao::draw(sf::RenderTarget& target, sf::RenderStates states) const{
