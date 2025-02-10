@@ -92,7 +92,6 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
         larguraTela = _window.getSize().x;
         alturaTela = _window.getSize().y;
 
-
         spritePainelMenu.setTexture(texturaPainelMenu);
         spritePainelMenu.setOrigin(spritePainelMenu.getLocalBounds().left + spritePainelMenu.getLocalBounds().width/2,
                                     spritePainelMenu.getLocalBounds().top + spritePainelMenu.getLocalBounds().height/2);
@@ -107,19 +106,29 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
         float posicaoBotaox = larguraTela/2;
         float posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2;
 
-        Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
-        botao.setPosition(posicaoBotaox, posicaoBotaoy);
-        botoes.push_back(botao);
+        // Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
+        // botao.setPosition(posicaoBotaox, posicaoBotaoy);
+        // botoes.push_back(botao);
 
-        // for(size_t i = 0; i < 2; ++i){
-        //
-        //     posicaoBotaox = larguraTela/2;
-        //     posicaoBotaoy =  i * ( alturaBotao + espacoBotao ) + spritePainelMenu.getLocalBounds().height/2;
-        //
-        //     Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
-        //     botao.setPosition(posicaoBotaox, posicaoBotaoy);
-        //     botoes.push_back(botao);
-        // }
+        for(size_t i = 0; i < 2; ++i){
+            posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2 +  i * ( alturaBotao + espacoBotao );
+            switch(i){
+                case 0:{
+                    Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
+                    botao.setPosition(posicaoBotaox, posicaoBotaoy);
+                    botoes.push_back(botao);
+                }
+                    break;
+                case 1:{
+                    Botao botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado);
+                    botao.setPosition(posicaoBotaox, posicaoBotaoy);
+                    botoes.push_back(botao);
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
 
         std::vector<std::string> optionsTexts={"Play","Exit"};
 
