@@ -23,4 +23,9 @@ conquista do desconhecido.
   - Gerenciamento de Memória, Ponteiros, SmarthPointers
   - Estrutura de dados
   - Design Patterns
+## Desafios
+  - Colisão
+  - Algoritmo leitor de texturas e criador automático de mapa de bits
+  - Algoritmo clicar mover 1 ou mais personagens
+  - Algoritmo menor caminho até o ponto, esquivando de obstáculos
   
