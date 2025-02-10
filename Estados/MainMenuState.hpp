@@ -38,6 +38,7 @@ private:
     unsigned short larguraTela;
     unsigned short alturaTela;
     std::vector<Botao> botoes;
+    void carregarRecursos();
 
 };
 #endif

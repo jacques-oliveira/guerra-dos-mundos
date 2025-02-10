@@ -84,33 +84,7 @@ bool MainMenuState::shouldExit() const{
 void MainMenuState::initMenu(sf::RenderWindow& _window){
     try{
 
-        if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
-            throw std::runtime_error("Erro ao carregar fonte");
-        }
-
-        if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
-            throw std::runtime_error("Erro ao carregar plano de fundo");
-        }
-
-        if(!texturaPainelMenu.loadFromFile("Assets/Textures/painel-menu.png")){
-            throw std::runtime_error("Erro ao carregar plano de fundo");
-        }
-
-        if(!texturaBotaoJogarNormal.loadFromFile("Assets/Textures/botao-jogar-textura-normal.png")){
-            throw std::runtime_error("Erro ao carregar textura botão jogar");
-        }
-
-        if(!texturaBotaoJogarSelecionado.loadFromFile("Assets/Textures/botao-jogar-textura-selecionada.png")){
-            throw std::runtime_error("Erro ao carregar textura botão jogar");
-        }
-
-        if(!texturaBotaoSairNormal.loadFromFile("Assets/Textures/botao-sair-textura-normal.png")){
-            throw std::runtime_error("Erro ao carregar textura botão sair");
-        }
-
-        if(!texturaBotaoSairSelecionado.loadFromFile("Assets/Textures/botao-sair-textura-selecionada.png")){
-            throw std::runtime_error("Erro ao carregar textura botão sair");
-        }
+        carregarRecursos();
 
         larguraTela = _window.getSize().x;
         alturaTela = _window.getSize().y;
@@ -167,6 +141,36 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
         musicaAmbiente.setLoop(true);
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
+    }
+}
+
+void MainMenuState::carregarRecursos(){
+    if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
+        throw std::runtime_error("Erro ao carregar fonte");
+    }
+
+    if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
+        throw std::runtime_error("Erro ao carregar plano de fundo");
+    }
+
+    if(!texturaPainelMenu.loadFromFile("Assets/Textures/painel-menu.png")){
+        throw std::runtime_error("Erro ao carregar plano de fundo");
+    }
+
+    if(!texturaBotaoJogarNormal.loadFromFile("Assets/Textures/botao-jogar-textura-normal.png")){
+        throw std::runtime_error("Erro ao carregar textura botão jogar");
+    }
+
+    if(!texturaBotaoJogarSelecionado.loadFromFile("Assets/Textures/botao-jogar-textura-selecionada.png")){
+        throw std::runtime_error("Erro ao carregar textura botão jogar");
+    }
+
+    if(!texturaBotaoSairNormal.loadFromFile("Assets/Textures/botao-sair-textura-normal.png")){
+        throw std::runtime_error("Erro ao carregar textura botão sair");
+    }
+
+    if(!texturaBotaoSairSelecionado.loadFromFile("Assets/Textures/botao-sair-textura-selecionada.png")){
+        throw std::runtime_error("Erro ao carregar textura botão sair");
     }
 }
 
