@@ -1,14 +1,19 @@
 #include "Botao.hpp"
 
-Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecioando) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecioando(&texturaSelecioando)
+Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecioando,std::string nomeBotao) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecioando(&texturaSelecioando),nomeBotao(nomeBotao)
 {
-    formaBotao.setSize(sf::Vector2f(width, height));
-    formaBotao.setTexture(&texturaNormal);
-    formaBotao.setOrigin(formaBotao.getSize().x/2, formaBotao.getSize().y/2);
-    cliqueEnter = false;
+    try{
+        formaBotao.setSize(sf::Vector2f(width, height));
+        formaBotao.setTexture(&texturaNormal);
+        formaBotao.setOrigin(formaBotao.getSize().x/2, formaBotao.getSize().y/2);
+        cliqueEnter = false;
+    }catch(std::exception e){
+        std::cerr<<"Erro ao carregar botão menu"<<e.what()<<std::endl;
+    }
 }
 
 Botao::~Botao(){
+
 }
 
 void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
@@ -31,17 +36,26 @@ void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
 
         }
     }catch(std::exception& e){
-        std::cerr<<"Erro ao atualizar botão menu"<<std::endl;
+        std::cerr<<"Erro ao atualizar botão menu"<<e.what()<<std::endl;
     }
 }
 
 void Botao::draw(sf::RenderTarget& target, sf::RenderStates states) const{
-    states.transform *= getTransform();
-    target.draw(formaBotao,states);
+    try{
+        states.transform *= getTransform();
+        target.draw(formaBotao,states);
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao desenhar botão menu"<<e.what()<<std::endl;
+    }
 }
 
 void Botao::renderizar(sf::RenderWindow& window){
-    window.draw(*this);
+    try{
+        window.draw(*this);
+
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao renderizar botão menu"<<e.what()<<std::endl;
+    }
 }
 
 bool Botao::obterEventoBotao(){

@@ -16,5 +16,6 @@ public:
 
 private:
     void initLevel(std::string);
+    void criarSoldados();
 };
 #endif

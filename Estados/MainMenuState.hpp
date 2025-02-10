@@ -39,6 +39,7 @@ private:
     unsigned short alturaTela;
     std::vector<Botao> botoes;
     void carregarRecursos();
+    void tocarMusicaAmbiente();
 
 };
 #endif

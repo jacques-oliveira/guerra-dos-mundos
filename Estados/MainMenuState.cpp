@@ -77,9 +77,9 @@ void MainMenuState::render(sf::RenderWindow& window){
 }
 
 void MainMenuState::updateOptionColors(){
-    for(size_t i = 0; i < options.size();++i){
-        options[i].setFillColor(i == selectedOption ? sf::Color::Red: sf::Color::White);
-    }
+    // for(size_t i = 0; i < options.size();++i){
+    //     options[i].setFillColor(i == selectedOption ? sf::Color::Red: sf::Color::White);
+    // }
 }
 
 bool MainMenuState::shouldContinue() const{
@@ -116,13 +116,13 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
             posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2 +  i * ( alturaBotao + espacoBotao );
             switch(i){
                 case 0:{
-                    Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
+                    Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado,"JOGAR");
                     botao.setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
                     break;
                 case 1:{
-                    Botao botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado);
+                    Botao botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado,"SAIR");
                     botao.setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
@@ -132,7 +132,7 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
             }
         }
 
-        std::vector<std::string> optionsTexts={"Play","Exit"};
+        // std::vector<std::string> optionsTexts={"Play","Exit"};
 
         // for(size_t i = 0; i < optionsTexts.size(); ++i){
         //     sf::Text option(optionsTexts[i], font, 30);
@@ -140,43 +140,55 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
         //     option.setPosition(200,200 + i * 50);
         //     options.push_back(option);
         // }
-        if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
-            throw std::runtime_error("Falha ao carregar musica ambiente");
-        }
-        musicaAmbiente.play();
-        musicaAmbiente.setLoop(true);
+        tocarMusicaAmbiente();
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
     }
 }
 
 void MainMenuState::carregarRecursos(){
-    if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
-        throw std::runtime_error("Erro ao carregar fonte");
-    }
+    try{
+        if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
+            throw std::runtime_error("Erro ao carregar fonte");
+        }
 
-    if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
-        throw std::runtime_error("Erro ao carregar plano de fundo");
-    }
+        if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
+            throw std::runtime_error("Erro ao carregar plano de fundo");
+        }
 
-    if(!texturaPainelMenu.loadFromFile("Assets/Textures/painel-menu.png")){
-        throw std::runtime_error("Erro ao carregar plano de fundo");
-    }
+        if(!texturaPainelMenu.loadFromFile("Assets/Textures/painel-menu.png")){
+            throw std::runtime_error("Erro ao carregar plano de fundo");
+        }
 
-    if(!texturaBotaoJogarNormal.loadFromFile("Assets/Textures/botao-jogar-textura-normal.png")){
-        throw std::runtime_error("Erro ao carregar textura botão jogar");
-    }
+        if(!texturaBotaoJogarNormal.loadFromFile("Assets/Textures/botao-jogar-textura-normal.png")){
+            throw std::runtime_error("Erro ao carregar textura botão jogar");
+        }
 
-    if(!texturaBotaoJogarSelecionado.loadFromFile("Assets/Textures/botao-jogar-textura-selecionada.png")){
-        throw std::runtime_error("Erro ao carregar textura botão jogar");
-    }
+        if(!texturaBotaoJogarSelecionado.loadFromFile("Assets/Textures/botao-jogar-textura-selecionada.png")){
+            throw std::runtime_error("Erro ao carregar textura botão jogar");
+        }
 
-    if(!texturaBotaoSairNormal.loadFromFile("Assets/Textures/botao-sair-textura-normal.png")){
-        throw std::runtime_error("Erro ao carregar textura botão sair");
-    }
+        if(!texturaBotaoSairNormal.loadFromFile("Assets/Textures/botao-sair-textura-normal.png")){
+            throw std::runtime_error("Erro ao carregar textura botão sair");
+        }
 
-    if(!texturaBotaoSairSelecionado.loadFromFile("Assets/Textures/botao-sair-textura-selecionada.png")){
-        throw std::runtime_error("Erro ao carregar textura botão sair");
+        if(!texturaBotaoSairSelecionado.loadFromFile("Assets/Textures/botao-sair-textura-selecionada.png")){
+            throw std::runtime_error("Erro ao carregar textura botão sair");
+        }
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao carregar recursos menu"<<e.what()<<std::endl;
+    }
+}
+
+void MainMenuState::tocarMusicaAmbiente(){
+    try{
+        if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
+            throw std::runtime_error("Falha ao carregar musica ambiente");
+        }
+        musicaAmbiente.play();
+        musicaAmbiente.setLoop(true);
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao tocar som ambiente menu"<<e.what()<<std::endl;
     }
 }
 
