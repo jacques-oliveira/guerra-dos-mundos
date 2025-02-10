@@ -5,9 +5,10 @@
 
 class Botao : public sf::Drawable, public sf::Transformable{
 public:
-    Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecioando);
+    Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecioando,sf::Text textoBotao);
     ~Botao();
     void atualizar(sf::RenderWindow& window);
+    void renderizar(sf::RenderWindow& window);
 
 private:
     virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
@@ -15,5 +16,6 @@ private:
     const sf::Texture * texturaNormal;
     const sf::Texture * texturaSelecaoMouse;
     const sf::Texture * texturaSelecioando;
+    sf::Text textoBotao;
 };
 #endif

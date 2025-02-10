@@ -5,15 +5,16 @@
 #include<stdexcept>
 #include <iostream>
 
-MainMenuState::MainMenuState(): selectedOption(0), continueGame(false), exitGame(false){
+MainMenuState::MainMenuState(sf::RenderWindow& _window): selectedOption(0), continueGame(false), exitGame(false){
 
-    initMenu();
+    initMenu(_window);
 }
 
 void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
     sf::Event event;
     try{
         while(window.pollEvent(event)){
+
             if(event.type == sf::Event::Closed){
                 exitGame=true;
                 if(shouldExit()){
@@ -55,6 +56,10 @@ void MainMenuState::render(sf::RenderWindow& window){
         for(const auto& option: options){
             window.draw(option);
         }
+
+        for(Botao& botao : botoes){
+            botao.renderizar(window);
+        }
         window.display();
 
     }catch(std::exception& e){
@@ -76,10 +81,8 @@ bool MainMenuState::shouldExit() const{
     return exitGame;
 }
 
-void MainMenuState::initMenu(){
+void MainMenuState::initMenu(sf::RenderWindow& _window){
     try{
-        larguraTela = 1024;
-        alturaTela = 768;
 
         if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
             throw std::runtime_error("Erro ao carregar fonte");
@@ -93,9 +96,68 @@ void MainMenuState::initMenu(){
             throw std::runtime_error("Erro ao carregar plano de fundo");
         }
 
-        spriteAmbienteMenu.setTexture(texturaAmbienteMenu);
-        spritePainelMenu.setTexture(texturaPainelMenu);
+        if(!texturaBotaoJogarNormal.loadFromFile("Assets/Textures/botao-jogar-textura-normal.png")){
+            throw std::runtime_error("Erro ao carregar textura botão jogar");
+        }
 
+        if(!texturaBotaoJogarSelecionado.loadFromFile("Assets/Textures/botao-jogar-textura-selecionada.png")){
+            throw std::runtime_error("Erro ao carregar textura botão jogar");
+        }
+
+        if(!texturaBotaoSairNormal.loadFromFile("Assets/Textures/botao-sair-textura-normal.png")){
+            throw std::runtime_error("Erro ao carregar textura botão sair");
+        }
+
+        if(!texturaBotaoSairSelecionado.loadFromFile("Assets/Textures/botao-sair-textura-selecionada.png")){
+            throw std::runtime_error("Erro ao carregar textura botão sair");
+        }
+
+        larguraTela = _window.getSize().x;
+        alturaTela = _window.getSize().y;
+
+        std::cout<<larguraTela<<std::endl;
+
+        spriteAmbienteMenu.setTexture(texturaAmbienteMenu);
+
+        spritePainelMenu.setTexture(texturaPainelMenu);
+        spritePainelMenu.setOrigin(spritePainelMenu.getGlobalBounds().getSize().x/2, spritePainelMenu.getGlobalBounds().getSize().y/2);
+        spritePainelMenu.setPosition(larguraTela/2, alturaTela/2 );
+
+        float larguraBotao = texturaBotaoJogarNormal.getSize().x + 0.1f;
+        float alturaBotao = texturaBotaoJogarNormal.getSize().y;
+        float espacoBotao = 20.f;
+
+        float posicaoBotaoy;
+        float posicaoBotaox;
+
+        for(size_t i = 0; i < 2; ++i){
+            sf::Text textoBotao;
+            textoBotao.setFont(font);
+            textoBotao.setCharacterSize(25);
+            textoBotao.setFillColor(sf::Color::White);
+            posicaoBotaox = spritePainelMenu.getGlobalBounds().getPosition().x + spritePainelMenu.getGlobalBounds().width/2 - larguraBotao/2;
+            posicaoBotaoy = spritePainelMenu.getPosition().y/2 + spritePainelMenu.getTextureRect().height/2 - alturaBotao/2 + i * ( alturaBotao + espacoBotao ) ;
+            switch(i){
+                case 0:{
+                        textoBotao.setString("JOGAR");
+                        textoBotao.setPosition(posicaoBotaox,posicaoBotaoy);
+                        Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado, textoBotao);
+                        botao.setPosition(posicaoBotaox, posicaoBotaoy);
+                        botoes.push_back(botao);
+                    }
+                    break;
+                case 1 :{
+                        textoBotao.setString("SAIR");
+                        textoBotao.setPosition(posicaoBotaox,posicaoBotaoy);
+                        Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado, textoBotao);
+                        botao.setPosition(posicaoBotaox, posicaoBotaoy);
+                        botoes.push_back(botao);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
         std::vector<std::string> optionsTexts={"Play","Exit"};
 

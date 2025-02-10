@@ -4,7 +4,7 @@
 Game::Game() : frame_per_seconds(60){
     _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
 
-    states.push(std::make_unique<MainMenuState>());
+    states.push(std::make_unique<MainMenuState>(*_window));
     isRunning = new bool(true);
 }
 
