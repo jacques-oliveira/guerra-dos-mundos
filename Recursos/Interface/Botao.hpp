@@ -2,6 +2,7 @@
 #define BOTAO_HPP
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Botao : public sf::Drawable, public sf::Transformable{
 public:
@@ -9,10 +10,10 @@ public:
     ~Botao();
     void atualizar(sf::RenderWindow& window);
     void renderizar(sf::RenderWindow& window);
+    sf::RectangleShape formaBotao;
 
 private:
     virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-    sf::RectangleShape formaBotao;
     const sf::Texture * texturaNormal;
     const sf::Texture * texturaSelecaoMouse;
     const sf::Texture * texturaSelecioando;
