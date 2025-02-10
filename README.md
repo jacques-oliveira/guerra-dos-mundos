@@ -1,6 +1,6 @@
 # Guerra dos Mundos
 
-## Aplicação desktop
+## Aplicação desktop v. 1.0.0
   - Estratégia (estilo RTS)
     
 A busca constante por recursos fez o homem habitar o espaço; e após uma contaminação
@@ -16,10 +16,11 @@ Assim começa a conquista do desconhecido.
   - C++ (14+)
   - SFML (2.6.2-1)
 ## Interface Gráfica / Recursos
-  - Blender (4.3)
-  - Krita  (5.5)
+  - Blender (4.2.2)
+  - Krita  (5.2.6)
   - Inkscape (1.4)
 ## Destaque
   - Gerenciamento de Memória, Ponteiros, SmarthPointers
   - Estrutura de dados
+  - Design Patterns
   
