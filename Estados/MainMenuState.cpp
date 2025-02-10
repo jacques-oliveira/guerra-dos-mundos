@@ -77,9 +77,9 @@ void MainMenuState::render(sf::RenderWindow& window){
 }
 
 void MainMenuState::updateOptionColors(){
-    for(size_t i = 0; i < options.size();++i){
-        options[i].setFillColor(i == selectedOption ? sf::Color::Red: sf::Color::White);
-    }
+    // for(size_t i = 0; i < options.size();++i){
+    //     options[i].setFillColor(i == selectedOption ? sf::Color::Red: sf::Color::White);
+    // }
 }
 
 bool MainMenuState::shouldContinue() const{
@@ -116,13 +116,13 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
             posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2 +  i * ( alturaBotao + espacoBotao );
             switch(i){
                 case 0:{
-                    Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
+                    Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado,"JOGAR");
                     botao.setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
                     break;
                 case 1:{
-                    Botao botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado);
+                    Botao botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado,"SAIR");
                     botao.setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
@@ -132,7 +132,7 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
             }
         }
 
-        std::vector<std::string> optionsTexts={"Play","Exit"};
+        // std::vector<std::string> optionsTexts={"Play","Exit"};
 
         // for(size_t i = 0; i < optionsTexts.size(); ++i){
         //     sf::Text option(optionsTexts[i], font, 30);
