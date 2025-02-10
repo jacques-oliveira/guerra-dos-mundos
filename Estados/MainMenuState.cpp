@@ -38,8 +38,12 @@ void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
                 }
             }*/
             for(auto& botao : botoes){
-                botao.atualizar(window);
+                botao.atualizar(window, event);
+                if(botao.obterEventoBotao()){
+                    continueGame = true;
+                }
             }
+
 
         }
     }catch(std::exception& e){
@@ -106,10 +110,6 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
         float posicaoBotaox = larguraTela/2;
         float posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2;
 
-        // Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
-        // botao.setPosition(posicaoBotaox, posicaoBotaoy);
-        // botoes.push_back(botao);
-
         for(size_t i = 0; i < 2; ++i){
             posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2 +  i * ( alturaBotao + espacoBotao );
             switch(i){
@@ -132,12 +132,12 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
 
         std::vector<std::string> optionsTexts={"Play","Exit"};
 
-        for(size_t i = 0; i < optionsTexts.size(); ++i){
-            sf::Text option(optionsTexts[i], font, 30);
-            option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
-            option.setPosition(200,200 + i * 50);
-            options.push_back(option);
-        }
+        // for(size_t i = 0; i < optionsTexts.size(); ++i){
+        //     sf::Text option(optionsTexts[i], font, 30);
+        //     option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
+        //     option.setPosition(200,200 + i * 50);
+        //     options.push_back(option);
+        // }
         if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
             throw std::runtime_error("Falha ao carregar musica ambiente");
         }
