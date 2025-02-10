@@ -40,11 +40,13 @@ void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
             for(auto& botao : botoes){
                 botao.atualizar(window, event);
                 if(botao.obterEventoBotao()){
-                    continueGame = true;
+                    if(botao.obterNomebotao() == "JOGAR"){
+                        continueGame = true;
+                    }else{
+                        exitGame = true;
+                    }
                 }
             }
-
-
         }
     }catch(std::exception& e){
         std::cerr<<"Erro ao processar Menu"<<e.what()<<std::endl;

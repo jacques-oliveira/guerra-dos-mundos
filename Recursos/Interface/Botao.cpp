@@ -28,6 +28,7 @@ void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
             limites.contains(posicaoMouse.x, posicaoMouse.y)){
             formaBotao.setTexture(texturaSelecioando);
             cliqueEnter = true;
+
         }
     }catch(std::exception& e){
         std::cerr<<"Erro ao atualizar botão menu"<<std::endl;
@@ -45,6 +46,10 @@ void Botao::renderizar(sf::RenderWindow& window){
 
 bool Botao::obterEventoBotao(){
     return cliqueEnter;
+}
+
+std::string Botao::obterNomebotao(){
+    return nomeBotao;
 }
 
 
