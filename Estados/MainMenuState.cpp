@@ -176,17 +176,20 @@ void MainMenuState::carregarRecursos(){
             throw std::runtime_error("Erro ao carregar textura botão sair");
         }
     }catch(std::exception& e){
-        std::cerr<<"Erro ao carregar recursos menu"<<std::endl;
+        std::cerr<<"Erro ao carregar recursos menu"<<e.what()<<std::endl;
     }
 }
 
 void MainMenuState::tocarMusicaAmbiente(){
-
-    if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
-        throw std::runtime_error("Falha ao carregar musica ambiente");
+    try{
+        if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
+            throw std::runtime_error("Falha ao carregar musica ambiente");
+        }
+        musicaAmbiente.play();
+        musicaAmbiente.setLoop(true);
+    }catch(std::exception& e){
+        std::cerr<<"Erro ao tocar som ambiente menu"<<e.what()<<std::endl;
     }
-    musicaAmbiente.play();
-    musicaAmbiente.setLoop(true);
 }
 
 #endif
