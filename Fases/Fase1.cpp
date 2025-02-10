@@ -152,7 +152,13 @@ void Fase1::criarSoldados(){
         players.push_back(soldado);
         players.push_back(soldado2);
         players.push_back(soldado3);
-        dynamic_cast<Soldado*>(soldado)->gritoAtaque();
+
+        Soldado* soldadoCast = dynamic_cast<Soldado*>(soldado);
+        if(soldadoCast){
+            soldadoCast->gritoAtaque();
+        }else{
+            cerr<<"Falha ao fazer cast de Soldado"<<endl;
+        }
     }catch(exception& e){
         cerr<<"Falha ao criar soldados Fase1"<<e.what()<<endl;
     }
