@@ -140,11 +140,7 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
         //     option.setPosition(200,200 + i * 50);
         //     options.push_back(option);
         // }
-        if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
-            throw std::runtime_error("Falha ao carregar musica ambiente");
-        }
-        musicaAmbiente.play();
-        musicaAmbiente.setLoop(true);
+        tocarMusicaAmbiente();
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
     }
@@ -178,6 +174,15 @@ void MainMenuState::carregarRecursos(){
     if(!texturaBotaoSairSelecionado.loadFromFile("Assets/Textures/botao-sair-textura-selecionada.png")){
         throw std::runtime_error("Erro ao carregar textura botão sair");
     }
+}
+
+void MainMenuState::tocarMusicaAmbiente(){
+
+    if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
+        throw std::runtime_error("Falha ao carregar musica ambiente");
+    }
+    musicaAmbiente.play();
+    musicaAmbiente.setLoop(true);
 }
 
 #endif
