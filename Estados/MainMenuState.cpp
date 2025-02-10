@@ -124,32 +124,25 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
         spritePainelMenu.setPosition(larguraTela/2, alturaTela/2 );
 
         float larguraBotao = texturaBotaoJogarNormal.getSize().x + 0.1f;
-        float alturaBotao = texturaBotaoJogarNormal.getSize().y;
+        float alturaBotao = texturaBotaoJogarNormal.getSize().y + 0.1f;
         float espacoBotao = 20.f;
 
         float posicaoBotaoy;
         float posicaoBotaox;
 
         for(size_t i = 0; i < 2; ++i){
-            sf::Text textoBotao;
-            textoBotao.setFont(font);
-            textoBotao.setCharacterSize(25);
-            textoBotao.setFillColor(sf::Color::White);
+
             posicaoBotaox = spritePainelMenu.getGlobalBounds().getPosition().x + spritePainelMenu.getGlobalBounds().width/2 - larguraBotao/2;
             posicaoBotaoy = spritePainelMenu.getPosition().y/2 + spritePainelMenu.getTextureRect().height/2 - alturaBotao/2 + i * ( alturaBotao + espacoBotao ) ;
             switch(i){
                 case 0:{
-                        textoBotao.setString("JOGAR");
-                        textoBotao.setPosition(posicaoBotaox,posicaoBotaoy);
-                        Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado, textoBotao);
+                        Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado);
                         botao.setPosition(posicaoBotaox, posicaoBotaoy);
                         botoes.push_back(botao);
                     }
                     break;
                 case 1 :{
-                        textoBotao.setString("SAIR");
-                        textoBotao.setPosition(posicaoBotaox,posicaoBotaoy);
-                        Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado, textoBotao);
+                        Botao botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado);
                         botao.setPosition(posicaoBotaox, posicaoBotaoy);
                         botoes.push_back(botao);
                     }
