@@ -16,6 +16,7 @@ Fase1::~Fase1(){
     if(!players.empty()){
         for(auto& player : players){
             delete player;
+            player = nullptr;
         }
         players.clear();
     }
