@@ -34,34 +34,8 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
                 }
             }
 
-            if(event.type == sf::Event::MouseButtonPressed){
+            selecaoPersonagens(event, _window);
 
-                sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                startSelection(start);
-
-            }else if(sf::Event::MouseMoved){
-                if(isSelectingPlayer){
-                    sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                    updateSelection(destination);
-
-                    for(auto& player : players){
-                        if(player->isInside(selectionBox.getGlobalBounds())){
-                            player->setSelected(true);
-
-                            cout<<"Selecionado "<<player->isPlayerSelected()<<endl;
-                        }
-                    }
-
-                }
-            }
-            if(event.type == sf::Event::MouseButtonReleased){
-                endSelection();
-            }
-            if(event.mouseButton.button == sf::Mouse::Right){
-                for (auto& player : players) {
-                    player->unselectPlayer(true);
-                }
-            }
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window), view);
                 for (auto& player : players) {
@@ -163,4 +137,36 @@ void Fase1::criarSoldados(){
         cerr<<"Falha ao criar soldados Fase1"<<e.what()<<endl;
     }
 }
+
+void Fase1::selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window){
+    if(event.type == sf::Event::MouseButtonPressed){
+
+        sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+        startSelection(start);
+
+    }else if(sf::Event::MouseMoved){
+        if(isSelectingPlayer){
+            sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+            updateSelection(destination);
+
+            for(auto& player : players){
+                if(player->isInside(selectionBox.getGlobalBounds())){
+                    player->setSelected(true);
+
+                    cout<<"Selecionado "<<player->isPlayerSelected()<<endl;
+                }
+            }
+
+        }
+    }
+    if(event.type == sf::Event::MouseButtonReleased){
+        endSelection();
+    }
+    if(event.mouseButton.button == sf::Mouse::Right){
+        for (auto& player : players) {
+            player->unselectPlayer(true);
+        }
+    }
+}
+
 
