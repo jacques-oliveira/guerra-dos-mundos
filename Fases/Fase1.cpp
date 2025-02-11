@@ -8,8 +8,8 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
         throw std::runtime_error("Erro ao carregar fonte Fase1");
     }
 
-    criarSoldados();
     initLevel(_levelName);
+    criarSoldados();
 }
 
 Fase1::~Fase1(){
