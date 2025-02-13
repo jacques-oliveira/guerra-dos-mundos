@@ -78,25 +78,16 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
         while (getline(inputFile, line)) {
             vector<int> row;
 
-            string sig = "";
             string strNum = "";
             for(int i =0; i < line.size();  i++){
                 string c(1,line[i]);
-                if(c == "," || c == "" || c == " "){
-                    if(strNum != ""){
-                        int num = stoi(strNum);
-                        row.push_back(num);
-                    }
+                if(c == "," || c.empty()){
+                    int num = stoi(strNum);
+                    row.push_back(num);
                     strNum = "";
-                }else if(c != "-"){
-
-                    if(sig == "-"){
-                        c = sig + c;
-                        sig = "";
-                    }
-                    strNum += c;
+                    continue;
                 }else{
-                    sig += c;
+                    strNum += c;
                 }
             }
             tileMap.push_back(row);
