@@ -8,14 +8,15 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
         throw std::runtime_error("Erro ao carregar fonte Fase1");
     }
 
-    criarSoldados();
     initLevel(_levelName);
+    criarSoldados();
 }
 
 Fase1::~Fase1(){
     if(!players.empty()){
         for(auto& player : players){
             delete player;
+            player = nullptr;
         }
         players.clear();
     }
@@ -34,34 +35,8 @@ void Fase1::processEvents(sf::RenderWindow& _window, bool * isRunning) {
                 }
             }
 
-            if(event.type == sf::Event::MouseButtonPressed){
+            selecaoPersonagens(event, _window);
 
-                sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                startSelection(start);
-
-            }else if(sf::Event::MouseMoved){
-                if(isSelectingPlayer){
-                    sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
-                    updateSelection(destination);
-
-                    for(auto& player : players){
-                        if(player->isInside(selectionBox.getGlobalBounds())){
-                            player->setSelected(true);
-
-                            cout<<"Selecionado "<<player->isPlayerSelected()<<endl;
-                        }
-                    }
-
-                }
-            }
-            if(event.type == sf::Event::MouseButtonReleased){
-                endSelection();
-            }
-            if(event.mouseButton.button == sf::Mouse::Right){
-                for (auto& player : players) {
-                    player->unselectPlayer(true);
-                }
-            }
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window), view);
                 for (auto& player : players) {
@@ -152,9 +127,47 @@ void Fase1::criarSoldados(){
         players.push_back(soldado);
         players.push_back(soldado2);
         players.push_back(soldado3);
-        dynamic_cast<Soldado*>(soldado)->gritoAtaque();
+
+        Soldado* soldadoCast = dynamic_cast<Soldado*>(soldado);
+        if(soldadoCast){
+            soldadoCast->gritoAtaque();
+        }else{
+            cerr<<"Falha ao fazer cast de Soldado"<<endl;
+        }
     }catch(exception& e){
         cerr<<"Falha ao criar soldados Fase1"<<e.what()<<endl;
     }
 }
+
+void Fase1::selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window){
+    if(event.type == sf::Event::MouseButtonPressed){
+
+        sf::Vector2f start = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+        startSelection(start);
+
+    }else if(sf::Event::MouseMoved){
+        if(isSelectingPlayer){
+            sf::Vector2f destination = _window.mapPixelToCoords(sf::Mouse::getPosition(_window),view);
+            updateSelection(destination);
+
+            for(auto& player : players){
+                if(player->isInside(selectionBox.getGlobalBounds())){
+                    player->setSelected(true);
+
+                    cout<<"Selecionado "<<player->isPlayerSelected()<<endl;
+                }
+            }
+
+        }
+    }
+    if(event.type == sf::Event::MouseButtonReleased){
+        endSelection();
+    }
+    if(event.mouseButton.button == sf::Mouse::Right){
+        for (auto& player : players) {
+            player->unselectPlayer(true);
+        }
+    }
+}
+
 

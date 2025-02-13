@@ -17,5 +17,6 @@ public:
 private:
     void initLevel(std::string);
     void criarSoldados();
+    void selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window);
 };
 #endif
