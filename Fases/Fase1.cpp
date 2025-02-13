@@ -121,6 +121,7 @@ void Fase1::initLevel(std::string _levelName){
 
 void Fase1::criarSoldados(){
     try{
+        FabricaJogador::registrarPersonagens();
         Player* soldado = FabricaJogador::criarJogador(100,50,Tipo_Soldado);
         Player* soldado2 = FabricaJogador::criarJogador(280,80,Tipo_Soldado);
         Player* soldado3 = FabricaJogador::criarJogador(100,150,Tipo_Coletor);
@@ -129,11 +130,20 @@ void Fase1::criarSoldados(){
         players.push_back(soldado3);
 
         Soldado* soldadoCast = dynamic_cast<Soldado*>(soldado);
+        Coletor* coletorCast = dynamic_cast<Coletor*>(soldado3);
+
         if(soldadoCast){
             soldadoCast->gritoAtaque();
         }else{
             cerr<<"Falha ao fazer cast de Soldado"<<endl;
         }
+
+        if(coletorCast){
+            coletorCast->coletarRecurso();
+        }else{
+            cerr<<"Falha ao fazer cast de Coletor"<<endl;
+        }
+
     }catch(exception& e){
         cerr<<"Falha ao criar soldados Fase1"<<e.what()<<endl;
     }

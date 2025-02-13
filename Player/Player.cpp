@@ -30,12 +30,7 @@ Player::Player(float posx, float posy,TipoPersonagem tipo){
     initPlayer(posx, posy);
 }
 
-Player::~Player(){
-    delete playerHealth;
-    playerHealth = nullptr;
-    delete collider;
-    collider = nullptr;
-}
+
 
 void Player::setSelected(bool isSelected){
     selected = isSelected;
