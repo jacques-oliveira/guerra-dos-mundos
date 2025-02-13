@@ -4,7 +4,7 @@
 TileGenerator::TileGenerator(){
     tileWidth = 64;
     tileHeight = 64;
-    txtMapFile = loadTileTxtMatrix("Assets/MapaBits/mapa-bits-fase1.txt");
+    txtMapFile = carregarMatrixTexto("Assets/MapaBits/mapa-bits-fase1.txt");
 }
 
 TileGenerator::~TileGenerator(){
@@ -64,12 +64,12 @@ vector<TileBlock> TileGenerator::extractTileBlock(const sf::Image& image) {
     return blocks;
 }
 
-vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
+vector<vector<int>> TileGenerator::carregarMatrixTexto(const string& nomeArquivo){
     vector<vector<int>> tileMap;
-    ifstream inputFile(filename);
+    ifstream inputFile(nomeArquivo);
 
     if (!inputFile.is_open()) {
-        cerr << "Erro ao abrir o arquivo " << filename << endl;
+        cerr << "Erro ao abrir o arquivo " << nomeArquivo << endl;
         return tileMap;
     }
 
@@ -78,25 +78,16 @@ vector<vector<int>> TileGenerator::loadTileTxtMatrix(const string& filename){
         while (getline(inputFile, line)) {
             vector<int> row;
 
-            string sig = "";
             string strNum = "";
             for(int i =0; i < line.size();  i++){
                 string c(1,line[i]);
-                if(c == "," || c == "" || c == " "){
-                    if(strNum != ""){
-                        int num = stoi(strNum);
-                        row.push_back(num);
-                    }
+                if(c == "," || c.empty()){
+                    int num = stoi(strNum);
+                    row.push_back(num);
                     strNum = "";
-                }else if(c != "-"){
-
-                    if(sig == "-"){
-                        c = sig + c;
-                        sig = "";
-                    }
-                    strNum += c;
+                    continue;
                 }else{
-                    sig += c;
+                    strNum += c;
                 }
             }
             tileMap.push_back(row);

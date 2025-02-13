@@ -17,7 +17,7 @@ public:
     ~TileGenerator();
 
     void generateTileMap(const string& tilesetFileName);
-    static vector<vector<int>> loadTileTxtMatrix(const string& filename);
+    static vector<vector<int>> carregarMatrixTexto(const string& nomeArquivo);
     vector<TileBlock> extractTileBlock(const sf::Image& image);
 
     const sf::Sprite& getEnvSprite() const;
