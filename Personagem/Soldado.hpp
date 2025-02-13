@@ -6,7 +6,7 @@
 class Soldado : public Player{
 public:
     Soldado(float posx, float posy, TipoPersonagem tipo);
-    ~Soldado();
+    virtual ~Soldado() = default;
 
     void gritoAtaque();
 private:

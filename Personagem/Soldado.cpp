@@ -4,9 +4,6 @@ Soldado::Soldado(float posx, float posy, TipoPersonagem tipo) : Player(posx, pos
 
 }
 
-Soldado::~Soldado(){
-}
-
 void Soldado::gritoAtaque(){
     std::cout<<"Soldado Combate!"<<std::endl;
 }

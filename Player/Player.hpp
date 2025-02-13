@@ -16,7 +16,7 @@ public :
     Player& operator = (const Player&) = delete;
 
     Player(float posx, float posy, TipoPersonagem tipo);
-    ~Player();
+    virtual ~Player() = default;
 
     template<typename ...Args>
     void setPosition(Args&& ... args);
