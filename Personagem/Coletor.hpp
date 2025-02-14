@@ -6,7 +6,7 @@
 class Coletor : public Player{
 public:
     Coletor(float posx, float posy, TipoPersonagem tipo);
-    ~Coletor();
+    virtual ~Coletor() = default;
     void coletarRecurso();
 };
 #endif
