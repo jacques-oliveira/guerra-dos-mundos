@@ -122,15 +122,18 @@ void Fase1::initLevel(std::string _levelName){
 void Fase1::criarSoldados(){
     try{
         FabricaJogador::registrarPersonagens();
-        Player* soldado = FabricaJogador::criarJogador(100,50,Tipo_Soldado);
-        Player* soldado2 = FabricaJogador::criarJogador(280,80,Tipo_Soldado);
-        Player* soldado3 = FabricaJogador::criarJogador(100,150,Tipo_Coletor);
+        Player* soldado = FabricaJogador::criarJogador<Soldado>(100,50,Tipo_Soldado);
+        Player* soldado2 = FabricaJogador::criarJogador<Soldado>(280,80,Tipo_Soldado);
+        Player* soldado3 = FabricaJogador::criarJogador<Coletor>(100,150,Tipo_Coletor);
+        Player* soldadoAereo = FabricaJogador::criarJogador<Aereo>(140,90,Tipo_Aereo);
         players.push_back(soldado);
         players.push_back(soldado2);
         players.push_back(soldado3);
+        players.push_back(soldadoAereo);
 
         Soldado* soldadoCast = dynamic_cast<Soldado*>(soldado);
         Coletor* coletorCast = dynamic_cast<Coletor*>(soldado3);
+        Aereo* aereoCast = dynamic_cast<Aereo*>(soldadoAereo);
 
         if(soldadoCast){
             soldadoCast->gritoAtaque();
@@ -142,6 +145,12 @@ void Fase1::criarSoldados(){
             coletorCast->coletarRecurso();
         }else{
             cerr<<"Falha ao fazer cast de Coletor"<<endl;
+        }
+
+        if(aereoCast){
+            cout<<"Cast aereo feito!"<<endl;
+        }else{
+            cerr<<"Falha ao fazer cast de Aereo"<<endl;
         }
 
     }catch(exception& e){
