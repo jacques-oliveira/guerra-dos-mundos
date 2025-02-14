@@ -4,6 +4,7 @@
 #include "../Player/Player.hpp"
 #include "../Personagem/Soldado.hpp"
 #include "../Personagem/Coletor.hpp"
+#include "../Personagem/Aereo.hpp"
 #include "../Personagem/TipoPersonagem.hpp"
 #include <unordered_map>
 #include <functional>
@@ -11,7 +12,18 @@
 class FabricaJogador{
 public:
     using CriadorFuncao = std::function<Player*(float, float)>;
-    static Player* criarJogador(float posx, float posy,TipoPersonagem tipo);
+    template<typename T>
+    static Player* criarJogador(float posx, float posy, TipoPersonagem tipo){
+
+        auto it = registradores.find(tipo);
+        if(it !=  registradores.end()){
+            return it->second(posx, posy);
+        }else{
+            registrar<T>(tipo);
+            return registradores[tipo](posx, posy);
+        }
+        return nullptr;
+    }
 
     template<typename T>
     static void registrar(TipoPersonagem tipo){
