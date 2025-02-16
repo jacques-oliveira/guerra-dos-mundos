@@ -88,6 +88,7 @@ void Fase1::render(sf::RenderWindow& window) {
     try{
         window.clear();
         tileGen->drawMap(window);
+        window.draw(spriteMapaFase1);
         for(auto& p : players){
             p->render(window);
         }
@@ -106,7 +107,11 @@ void Fase1::initLevel(std::string _levelName){
     try{
         levelName = _levelName;
         levelCompleted = false;
-
+        if(!textureMapaFase1.loadFromFile("Assets/Textures/mapa-fase1.png")){
+            cerr<<"Erro ao carregar textura mapa fase 1"<<endl;
+            return;
+        }
+        spriteMapaFase1.setTexture(textureMapaFase1);
         levelText.setFont(font);
         levelText.setString("Playing " + levelName);
         levelText.setCharacterSize(30);

@@ -18,5 +18,7 @@ private:
     void initLevel(std::string);
     void criarSoldados();
     void selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window);
+    sf::Sprite spriteMapaFase1;
+    sf::Texture textureMapaFase1;
 };
 #endif
