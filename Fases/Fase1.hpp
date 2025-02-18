@@ -21,6 +21,6 @@ private:
     void selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window);
     sf::Sprite spriteMapaFase1;
     sf::Texture textureMapaFase1;
-    FonteEnergia* fonteEnergia;
+    std::vector<FonteEnergia*> fontesEnergia;
 };
 #endif

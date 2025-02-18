@@ -8,7 +8,7 @@
 class FonteEnergia{
 public:
     FonteEnergia(float posx, float posy, int energiaFonte);
-    ~FonteEnergia();
+    virtual ~FonteEnergia() = default;
     void iniciar();
     void processarEventos();
     void atualizar();

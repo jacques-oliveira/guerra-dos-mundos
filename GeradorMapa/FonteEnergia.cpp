@@ -18,6 +18,7 @@ void FonteEnergia::iniciar(){
 
     spriteCristalNegro.setTexture(animacoes[0].getTexture());
     spriteCristalNegro.setTextureRect(animacoes[0].getCurrentFrame());
+    spriteCristalNegro.setPosition(posicao);
 }
 
 void FonteEnergia::carregarAnimacao(Animation& animacao, int quantidadeFrames, int linha)
