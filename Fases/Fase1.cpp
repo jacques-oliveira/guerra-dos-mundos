@@ -8,6 +8,7 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
         throw std::runtime_error("Erro ao carregar fonte Fase1");
     }
 
+    fonteEnergia = new FonteEnergia(200,300,1500);
     initLevel(_levelName);
     criarSoldados();
 }
@@ -78,6 +79,7 @@ void Fase1::update(sf::Time deltaTime) {
                 cerr<<"Player não foi inicializado"<<endl;
             }
         }
+        fonteEnergia->atualizar();
 
     }catch(exception& e){
         cerr<<"Falha ao atualizar Fase "<<e.what()<<endl;
@@ -92,6 +94,7 @@ void Fase1::render(sf::RenderWindow& window) {
         for(auto& p : players){
             p->render(window);
         }
+        fonteEnergia->renderizar(window);
         enemy->render(window);
         window.draw(selectionBox);
         window.setView(uiView);

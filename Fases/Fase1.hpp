@@ -4,6 +4,7 @@
 #include "Fase.hpp"
 #include "../GeradorMapa/TileGenerator.hpp"
 #include "../Factory/FabricaJogador.hpp"
+#include "../GeradorMapa/FonteEnergia.hpp"
 
 class Fase1 : public Fase{
 public:
@@ -20,6 +21,6 @@ private:
     void selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window);
     sf::Sprite spriteMapaFase1;
     sf::Texture textureMapaFase1;
-
+    FonteEnergia* fonteEnergia;
 };
 #endif
