@@ -7,15 +7,15 @@
 
 class FonteEnergia{
 public:
-    FonteEnergia(float posx, float posy, float energiaFonte);
+    FonteEnergia(float posx, float posy, int energiaFonte);
     ~FonteEnergia();
     void iniciar();
     void processarEventos();
     void atualizar();
-    void renderizar();
+    void renderizar(sf::RenderWindow& window);
 
 private:
-    float energiaFonte;
+    int energiaFonte;
     sf::Texture texturaCristalNegro;
     sf::Sprite spriteCristalNegro;
     sf::Vector2f posicao;
