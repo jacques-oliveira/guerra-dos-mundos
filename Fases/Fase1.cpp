@@ -75,40 +75,8 @@ void Fase1::update(sf::Time deltaTime) {
                 if(window != nullptr){
                     float ratio = (float)window->getSize().y / (float)window->getSize().x;
                     setViewSize(ratio);
-                    if(window->hasFocus()){
 
-
-                        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-                        sf::Vector2f moverView({0,0});
-
-                        if(mousePos.x < bordaMargem){
-                            moverView.x -= velocidadeView * clock.getElapsedTime().asSeconds();
-                        }
-                        if(mousePos.x > window->getSize().x - bordaMargem){
-                            moverView.x += velocidadeView * clock.getElapsedTime().asSeconds();
-                        }
-                        if(mousePos.y < bordaMargem){
-                            moverView.y -= velocidadeView * clock.getElapsedTime().asSeconds();
-                        }
-                        if(mousePos.y > window->getSize().y - bordaMargem){
-                            moverView.y += velocidadeView * clock.getElapsedTime().asSeconds();
-                        }
-
-                        sf::Vector2f newCenter = view.getCenter() + moverView;
-                        sf::Vector2f halfSize = view.getSize() / 2.0f;
-
-                        if (newCenter.x - halfSize.x < 0)
-                            newCenter.x = halfSize.x;
-                        if (newCenter.x + halfSize.x > 4096)
-                            newCenter.x = 4096- halfSize.x;
-                        if (newCenter.y - halfSize.y < 0)
-                            newCenter.y = halfSize.y;
-                        if (newCenter.y + halfSize.y > 3072)
-                            newCenter.y = 3072 - halfSize.y;
-
-                        view.setCenter(newCenter);
-                    }
-                    window->setView(view);
+                    moverViewMouse();
                 }else{
                     cerr<<"Window não foi inicializado"<<endl;
                 }
@@ -249,4 +217,39 @@ void Fase1::selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window){
     }
 }
 
+void Fase1::moverViewMouse(){
+    if(window->hasFocus()){
+
+        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+        sf::Vector2f moverView({0,0});
+
+        if(mousePos.x < bordaMargem){
+            moverView.x -= velocidadeView * clock.getElapsedTime().asSeconds();
+        }
+        if(mousePos.x > window->getSize().x - bordaMargem){
+            moverView.x += velocidadeView * clock.getElapsedTime().asSeconds();
+        }
+        if(mousePos.y < bordaMargem){
+            moverView.y -= velocidadeView * clock.getElapsedTime().asSeconds();
+        }
+        if(mousePos.y > window->getSize().y - bordaMargem){
+            moverView.y += velocidadeView * clock.getElapsedTime().asSeconds();
+        }
+
+        sf::Vector2f newCenter = view.getCenter() + moverView;
+        sf::Vector2f halfSize = view.getSize() / 2.0f;
+
+        if (newCenter.x - halfSize.x < 0)
+            newCenter.x = halfSize.x;
+        if (newCenter.x + halfSize.x > 4096)
+            newCenter.x = 4096- halfSize.x;
+        if (newCenter.y - halfSize.y < 0)
+            newCenter.y = halfSize.y;
+        if (newCenter.y + halfSize.y > 3072)
+            newCenter.y = 3072 - halfSize.y;
+
+        view.setCenter(newCenter);
+    }
+    window->setView(view);
+}
 

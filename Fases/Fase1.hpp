@@ -25,5 +25,6 @@ private:
     sf::Clock clock;
     float velocidadeView;
     float bordaMargem;
+    void moverViewMouse();
 };
 #endif
