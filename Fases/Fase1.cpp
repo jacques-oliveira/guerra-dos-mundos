@@ -110,13 +110,8 @@ void Fase1::render(sf::RenderWindow& window) {
         enemy->render(window);
         window.draw(selectionBox);
         window.setView(uiView);
-        window.draw(levelText);
-        sf::RectangleShape viewBorder(sf::Vector2f(view.getSize().x, view.getSize().y));
-        viewBorder.setPosition(view.getCenter() - view.getSize() / 2.0f);
-        viewBorder.setFillColor(sf::Color::Transparent);
-        viewBorder.setOutlineColor(sf::Color::Green);
-        viewBorder.setOutlineThickness(2.0f);
-        window.draw(viewBorder);
+
+        window.draw(spriteFundoNeon);
         window.display();
 
     }catch(exception&){
@@ -126,6 +121,7 @@ void Fase1::render(sf::RenderWindow& window) {
 
 void Fase1::initLevel(std::string _levelName){
     try{
+
         velocidadeView = 340.f;
         bordaMargem = 50.f;
         levelName = _levelName;
@@ -135,12 +131,7 @@ void Fase1::initLevel(std::string _levelName){
             return;
         }
         spriteMapaFase1.setTexture(textureMapaFase1);
-        levelText.setFont(font);
-        levelText.setString("Playing " + levelName);
-        levelText.setCharacterSize(30);
-        levelText.setFillColor(sf::Color::White);
-        levelText.setPosition(10, 10);
-        //player = new Soldado(100,100,SoldierType);
+
         enemy = new Enemy(Tipo_Soldado);
     }catch(exception& e){
         cerr<<"Falha ao iniciar Fase1"<<e.what()<<endl;

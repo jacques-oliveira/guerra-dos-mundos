@@ -8,6 +8,13 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
     exitGame =false;
     isSelectingPlayer = false;
 
+
+    if(!texturaFundoNeon.loadFromFile("Assets/Textures/textura_fundo_neon.png")){
+        cerr<<"Falha ao carregar textura do fundo neon"<<endl;
+    }
+    texturaFundoNeon.setSmooth(true);
+    spriteFundoNeon.setTexture(texturaFundoNeon);
+
 }
 
 Fase::~Fase(){
