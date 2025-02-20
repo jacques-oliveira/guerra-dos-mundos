@@ -69,20 +69,50 @@ void Fase1::update(sf::Time deltaTime) {
             if(player != nullptr){
                 player->update(deltaTime);
                 player->resolveCollision(*enemy->collider);
-                sf::Vector2f playerPosition = player->getPlayerSprite().getPosition();
-                sf::Vector2f targetCenter(playerPosition.x +100, playerPosition.y + 100);
+
                 sf::Vector2f currentCenter = view.getCenter();
 
-                sf::Vector2f smoothedCenter = currentCenter + (targetCenter - currentCenter) * 0.05f;
-                view.setCenter(smoothedCenter);
-                view.move(10,5);
                 if(window != nullptr){
                     float ratio = (float)window->getSize().y / (float)window->getSize().x;
                     setViewSize(ratio);
+                    if(window->hasFocus()){
+
+
+                        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+                        sf::Vector2f moverView({0,0});
+
+                        if(mousePos.x < bordaMargem){
+                            moverView.x -= velocidadeView * clock.getElapsedTime().asSeconds();
+                        }
+                        if(mousePos.x > window->getSize().x - bordaMargem){
+                            moverView.x += velocidadeView * clock.getElapsedTime().asSeconds();
+                        }
+                        if(mousePos.y < bordaMargem){
+                            moverView.y -= velocidadeView * clock.getElapsedTime().asSeconds();
+                        }
+                        if(mousePos.y > window->getSize().y - bordaMargem){
+                            moverView.y += velocidadeView * clock.getElapsedTime().asSeconds();
+                        }
+
+                        sf::Vector2f newCenter = view.getCenter() + moverView;
+                        sf::Vector2f halfSize = view.getSize() / 2.0f;
+
+                        if (newCenter.x - halfSize.x < 0)
+                            newCenter.x = halfSize.x;
+                        if (newCenter.x + halfSize.x > 4096)
+                            newCenter.x = 4096- halfSize.x;
+                        if (newCenter.y - halfSize.y < 0)
+                            newCenter.y = halfSize.y;
+                        if (newCenter.y + halfSize.y > 3072)
+                            newCenter.y = 3072 - halfSize.y;
+
+                        view.setCenter(newCenter);
+                    }
                     window->setView(view);
                 }else{
                     cerr<<"Window não foi inicializado"<<endl;
                 }
+                clock.restart();
             }else{
                 cerr<<"Player não foi inicializado"<<endl;
             }
@@ -108,10 +138,17 @@ void Fase1::render(sf::RenderWindow& window) {
         for(auto& fe : fontesEnergia){
             fe->renderizar(window);
         }
+
         enemy->render(window);
         window.draw(selectionBox);
         window.setView(uiView);
         window.draw(levelText);
+        sf::RectangleShape viewBorder(sf::Vector2f(view.getSize().x, view.getSize().y));
+        viewBorder.setPosition(view.getCenter() - view.getSize() / 2.0f);
+        viewBorder.setFillColor(sf::Color::Transparent);
+        viewBorder.setOutlineColor(sf::Color::Green);
+        viewBorder.setOutlineThickness(2.0f);
+        window.draw(viewBorder);
         window.display();
 
     }catch(exception&){
@@ -121,6 +158,8 @@ void Fase1::render(sf::RenderWindow& window) {
 
 void Fase1::initLevel(std::string _levelName){
     try{
+        velocidadeView = 340.f;
+        bordaMargem = 50.f;
         levelName = _levelName;
         levelCompleted = false;
         if(!textureMapaFase1.loadFromFile("Assets/Textures/mapa-fase1.png")){

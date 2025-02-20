@@ -22,5 +22,8 @@ private:
     sf::Sprite spriteMapaFase1;
     sf::Texture textureMapaFase1;
     std::vector<FonteEnergia*> fontesEnergia;
+    sf::Clock clock;
+    float velocidadeView;
+    float bordaMargem;
 };
 #endif
