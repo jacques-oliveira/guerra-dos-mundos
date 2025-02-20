@@ -62,9 +62,6 @@ void MainMenuState::render(sf::RenderWindow& window){
         window.draw(spriteAmbienteMenu);
         window.draw(spritePainelMenu);
 
-        // for(const auto& option: options){
-        //     window.draw(option);
-        // }
 
         for(Botao& botao : botoes){
             botao.renderizar(window);
@@ -77,9 +74,6 @@ void MainMenuState::render(sf::RenderWindow& window){
 }
 
 void MainMenuState::updateOptionColors(){
-    // for(size_t i = 0; i < options.size();++i){
-    //     options[i].setFillColor(i == selectedOption ? sf::Color::Red: sf::Color::White);
-    // }
 }
 
 bool MainMenuState::shouldContinue() const{
@@ -131,15 +125,6 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
                     break;
             }
         }
-
-        // std::vector<std::string> optionsTexts={"Play","Exit"};
-
-        // for(size_t i = 0; i < optionsTexts.size(); ++i){
-        //     sf::Text option(optionsTexts[i], font, 30);
-        //     option.setFillColor(i== 0 ?sf::Color::Red:sf::Color::White);
-        //     option.setPosition(200,200 + i * 50);
-        //     options.push_back(option);
-        // }
         tocarMusicaAmbiente();
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
