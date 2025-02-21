@@ -8,6 +8,13 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
     exitGame =false;
     isSelectingPlayer = false;
 
+
+    if(!texturaFundoNeon.loadFromFile("Assets/Textures/textura_fundo_neon.png")){
+        cerr<<"Falha ao carregar textura do fundo neon"<<endl;
+    }
+    texturaFundoNeon.setSmooth(true);
+    spriteFundoNeon.setTexture(texturaFundoNeon);
+
 }
 
 Fase::~Fase(){
@@ -83,8 +90,8 @@ bool Fase::shouldExit() const {
     return exitGame;
 }
 
-void Fase::setViewSize(float ratio){
-    view.setSize(SIZE, SIZE * ratio);
+void Fase::setViewSize(sf::View& _view,float ratio){
+    _view.setSize(SIZE, SIZE * ratio);
 }
 
 void Fase::updateViewSize(sf::View& view, sf::RenderWindow& window){

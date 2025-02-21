@@ -11,6 +11,7 @@ public:
     void processEvents(sf::RenderWindow & window, bool*) override;
     void update(sf::Time deltaTime) override;
     void render(sf::RenderWindow & window) override;
+
 private:
     bool shouldContinue() const override;
     bool shouldExit() const override;

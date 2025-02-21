@@ -12,10 +12,11 @@ public:
     virtual void render(sf::RenderWindow& window) = 0;
     virtual bool shouldContinue() const = 0;
     virtual bool shouldExit() const = 0;
+
 protected:
     sf::Music musicaAmbiente;
-private:
-
+    void modoFullScreen(sf::RenderWindow& window, sf::View& view);
+    void fatorEscala(sf::RenderWindow& window, sf::Sprite& sprite);
 };
 #endif
 
