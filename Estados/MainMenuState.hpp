@@ -8,7 +8,7 @@
 
 class MainMenuState : public GameState{
 public:
-    MainMenuState(sf::RenderWindow& _window);
+    MainMenuState(sf::RenderWindow* _window);
     ~MainMenuState() override = default;
     void processEvents(sf::RenderWindow & window, bool * isRunning) override;
     void update(sf::Time deltaTime) override;
@@ -32,7 +32,7 @@ private:
     bool exitGame;
 
     void updateOptionColors();
-    void initMenu(sf::RenderWindow& _window);
+    void initMenu(sf::RenderWindow* _window);
     sf::Texture texturaAmbienteMenu;
     sf::Sprite spriteAmbienteMenu;
     unsigned short larguraTela;
@@ -40,6 +40,6 @@ private:
     std::vector<Botao> botoes;
     void carregarRecursos();
     void tocarMusicaAmbiente();
-
+    sf::View view;
 };
 #endif

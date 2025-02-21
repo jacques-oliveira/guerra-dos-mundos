@@ -2,9 +2,10 @@
 #include "../Motor/Game.hpp"
 
 Game::Game() : frame_per_seconds(60){
-    _window = new sf::RenderWindow(sf::VideoMode(1024,768),"Guerra dos Mundos");
+    sf::VideoMode modoDesktop = sf::VideoMode::getDesktopMode();
+    _window = new sf::RenderWindow(modoDesktop,"Guerra dos Mundos", sf::Style::Fullscreen);
 
-    states.push(std::make_unique<MainMenuState>(*_window));
+    states.push(std::make_unique<MainMenuState>(_window));
     isRunning = new bool(true);
 }
 
@@ -74,7 +75,7 @@ void Game::handleStateChanges() {
             }
         } else if (currentState->shouldContinue()) {
             if (dynamic_cast<MainMenuState*>(currentState.get())) {
-                changeState(std::make_unique<Fase1>("Phase 1"));
+                changeState(std::make_unique<Fase1>("Phase 1",_window));
             }/* else if (dynamic_cast<PlayState*>(currentState.get())) {
                 changeState(std::make_unique<GameOverState>(true)); // Fim da fase 1
             } else if (dynamic_cast<GameOverState*>(currentState.get())) {

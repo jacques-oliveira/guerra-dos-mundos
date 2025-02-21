@@ -25,8 +25,6 @@ public:
 
 protected:
     sf::Font font;
-    sf::Text levelText;
-    //Soldado* player;
     Enemy * enemy;
     std::string levelName;
     bool levelCompleted;
@@ -43,8 +41,12 @@ protected:
     bool isInside(const sf::FloatRect& selectionArea) const;
     sf::View view;
     sf::View uiView;
-    void setViewSize(float);
+    void setViewSize(sf::View& _view, float ratio);
     sf::RenderWindow * window;
     std::vector<Player*> players;
+    sf::Sprite spriteFundoNeon;
+    sf::Text quantidadeNeon;
+    sf::Texture texturaFundoNeon;
+    sf::Text textoNeon;
 };
 #endif
