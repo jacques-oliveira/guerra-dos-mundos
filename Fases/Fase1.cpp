@@ -2,7 +2,7 @@
 #include "Fase1.hpp"
 #include <stdexcept>
 
-Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
+Fase1::Fase1(const std::string& _levelName, sf::RenderWindow* refJanela) : Fase(_levelName){
 
     if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
         throw std::runtime_error("Erro ao carregar fonte Fase1");
@@ -11,7 +11,7 @@ Fase1::Fase1(const std::string& _levelName) : Fase(_levelName){
     fontesEnergia.push_back(new FonteEnergia(300,1850,1500)) ;
     fontesEnergia.push_back(new FonteEnergia(3600,560,1500)) ;
     /*= new FonteEnergia(120,10,1500);*/
-    initLevel(_levelName);
+    initLevel(_levelName, refJanela);
     criarSoldados();
 }
 
@@ -73,8 +73,8 @@ void Fase1::update(sf::Time deltaTime) {
                 sf::Vector2f currentCenter = view.getCenter();
 
                 if(window != nullptr){
-                    float ratio = (float)window->getSize().y / (float)window->getSize().x;
-                    setViewSize(ratio);
+                    // float ratio = (float)window->getSize().y / (float)window->getSize().x;
+                    // setViewSize(view,ratio);
 
                     moverViewMouse();
                 }else{
@@ -98,7 +98,9 @@ void Fase1::update(sf::Time deltaTime) {
 void Fase1::render(sf::RenderWindow& window) {
     try{
         window.clear();
+        window.setView(view);
         tileGen->drawMap(window);
+
         window.draw(spriteMapaFase1);
         for(auto& p : players){
             p->render(window);
@@ -119,9 +121,15 @@ void Fase1::render(sf::RenderWindow& window) {
     }
 }
 
-void Fase1::initLevel(std::string _levelName){
+void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
     try{
-
+        if(window != nullptr){
+            view = sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
+            uiView = view;
+            cout<<window->getSize().x<<endl;
+            modoFullScreen(*window, view);
+        }
+        //fatorEscala(*window,spriteFundoNeon);
         velocidadeView = 340.f;
         bordaMargem = 50.f;
         levelName = _levelName;

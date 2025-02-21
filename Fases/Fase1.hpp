@@ -8,7 +8,7 @@
 
 class Fase1 : public Fase{
 public:
-    Fase1(const std::string& levelName);
+    Fase1(const std::string& levelName, sf::RenderWindow* refJanela);
     ~Fase1() ;
 
     void processEvents(sf::RenderWindow & window, bool * isRunning) override;
@@ -16,7 +16,7 @@ public:
     void render(sf::RenderWindow & window) override;
 
 private:
-    void initLevel(std::string);
+    void initLevel(std::string, sf::RenderWindow* janela);
     void criarSoldados();
     void selecaoPersonagens(sf::Event& event, sf::RenderWindow& _window);
     sf::Sprite spriteMapaFase1;
@@ -26,5 +26,6 @@ private:
     float velocidadeView;
     float bordaMargem;
     void moverViewMouse();
+    sf::View view;
 };
 #endif

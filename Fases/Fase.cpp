@@ -90,8 +90,8 @@ bool Fase::shouldExit() const {
     return exitGame;
 }
 
-void Fase::setViewSize(float ratio){
-    view.setSize(SIZE, SIZE * ratio);
+void Fase::setViewSize(sf::View& _view,float ratio){
+    _view.setSize(SIZE, SIZE * ratio);
 }
 
 void Fase::updateViewSize(sf::View& view, sf::RenderWindow& window){
