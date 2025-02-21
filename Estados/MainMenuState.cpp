@@ -5,7 +5,7 @@
 #include<stdexcept>
 #include <iostream>
 
-MainMenuState::MainMenuState(sf::RenderWindow& _window): selectedOption(0), continueGame(false), exitGame(false){
+MainMenuState::MainMenuState(sf::RenderWindow* _window): selectedOption(0), continueGame(false), exitGame(false){
 
     initMenu(_window);
 }
@@ -59,6 +59,7 @@ void MainMenuState::update(sf::Time deltaTime){
 void MainMenuState::render(sf::RenderWindow& window){
     try{
         window.clear();
+        window.setView(view);
         window.draw(spriteAmbienteMenu);
         window.draw(spritePainelMenu);
 
@@ -84,13 +85,17 @@ bool MainMenuState::shouldExit() const{
     return exitGame;
 }
 
-void MainMenuState::initMenu(sf::RenderWindow& _window){
+void MainMenuState::initMenu(sf::RenderWindow* _window){
     try{
-
+        if(_window != nullptr){
+            view = sf::View(sf::FloatRect(0, 0, _window->getSize().x, _window->getSize().y));
+            std::cout<<_window->getSize().x<<std::endl;
+            modoFullScreen(*_window, view);
+        }
         carregarRecursos();
 
-        larguraTela = _window.getSize().x;
-        alturaTela = _window.getSize().y;
+        larguraTela = _window->getSize().x;
+        alturaTela = _window->getSize().y;
 
         spritePainelMenu.setTexture(texturaPainelMenu);
         spritePainelMenu.setOrigin(spritePainelMenu.getLocalBounds().left + spritePainelMenu.getLocalBounds().width/2,
@@ -98,6 +103,9 @@ void MainMenuState::initMenu(sf::RenderWindow& _window){
 
         spritePainelMenu.setPosition(larguraTela/2, alturaTela/2 );
         spriteAmbienteMenu.setTexture(texturaAmbienteMenu);
+        fatorEscala(*_window, spriteAmbienteMenu);
+
+        //spriteAmbienteMenu.setScale(fatorEscala,fatorEscala);
 
         float larguraBotao = texturaBotaoJogarNormal.getSize().x + 0.1f;
         float alturaBotao = texturaBotaoJogarNormal.getSize().y + 0.1f;
