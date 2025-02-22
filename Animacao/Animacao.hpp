@@ -1,11 +1,11 @@
-#ifndef ANIMATION_HPP
-#define ANIMATION_HPP
+#ifndef ANIMACAO_HPP
+#define ANIMACAO_HPP
 
 #include <SFML/Graphics.hpp>
 
-class Animation{
+class Animacao{
 public:
-    Animation(float frameSpeed = 0.125f);
+    Animacao(float frameSpeed = 0.125f);
     void addFrame(sf::IntRect frameRect);
     void update();
     const sf::Texture& getTexture() const;

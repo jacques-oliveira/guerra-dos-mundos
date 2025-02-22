@@ -138,7 +138,7 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             cout<<window->getSize().x<<endl;
             modoFullScreen(*window, view);
             //fatorEscala(*window,spriteFundoNeon);
-            velocidadeView = 340.f;
+            velocidadeView = 440.f;
             bordaMargem = 50.f;
             levelName = _levelName;
             levelCompleted = false;
