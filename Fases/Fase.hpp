@@ -6,6 +6,7 @@
 #include "../Personagem/Player.hpp"
 #include "../Enemy.hpp"
 #include "../Personagem/Soldado.hpp"
+#include "../Recursos/BarraMensagem/BarraMensagem.hpp"
 
 class Fase : public GameState{
 public:
@@ -51,5 +52,6 @@ protected:
     sf::Text valorNeon;
     sf::Sprite spriteMiniMapa;
     sf::Texture texturaMiniMapa;
+    BarraMensagem barraMensagem;
 };
 #endif
