@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "./Collision/Collider.hpp"
+#include "./Colisao/Collider.hpp"
 #include "Personagem/TipoPersonagem.hpp"
 
 class Enemy : sf::Drawable{

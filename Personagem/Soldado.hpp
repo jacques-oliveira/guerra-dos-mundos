@@ -1,7 +1,7 @@
 #ifndef SOLIDER_HPP
 #define SOLIDER_HPP
 
-#include "../Player/Player.hpp"
+#include "../Personagem/Player.hpp"
 
 class Soldado : public Player{
 public:

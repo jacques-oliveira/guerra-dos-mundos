@@ -3,7 +3,7 @@
 
 #include "../Estados/GameState.hpp"
 #include "../GeradorMapa/TileGenerator.hpp"
-#include "../Player/Player.hpp"
+#include "../Personagem/Player.hpp"
 #include "../Enemy.hpp"
 #include "../Personagem/Soldado.hpp"
 
