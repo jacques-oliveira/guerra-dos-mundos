@@ -3,7 +3,7 @@
 
 #include "../Estados/GameState.hpp"
 #include "../GeradorMapa/TileGenerator.hpp"
-#include "../Player/Player.hpp"
+#include "../Personagem/Player.hpp"
 #include "../Enemy.hpp"
 #include "../Personagem/Soldado.hpp"
 
@@ -48,6 +48,7 @@ protected:
     sf::Text quantidadeNeon;
     sf::Texture texturaFundoNeon;
     sf::Text textoNeon;
+    sf::Text valorNeon;
     sf::Sprite spriteMiniMapa;
     sf::Texture texturaMiniMapa;
 };

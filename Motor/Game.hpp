@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "../Player/Player.hpp"
+#include "../Personagem/Player.hpp"
 #include "../GeradorMapa/TileGenerator.hpp"
 #include "../Enemy.hpp"
 #include "../Estados/GameState.hpp"

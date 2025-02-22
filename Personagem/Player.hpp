@@ -5,7 +5,7 @@
 #include "PlayerState.hpp"
 #include "../Animation/Animation.hpp"
 #include "HeathBar.hpp"
-#include "../Collision/Collider.hpp"
+#include "../Colisao/Collider.hpp"
 #include "../Personagem/TipoPersonagem.hpp"
 #include <iostream>
 #include <random>
