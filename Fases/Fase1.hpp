@@ -3,7 +3,7 @@
 
 #include "Fase.hpp"
 #include "../GeradorMapa/TileGenerator.hpp"
-#include "../Factory/FabricaJogador.hpp"
+#include "../Fabrica/FabricaJogador.hpp"
 #include "../GeradorMapa/FonteEnergia.hpp"
 
 class Fase1 : public Fase{

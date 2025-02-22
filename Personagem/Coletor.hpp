@@ -1,7 +1,7 @@
 #ifndef COLETOR_HPP
 #define COLETOR_HPP
 
-#include "../Player/Player.hpp"
+#include "../Personagem/Player.hpp"
 
 class Coletor : public Player{
 public:

@@ -1,7 +1,7 @@
 #ifndef FABRICAJOGADOR_HPP
 #define FABRICAJOGADOR_HPP
 
-#include "../Player/Player.hpp"
+#include "../Personagem/Player.hpp"
 #include "../Personagem/Soldado.hpp"
 #include "../Personagem/Coletor.hpp"
 #include "../Personagem/Aereo.hpp"

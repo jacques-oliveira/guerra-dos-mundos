@@ -115,6 +115,7 @@ void Fase1::render(sf::RenderWindow& window) {
 
         window.draw(spriteFundoNeon);
         window.draw(textoNeon);
+        window.draw(valorNeon);
         //spriteMiniMapa.setPosition({window.getSize().x - (spriteMiniMapa.getTexture()->getSize().x + 20.f),window.getSize().y-20.f});
         window.draw(spriteMiniMapa);
         window.display();
