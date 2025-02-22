@@ -12,6 +12,7 @@ Fase1::Fase1(const std::string& _levelName, sf::RenderWindow* refJanela) : Fase(
     fontesEnergia.push_back(new FonteEnergia(3600,560,1500)) ;
     /*= new FonteEnergia(120,10,1500);*/
     initLevel(_levelName, refJanela);
+
     criarSoldados();
 
 }
@@ -130,7 +131,9 @@ void Fase1::render(sf::RenderWindow& window) {
 void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
     try{
         if(window != nullptr){
-            view = sf::View(sf::FloatRect(0, 0, window->getSize().x, window->getSize().y));
+            float tamanhoJanelaX = window->getSize().x;
+            float tamanhoJanelaY = window->getSize().y;
+            view = sf::View(sf::FloatRect(0, 0, tamanhoJanelaX, tamanhoJanelaY));
             uiView = view;
             cout<<window->getSize().x<<endl;
             modoFullScreen(*window, view);
@@ -147,6 +150,7 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             spriteMiniMapa.setPosition({ window->getSize().x -( texturaMiniMapa.getSize().x + 40.f)
                                         ,window->getSize().y -( texturaMiniMapa.getSize().y + 40.f)});
             fatorEscala(*window,spriteMiniMapa);
+            barraMensagem.atribuirPosicao(tamanhoJanelaX/2 - 300.f, tamanhoJanelaY - 60.f, tamanhoJanelaX);
             enemy = new Enemy(Tipo_Soldado);
         }
     }catch(exception& e){
