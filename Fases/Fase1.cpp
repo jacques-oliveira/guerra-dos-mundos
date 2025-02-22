@@ -4,9 +4,9 @@
 
 Fase1::Fase1(const std::string& _levelName, sf::RenderWindow* refJanela) : Fase(_levelName){
 
-    if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
-        throw std::runtime_error("Erro ao carregar fonte Fase1");
-    }
+    // if (!font.loadFromFile("Assets/Fonts/Good-Game.ttf")) {
+    //     throw std::runtime_error("Erro ao carregar fonte Fase1");
+    // }
 
     fontesEnergia.push_back(new FonteEnergia(300,1850,1500)) ;
     fontesEnergia.push_back(new FonteEnergia(3600,560,1500)) ;
@@ -114,10 +114,13 @@ void Fase1::render(sf::RenderWindow& window) {
         window.setView(uiView);
 
         window.draw(spriteFundoNeon);
+        window.draw(textoNeon);
+        //spriteMiniMapa.setPosition({window.getSize().x - (spriteMiniMapa.getTexture()->getSize().x + 20.f),window.getSize().y-20.f});
+        window.draw(spriteMiniMapa);
         window.display();
 
-    }catch(exception&){
-        cerr<<"Falha ao renderizar estado"<<endl;
+    }catch(exception& e){
+        cerr<<"Falha ao renderizar estado"<<e.what()<<endl;
     }
 }
 
@@ -139,7 +142,9 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             return;
         }
         spriteMapaFase1.setTexture(textureMapaFase1);
-
+        spriteMiniMapa.setPosition({ window->getSize().x -( texturaMiniMapa.getSize().x + 40.f)
+                                    ,window->getSize().y -( texturaMiniMapa.getSize().y + 40.f)});
+        fatorEscala(*window,spriteMiniMapa);
         enemy = new Enemy(Tipo_Soldado);
     }catch(exception& e){
         cerr<<"Falha ao iniciar Fase1"<<e.what()<<endl;

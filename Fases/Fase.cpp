@@ -8,12 +8,23 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
     exitGame =false;
     isSelectingPlayer = false;
 
-
+    if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
+        cerr<<"Falha ao carregar fonte Truly"<<endl;
+    }
     if(!texturaFundoNeon.loadFromFile("Assets/Textures/textura_fundo_neon.png")){
         cerr<<"Falha ao carregar textura do fundo neon"<<endl;
     }
     texturaFundoNeon.setSmooth(true);
     spriteFundoNeon.setTexture(texturaFundoNeon);
+
+    if(!texturaMiniMapa.loadFromFile("Assets/Textures/textura_fundo_miniMapa.png")){
+        cerr<<"Erro ao carregar textura mini mapa fase 1"<<endl;
+        return;
+    }
+    spriteMiniMapa.setTexture(texturaMiniMapa);
+    textoNeon.setFont(font);
+    textoNeon.setString("neon :");
+    textoNeon.setPosition(10,0);
 
 }
 
