@@ -23,8 +23,11 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
     }
     spriteMiniMapa.setTexture(texturaMiniMapa);
     textoNeon.setFont(font);
+    valorNeon.setFont(font);
     textoNeon.setString("neon :");
+    valorNeon.setString("2050");
     textoNeon.setPosition(10,0);
+    valorNeon.setPosition(textoNeon.getGlobalBounds().width + 32.f,0);
 
 }
 

@@ -48,6 +48,7 @@ protected:
     sf::Text quantidadeNeon;
     sf::Texture texturaFundoNeon;
     sf::Text textoNeon;
+    sf::Text valorNeon;
     sf::Sprite spriteMiniMapa;
     sf::Texture texturaMiniMapa;
 };
