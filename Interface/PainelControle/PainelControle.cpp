@@ -5,7 +5,6 @@ PainelControle::PainelControle(){
 }
 
 void PainelControle::inicializarPainel(){
-    sf::Texture texturaFundoPainel;
     try{
         valorNeon = 0;
         numeroDia = 0;
@@ -19,9 +18,14 @@ void PainelControle::inicializarPainel(){
 }
 
 void PainelControle::draw(sf::RenderTarget& target, sf::RenderStates states) const{
-    target.draw(spriteFundoPainel);
+    target.draw(spriteFundoPainel,states);
 }
 
 void PainelControle::atribuirPosicao(float posx, float posy){
+    spriteFundoPainel.setOrigin(spriteFundoPainel.getLocalBounds().left, spriteFundoPainel.getLocalBounds().height/2);
+    spriteFundoPainel.setPosition(posx, posy - spriteFundoPainel.getGlobalBounds().height/2 -2.f);
+}
 
+void PainelControle::renderizar(sf::RenderWindow& window){
+    draw(window, sf::RenderStates::Default);
 }

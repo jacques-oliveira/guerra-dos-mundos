@@ -9,12 +9,14 @@ class PainelControle : sf::Drawable{
 public:
     PainelControle();
     virtual ~PainelControle() = default;
+    void renderizar(sf::RenderWindow& window);
+    void atribuirPosicao(float posx, float posy);
 private:
     float valorNeon;
     short numeroDia;
     sf::Sprite spriteFundoPainel;
+    sf::Texture texturaFundoPainel;
     void inicializarPainel();
     void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-    void atribuirPosicao(float posx, float posy);
 };
 #endif

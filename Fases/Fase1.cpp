@@ -118,6 +118,7 @@ void Fase1::render(sf::RenderWindow& window) {
         window.draw(spriteFundoNeon);
         window.draw(textoNeon);
         window.draw(valorNeon);
+        painelControle.renderizar(window);
         barraMensagem.render(window);
         //spriteMiniMapa.setPosition({window.getSize().x - (spriteMiniMapa.getTexture()->getSize().x + 20.f),window.getSize().y-20.f});
         window.draw(spriteMiniMapa);
@@ -150,6 +151,7 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             spriteMiniMapa.setPosition({ window->getSize().x -( texturaMiniMapa.getSize().x + 40.f)
                                         ,window->getSize().y -( texturaMiniMapa.getSize().y + 40.f)});
             fatorEscala(*window,spriteMiniMapa);
+            painelControle.atribuirPosicao(0 , tamanhoJanelaY);
             barraMensagem.atribuirPosicao(tamanhoJanelaX/2 - 300.f, tamanhoJanelaY - 60.f, tamanhoJanelaX);
             enemy = new Enemy(Tipo_Soldado);
         }
