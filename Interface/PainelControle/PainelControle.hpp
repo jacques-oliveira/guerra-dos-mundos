@@ -12,11 +12,18 @@ public:
     void renderizar(sf::RenderWindow& window);
     void atribuirPosicao(float posx, float posy);
     sf::Vector2f obterPosicaoPainel();
+    void atribuirFonte(sf::Font& fonte);
 private:
-    float valorNeon;
+    int valorNeon;
     short numeroDia;
     sf::Sprite spriteFundoPainel;
     sf::Texture texturaFundoPainel;
+    sf::Sprite spriteComandante;
+    sf::Texture texturaComandante;
+    sf::Texture texturaNeonPainel;
+    sf::Sprite spriteNeonPainel;
+    sf::Text textValorNeon;
+    sf::Text textTituloNeon;
     void inicializarPainel();
     void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
 };
