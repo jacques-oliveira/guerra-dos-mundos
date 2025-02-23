@@ -21,6 +21,7 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
         cerr<<"Erro ao carregar textura mini mapa fase 1"<<endl;
         return;
     }
+    painelControle.atribuirFonte(font);
     barraMensagem.atribuirFonte(font);
     spriteMiniMapa.setTexture(texturaMiniMapa);
     textoNeon.setFont(font);
