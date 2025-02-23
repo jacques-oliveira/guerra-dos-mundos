@@ -1,7 +1,7 @@
 #include "Enemy.hpp"
 
 Enemy::Enemy(TipoPersonagem tipo) : characterType(tipo){
-    if(!enemyTexture.loadFromFile("Assets/Textures/frame0000.png")){
+    if(!enemyTexture.loadFromFile("Recursos/Textures/frame0000.png")){
         return;
     }
     enemySprite.setTexture(enemyTexture);

@@ -6,7 +6,7 @@
 #include "../Personagem/Player.hpp"
 #include "../Enemy.hpp"
 #include "../Personagem/Soldado.hpp"
-#include "../Recursos/BarraMensagem/BarraMensagem.hpp"
+#include "../Interface/BarraMensagem/BarraMensagem.hpp"
 
 class Fase : public GameState{
 public:

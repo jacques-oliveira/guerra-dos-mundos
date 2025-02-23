@@ -11,7 +11,7 @@ Player::Player(float posx, float posy,TipoPersonagem tipo){
     isMoving = false;
     speed = 10.f;
     if(!
-    spriteSheet.loadFromFile("Assets/Textures/player-sprite.png")){
+    spriteSheet.loadFromFile("Recursos/Textures/player-sprite.png")){
         return;
     }
 

@@ -8,7 +8,7 @@ FonteEnergia::FonteEnergia(float posx, float posy, int energiaFonte){
 }
 
 void FonteEnergia::iniciar(){
-    if(!texturaCristalNegro.loadFromFile("Assets/Textures/textura-cristal-negro.png")){
+    if(!texturaCristalNegro.loadFromFile("Recursos/Textures/textura-cristal-negro.png")){
         std::cerr<<"Falha ao carregar textura cristal negro"<<std::endl;
     }
 

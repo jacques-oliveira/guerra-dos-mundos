@@ -142,7 +142,7 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             bordaMargem = 50.f;
             levelName = _levelName;
             levelCompleted = false;
-            if(!textureMapaFase1.loadFromFile("Assets/Textures/mapa-fase1.png")){
+            if(!textureMapaFase1.loadFromFile("Recursos/Textures/mapa-fase1.png")){
                 cerr<<"Erro ao carregar textura mapa fase 1"<<endl;
                 return;
             }

@@ -4,7 +4,7 @@
 #include "GameState.hpp"
 #include <vector>
 #include <string>
-#include "../Recursos/Interface/Botao.hpp"
+#include "../Interface/Botao.hpp"
 
 class MainMenuState : public GameState{
 public:
