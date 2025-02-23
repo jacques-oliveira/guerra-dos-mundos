@@ -6,12 +6,20 @@ PainelControle::PainelControle(){
 
 void PainelControle::inicializarPainel(){
     try{
-        valorNeon = 0;
-        numeroDia = 0;
+        valorNeon = 35000;
+        numeroDia = 1;
+
         if(!texturaFundoPainel.loadFromFile("Recursos/Textures/fundo_painel_controle.png")){
             std::cerr<<"Erro ao carregar textura fundo do painel"<<std::endl;
         }
+        if(!texturaComandante.loadFromFile("Recursos/Textures/textura_comandante.png")){
+            std::cerr<<"Erro ao carregar textura comandante no painel"<<std::endl;
+        }if(!texturaNeonPainel.loadFromFile("Recursos/Textures/fundo_neon_painel.png")){
+            std::cerr<<"Erro ao carregar textura neon painel"<<std::endl;
+        }
         spriteFundoPainel.setTexture(texturaFundoPainel);
+        spriteComandante.setTexture(texturaComandante);
+        spriteNeonPainel.setTexture(texturaNeonPainel);
     }catch(std::exception& e){
         std::cerr<<"Erro ao carregar textura do painel"<<e.what()<<std::endl;
     }
@@ -19,12 +27,28 @@ void PainelControle::inicializarPainel(){
 
 void PainelControle::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     target.draw(spriteFundoPainel,states);
+    target.draw(spriteComandante,states);
+    target.draw(spriteNeonPainel,states);
+    target.draw(textTituloNeon,states);
+    target.draw(textValorNeon,states);
 }
 
 void PainelControle::atribuirPosicao(float posx, float posy){
     float borda = 2.f;
     spriteFundoPainel.setOrigin(spriteFundoPainel.getLocalBounds().left, spriteFundoPainel.getLocalBounds().height/2);
     spriteFundoPainel.setPosition(posx, posy - spriteFundoPainel.getGlobalBounds().height/2 -borda);
+    spriteComandante.setOrigin(spriteComandante.getLocalBounds().left, spriteComandante.getLocalBounds().height/2);
+    spriteComandante.setPosition(spriteFundoPainel.getPosition().x + 60.f, spriteFundoPainel.getGlobalBounds().top + spriteComandante.getLocalBounds().height/2 + 36.f);
+    spriteNeonPainel.setPosition(spriteComandante.getGlobalBounds().left - 16.f,
+                                 spriteFundoPainel.getPosition().y + spriteFundoPainel.getGlobalBounds().height/2 - 45.f);
+
+    textTituloNeon.setOrigin(textTituloNeon.getLocalBounds().left, textTituloNeon.getLocalBounds().height/2);
+    textTituloNeon.setPosition(spriteNeonPainel.getGlobalBounds().left + 6,
+                               spriteNeonPainel.getGlobalBounds().top + textTituloNeon.getGlobalBounds().height/3 );
+
+    //textValorNeon.setOrigin(textValorNeon.getLocalBounds().left, textValorNeon.getLocalBounds().height/2);
+    textValorNeon.setPosition(textTituloNeon.getGlobalBounds().left + textTituloNeon.getGlobalBounds().width + 6.f,
+                              spriteNeonPainel.getPosition().y);
 }
 
 void PainelControle::renderizar(sf::RenderWindow& window){
@@ -35,4 +59,19 @@ sf::Vector2f PainelControle::obterPosicaoPainel(){
     float distanciaPainel = 50.f;
     sf::Vector2f posicaoTotal(sf::Vector2f(spriteFundoPainel.getLocalBounds().width + spriteFundoPainel.getPosition().x + distanciaPainel, spriteFundoPainel.getPosition().y));
     return posicaoTotal;
+}
+
+void PainelControle::atribuirFonte(sf::Font& fonte){
+    try{
+        textValorNeon.setFont(fonte);
+        textTituloNeon.setFont(fonte);
+        textValorNeon.setFillColor(sf::Color::White);
+        textTituloNeon.setFillColor(sf::Color::White);
+        textValorNeon.setCharacterSize(24);
+        textTituloNeon.setCharacterSize(24);
+        textValorNeon.setString(std::to_string(valorNeon));
+        textTituloNeon.setString("neon:");
+    }catch(std::exception& e){
+        std::cerr<<"Falha ao atriubuir Fonte a Painel de controle"<<e.what()<<std::endl;
+    }
 }
