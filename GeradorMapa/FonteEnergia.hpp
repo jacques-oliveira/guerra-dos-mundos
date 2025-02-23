@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../Animation/Animation.hpp"
+#include "../Animacao/Animacao.hpp"
 
 class FonteEnergia{
 public:
@@ -19,7 +19,7 @@ private:
     sf::Texture texturaCristalNegro;
     sf::Sprite spriteCristalNegro;
     sf::Vector2f posicao;
-    std::vector<Animation> animacoes;
-    void carregarAnimacao(Animation& animacao, int quantidadeFrames, int linha);
+    std::vector<Animacao> animacoes;
+    void carregarAnimacao(Animacao& animacao, int quantidadeFrames, int linha);
 };
 #endif

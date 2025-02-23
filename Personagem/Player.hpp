@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayerState.hpp"
-#include "../Animation/Animation.hpp"
+#include "../Animacao/Animacao.hpp"
 #include "HeathBar.hpp"
 #include "../Colisao/Collider.hpp"
 #include "../Personagem/TipoPersonagem.hpp"
@@ -43,15 +43,14 @@ private :
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::Sprite playerSprite;
     sf::Texture playerTexture;
-    //sf::Vector2f _velocity;
     bool moveUp,moveDown,moveLeft, moveRight;
     bool selected;
     sf::Vector2f destination;
     void updatePositionPlayer(float);
     float speed;
     void bindSelectShape();
-    std::vector<Animation> animations;
-    void loadAnimation(Animation& animation, int framecount, int row);
+    std::vector<Animacao> animations;
+    void loadAnimation(Animacao& animation, int framecount, int row);
     void setState(PlayerState state);
     sf::Texture spriteSheet;
     PlayerState currentState;

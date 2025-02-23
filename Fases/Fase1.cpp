@@ -118,6 +118,7 @@ void Fase1::render(sf::RenderWindow& window) {
         window.draw(spriteFundoNeon);
         window.draw(textoNeon);
         window.draw(valorNeon);
+        painelControle.renderizar(window);
         barraMensagem.render(window);
         //spriteMiniMapa.setPosition({window.getSize().x - (spriteMiniMapa.getTexture()->getSize().x + 20.f),window.getSize().y-20.f});
         window.draw(spriteMiniMapa);
@@ -138,11 +139,11 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             cout<<window->getSize().x<<endl;
             modoFullScreen(*window, view);
             //fatorEscala(*window,spriteFundoNeon);
-            velocidadeView = 340.f;
+            velocidadeView = 440.f;
             bordaMargem = 50.f;
             levelName = _levelName;
             levelCompleted = false;
-            if(!textureMapaFase1.loadFromFile("Assets/Textures/mapa-fase1.png")){
+            if(!textureMapaFase1.loadFromFile("Recursos/Textures/mapa-fase1.png")){
                 cerr<<"Erro ao carregar textura mapa fase 1"<<endl;
                 return;
             }
@@ -150,7 +151,8 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             spriteMiniMapa.setPosition({ window->getSize().x -( texturaMiniMapa.getSize().x + 40.f)
                                         ,window->getSize().y -( texturaMiniMapa.getSize().y + 40.f)});
             fatorEscala(*window,spriteMiniMapa);
-            barraMensagem.atribuirPosicao(tamanhoJanelaX/2 - 300.f, tamanhoJanelaY - 60.f, tamanhoJanelaX);
+            painelControle.atribuirPosicao(0 , tamanhoJanelaY);
+            barraMensagem.atribuirPosicao(painelControle.obterPosicaoPainel().x, tamanhoJanelaY - 60.f, tamanhoJanelaX);
             enemy = new Enemy(Tipo_Soldado);
         }
     }catch(exception& e){

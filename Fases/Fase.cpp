@@ -8,16 +8,16 @@ Fase::Fase(const std::string& levelName) : levelCompleted(false), exitGame(false
     exitGame =false;
     isSelectingPlayer = false;
 
-    if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
+    if(!font.loadFromFile("Recursos/Fonts/TrulyMadlyDpad-a72o.ttf")){
         cerr<<"Falha ao carregar fonte Truly"<<endl;
     }
-    if(!texturaFundoNeon.loadFromFile("Assets/Textures/textura_fundo_neon.png")){
+    if(!texturaFundoNeon.loadFromFile("Recursos/Textures/textura_fundo_neon.png")){
         cerr<<"Falha ao carregar textura do fundo neon"<<endl;
     }
     texturaFundoNeon.setSmooth(true);
     spriteFundoNeon.setTexture(texturaFundoNeon);
 
-    if(!texturaMiniMapa.loadFromFile("Assets/Textures/textura_fundo_miniMapa.png")){
+    if(!texturaMiniMapa.loadFromFile("Recursos/Textures/textura_fundo_miniMapa.png")){
         cerr<<"Erro ao carregar textura mini mapa fase 1"<<endl;
         return;
     }
@@ -89,7 +89,7 @@ void Fase::moveSelectedPlayers(sf::Vector2f& dest){
 
 void Fase::configureTileMap(){
     try{
-        char path[100] =  {"Assets/Textures/forest.png\0"};
+        char path[100] =  {"Recursos/Textures/forest.png\0"};
         tileGen = new TileGenerator();
         tileGen->generateTileMap(path);
     }catch(exception& e){
