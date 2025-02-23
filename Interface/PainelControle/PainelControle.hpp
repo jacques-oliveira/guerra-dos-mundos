@@ -11,6 +11,7 @@ public:
     virtual ~PainelControle() = default;
     void renderizar(sf::RenderWindow& window);
     void atribuirPosicao(float posx, float posy);
+    sf::Vector2f obterPosicaoPainel();
 private:
     float valorNeon;
     short numeroDia;

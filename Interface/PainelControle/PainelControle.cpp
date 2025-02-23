@@ -22,10 +22,17 @@ void PainelControle::draw(sf::RenderTarget& target, sf::RenderStates states) con
 }
 
 void PainelControle::atribuirPosicao(float posx, float posy){
+    float borda = 2.f;
     spriteFundoPainel.setOrigin(spriteFundoPainel.getLocalBounds().left, spriteFundoPainel.getLocalBounds().height/2);
-    spriteFundoPainel.setPosition(posx, posy - spriteFundoPainel.getGlobalBounds().height/2 -2.f);
+    spriteFundoPainel.setPosition(posx, posy - spriteFundoPainel.getGlobalBounds().height/2 -borda);
 }
 
 void PainelControle::renderizar(sf::RenderWindow& window){
     draw(window, sf::RenderStates::Default);
+}
+
+sf::Vector2f PainelControle::obterPosicaoPainel(){
+    float distanciaPainel = 50.f;
+    sf::Vector2f posicaoTotal(sf::Vector2f(spriteFundoPainel.getLocalBounds().width + spriteFundoPainel.getPosition().x + distanciaPainel, spriteFundoPainel.getPosition().y));
+    return posicaoTotal;
 }

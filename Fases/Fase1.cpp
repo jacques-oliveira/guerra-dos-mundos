@@ -152,7 +152,7 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
                                         ,window->getSize().y -( texturaMiniMapa.getSize().y + 40.f)});
             fatorEscala(*window,spriteMiniMapa);
             painelControle.atribuirPosicao(0 , tamanhoJanelaY);
-            barraMensagem.atribuirPosicao(tamanhoJanelaX/2 - 300.f, tamanhoJanelaY - 60.f, tamanhoJanelaX);
+            barraMensagem.atribuirPosicao(painelControle.obterPosicaoPainel().x, tamanhoJanelaY - 60.f, tamanhoJanelaX);
             enemy = new Enemy(Tipo_Soldado);
         }
     }catch(exception& e){
