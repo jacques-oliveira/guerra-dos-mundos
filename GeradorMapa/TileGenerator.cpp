@@ -4,7 +4,7 @@
 TileGenerator::TileGenerator(){
     tileWidth = 64;
     tileHeight = 64;
-    txtMapFile = carregarMatrixTexto("Assets/MapaBits/mapa-bits-fase1.txt");
+    txtMapFile = carregarMatrixTexto("Recursos/MapaBits/mapa-bits-fase1.txt");
 }
 
 TileGenerator::~TileGenerator(){

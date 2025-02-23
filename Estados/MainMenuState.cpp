@@ -141,31 +141,31 @@ void MainMenuState::initMenu(sf::RenderWindow* _window){
 
 void MainMenuState::carregarRecursos(){
     try{
-        if(!font.loadFromFile("Assets/Fonts/TrulyMadlyDpad-a72o.ttf")){
+        if(!font.loadFromFile("Recursos/Fonts/TrulyMadlyDpad-a72o.ttf")){
             throw std::runtime_error("Erro ao carregar fonte");
         }
 
-        if(!texturaAmbienteMenu.loadFromFile("Assets/Textures/menu-background.png")){
+        if(!texturaAmbienteMenu.loadFromFile("Recursos/Textures/menu-background.png")){
             throw std::runtime_error("Erro ao carregar plano de fundo");
         }
 
-        if(!texturaPainelMenu.loadFromFile("Assets/Textures/painel-menu.png")){
+        if(!texturaPainelMenu.loadFromFile("Recursos/Textures/painel-menu.png")){
             throw std::runtime_error("Erro ao carregar plano de fundo");
         }
 
-        if(!texturaBotaoJogarNormal.loadFromFile("Assets/Textures/botao-jogar-textura-normal.png")){
+        if(!texturaBotaoJogarNormal.loadFromFile("Recursos/Textures/botao-jogar-textura-normal.png")){
             throw std::runtime_error("Erro ao carregar textura botão jogar");
         }
 
-        if(!texturaBotaoJogarSelecionado.loadFromFile("Assets/Textures/botao-jogar-textura-selecionada.png")){
+        if(!texturaBotaoJogarSelecionado.loadFromFile("Recursos/Textures/botao-jogar-textura-selecionada.png")){
             throw std::runtime_error("Erro ao carregar textura botão jogar");
         }
 
-        if(!texturaBotaoSairNormal.loadFromFile("Assets/Textures/botao-sair-textura-normal.png")){
+        if(!texturaBotaoSairNormal.loadFromFile("Recursos/Textures/botao-sair-textura-normal.png")){
             throw std::runtime_error("Erro ao carregar textura botão sair");
         }
 
-        if(!texturaBotaoSairSelecionado.loadFromFile("Assets/Textures/botao-sair-textura-selecionada.png")){
+        if(!texturaBotaoSairSelecionado.loadFromFile("Recursos/Textures/botao-sair-textura-selecionada.png")){
             throw std::runtime_error("Erro ao carregar textura botão sair");
         }
     }catch(std::exception& e){
@@ -175,7 +175,7 @@ void MainMenuState::carregarRecursos(){
 
 void MainMenuState::tocarMusicaAmbiente(){
     try{
-        if(!musicaAmbiente.openFromFile("Assets/Audios/the-origin-menu.mp3")){
+        if(!musicaAmbiente.openFromFile("Recursos/Audios/the-origin-menu.mp3")){
             throw std::runtime_error("Falha ao carregar musica ambiente");
         }
         musicaAmbiente.play();

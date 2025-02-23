@@ -11,7 +11,7 @@ Player::Player(float posx, float posy,TipoPersonagem tipo){
     isMoving = false;
     speed = 10.f;
     if(!
-    spriteSheet.loadFromFile("Assets/Textures/player-sprite.png")){
+    spriteSheet.loadFromFile("Recursos/Textures/player-sprite.png")){
         return;
     }
 
@@ -144,7 +144,7 @@ void Player::bindSelectShape(){
     selectShape.setPosition(playerSprite.getPosition().x + playerSprite.getTextureRect().width*0.1, playerSprite.getPosition().y + playerSprite.getTextureRect().height*0.65);
 }
 
-void Player::loadAnimation(Animation& animation, int framecount, int row){
+void Player::loadAnimation(Animacao& animation, int framecount, int row){
     for(int i = 0; i < framecount; ++i){
         animation.addFrame(sf::IntRect(i * 64, row * 64, 64, 64));
     }

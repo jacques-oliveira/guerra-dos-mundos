@@ -8,7 +8,7 @@ FonteEnergia::FonteEnergia(float posx, float posy, int energiaFonte){
 }
 
 void FonteEnergia::iniciar(){
-    if(!texturaCristalNegro.loadFromFile("Assets/Textures/textura-cristal-negro.png")){
+    if(!texturaCristalNegro.loadFromFile("Recursos/Textures/textura-cristal-negro.png")){
         std::cerr<<"Falha ao carregar textura cristal negro"<<std::endl;
     }
 
@@ -21,12 +21,11 @@ void FonteEnergia::iniciar(){
     spriteCristalNegro.setPosition(posicao);
 }
 
-void FonteEnergia::carregarAnimacao(Animation& animacao, int quantidadeFrames, int linha)
+void FonteEnergia::carregarAnimacao(Animacao& animacao, int quantidadeFrames, int linha)
 {
-
-        for(int i = 0; i < quantidadeFrames; ++i){
-            animacao.addFrame(sf::IntRect(i * 256, linha * 256, 256,256));
-        }
+    for(int i = 0; i < quantidadeFrames; ++i){
+        animacao.addFrame(sf::IntRect(i * 256, linha * 256, 256,256));
+    }
 }
 
 void FonteEnergia::atualizar(){
