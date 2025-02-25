@@ -1,6 +1,6 @@
 #include "Botao.hpp"
 
-Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,std::wstring nomeBotao) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecionado(&texturaSelecionado),nomeBotao(nomeBotao)
+Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,std::wstring nomeBotao, short tamanhoFonte) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecionado(&texturaSelecionado),nomeBotao(nomeBotao)
 {
     try{
         formaBotao.setSize(sf::Vector2f(width, height));
@@ -12,7 +12,7 @@ Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const 
             std::cerr<<"Erro ao carregar fonte botão"<<std::endl;
         }
         textoBotao.setFont(fonteBotao);
-        textoBotao.setCharacterSize(34);
+        textoBotao.setCharacterSize(tamanhoFonte);
         textoBotao.setString(nomeBotao);
         textoBotao.setOrigin(textoBotao.getLocalBounds().left + textoBotao.getGlobalBounds().width/2, textoBotao.getLocalBounds().height/2);
         textoBotao.setPosition(formaBotao.getPosition().x, formaBotao.getPosition().y-textoBotao.getGlobalBounds().height/2);
