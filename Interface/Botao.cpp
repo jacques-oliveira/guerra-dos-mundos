@@ -21,10 +21,6 @@ Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const 
     }
 }
 
-Botao::~Botao(){
-
-}
-
 void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
     try{
         sf::Vector2i posicaoMouse = sf::Mouse::getPosition(window);
