@@ -39,7 +39,7 @@ void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
             for(auto* botao : botoes){
                 botao->atualizar(window, event);
                 if(botao->obterEventoBotao()){
-                    if(botao->obterNomebotao() == "JOGAR"){
+                    if(botao->obterNomebotao() == L"JOGAR"){
                         continueGame = true;
                     }else{
                         exitGame = true;
@@ -112,26 +112,11 @@ void MainMenuState::initMenu(sf::RenderWindow* _window){
 
         float posicaoBotaox = larguraTela/2;
         float posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2;
+        std::vector<std::wstring> nomesBotao = {L"JOGAR", L"SAIR",L"OPÇÕES"};
 
-        for(size_t i = 0; i < 2; ++i){
-            posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2 +  i * ( alturaBotao + espacoBotao );
-            switch(i){
-                case 0:{
-                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoNormal, texturaBotaoSelecionado, texturaBotaoSelecionado,"JOGAR");
-                    botao->setPosition(posicaoBotaox, posicaoBotaoy);
-                    botoes.push_back(botao);
-                }
-                    break;
-                case 1:{
-                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoNormal, texturaBotaoSelecionado, texturaBotaoSelecionado,"SAIR");
-                    botao->setPosition(posicaoBotaox, posicaoBotaoy);
-                    botoes.push_back(botao);
-                }
-                    break;
-                default:
-                    break;
-            }
-        }
+        botoes = Interface::criarBotoesVertical(larguraBotao, alturaBotao, posicaoBotaox, posicaoBotaoy,
+                                                  texturaBotaoNormal, texturaBotaoSelecionado, texturaBotaoSelecionado,
+                                                  nomesBotao,0.f,1.25f);
         tocarMusicaAmbiente();
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
