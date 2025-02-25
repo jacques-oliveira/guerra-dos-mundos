@@ -9,10 +9,10 @@ public:
     Interface();
     virtual ~Interface() = default;
 
-    static Botao * criarBotao(float largura, float altura, float posx, float posy, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,std::wstring nomeBotao){
+    static Botao * criarBotao(float largura, float altura, float posx, float posy, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,std::wstring nomeBotao, short tamanhoFonte = 0){
         Botao * botao;
         try{
-            botao = new Botao(largura, altura, texturaNormal, texturaSelecaoMouse, texturaSelecionado, nomeBotao);
+            botao = new Botao(largura, altura, texturaNormal, texturaSelecaoMouse, texturaSelecionado, nomeBotao,tamanhoFonte);
             botao->setPosition(posx, posy);
             return botao;
         }catch(std::exception& e){
@@ -23,7 +23,7 @@ public:
 
     static std::vector<Botao*> criarBotoesVertical(float largura, float altura, float posx, float posy, const sf::Texture&                                                                          texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,
                                                     std::vector<std::wstring> nomeBotoes,
-                                                    float espacoHorizontal = 0.f, float espacoVertical = 0.f){
+                                                    float espacoHorizontal = 0.f, float espacoVertical = 0.f, short tamanhoFonte = 0){
 
         std::vector<Botao*> vetorBotoes;
         try{
@@ -33,7 +33,7 @@ public:
                 std::wstring nomeBotao = nomeBotoes[i];
                 float posicaoY = posy + i * altura * espacoVertical;
                 Botao * botao = new Botao(largura, altura, texturaNormal, texturaSelecaoMouse, texturaSelecionado,
-                            nomeBotao);
+                            nomeBotao,tamanhoFonte);
 
                 botao->atribuirPosicao(posicaoX, posicaoY);
                 vetorBotoes.push_back(botao);
@@ -47,15 +47,15 @@ public:
 
     static std::vector<Botao*> criarBotoesHorizontal(float largura, float altura, float posx, float posy, const sf::Texture&                                                        texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,
                                                      std::vector<std::wstring> nomeBotoes,
-                                                     float espacoHorizontal = 0.f, float espacoVertical = 0.f){
+                                                     float espacoHorizontal = 0.f, float espacoVertical = 0.f, short tamanhoFonte = 0){
         std::vector<Botao*> vetorBotoes;
         try{
+            float posicaoY = posy;
             for(int i = 0; i < nomeBotoes.size(); ++i){
-                float posicaoX = posx + i * largura * espacoHorizontal;
-                float posicaoY = posy;
+                float posicaoX = posx + i * largura + espacoHorizontal;
                 std::wstring nomeBotao = nomeBotoes[i];
                 Botao * botao = new Botao(largura, altura, texturaNormal, texturaSelecaoMouse, texturaSelecionado,
-                                        nomeBotao);
+                                        nomeBotao, tamanhoFonte);
                 botao->atribuirPosicao(posicaoX, posicaoY);
                 vetorBotoes.push_back(botao);
             }
