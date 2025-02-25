@@ -1,6 +1,6 @@
 #include "Botao.hpp"
 
-Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,std::string nomeBotao) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecionado(&texturaSelecionado),nomeBotao(nomeBotao)
+Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,std::wstring nomeBotao) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecionado(&texturaSelecionado),nomeBotao(nomeBotao)
 {
     try{
         formaBotao.setSize(sf::Vector2f(width, height));
@@ -19,10 +19,6 @@ Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const 
     }catch(std::exception e){
         std::cerr<<"Erro ao carregar botão menu"<<e.what()<<std::endl;
     }
-}
-
-Botao::~Botao(){
-
 }
 
 void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
@@ -72,13 +68,13 @@ bool Botao::obterEventoBotao(){
     return cliqueEnter;
 }
 
-std::string Botao::obterNomebotao(){
+std::wstring Botao::obterNomebotao(){
     return nomeBotao;
 }
 
 void Botao::atribuirPosicao(float posx, float posy){
     formaBotao.setPosition(posx,posy);
-    textoBotao.setPosition(formaBotao.getGlobalBounds().left + formaBotao.getGlobalBounds().width/2 + textoBotao.getGlobalBounds().getSize().x*2, formaBotao.getPosition().y);
+    textoBotao.setPosition(formaBotao.getGlobalBounds().left + formaBotao.getGlobalBounds().width/2 , formaBotao.getGlobalBounds().getPosition().y + textoBotao.getGlobalBounds().height/2);
 }
 
 
