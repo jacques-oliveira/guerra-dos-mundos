@@ -64,8 +64,8 @@ void PainelControle::atribuirPosicao(float posx, float posy){
     float larguraBotao = texturaBotaoNormal.getSize().x;
     float alturaBotao = texturaBotaoNormal.getSize().y;
     float posicaoX = spriteComandante.getGlobalBounds().left + larguraBotao/2;
-    float posicaoY = spriteComandante.getGlobalBounds().top + spriteComandante.getGlobalBounds().height + alturaBotao;
-    std::vector<std::wstring> nomeBotoes = {L"Comandante",L"Equiapmento",L"Fábrica",L"Opções"};
+    float posicaoY = spriteComandante.getGlobalBounds().top + spriteComandante.getGlobalBounds().height + alturaBotao*0.75f;
+    std::vector<std::wstring> nomeBotoes = {L"Combatente",L"Equipamento",L"Fábrica",L"Opções"};
 
 
     botoes = Interface::criarBotoesHorizontal(larguraBotao, alturaBotao,
