@@ -1,6 +1,6 @@
 #include "Botao.hpp"
 
-Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecioando,std::string nomeBotao) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecioando(&texturaSelecioando),nomeBotao(nomeBotao)
+Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,std::string nomeBotao) : texturaNormal(&texturaNormal), texturaSelecaoMouse(&texturaSelecaoMouse), texturaSelecionado(&texturaSelecionado),nomeBotao(nomeBotao)
 {
     try{
         formaBotao.setSize(sf::Vector2f(width, height));
@@ -40,7 +40,7 @@ void Botao::atualizar(sf::RenderWindow& window, sf::Event& event){
         if( (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
             (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)) &&
             limites.contains(posicaoMouse.x, posicaoMouse.y)){
-            formaBotao.setTexture(texturaSelecioando);
+            formaBotao.setTexture(texturaSelecionado);
             cliqueEnter = true;
 
         }

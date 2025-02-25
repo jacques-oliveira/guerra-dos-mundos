@@ -6,7 +6,6 @@
 #include <iostream>
 
 MainMenuState::MainMenuState(sf::RenderWindow* _window): selectedOption(0), continueGame(false), exitGame(false){
-
     initMenu(_window);
 }
 
@@ -107,8 +106,8 @@ void MainMenuState::initMenu(sf::RenderWindow* _window){
 
         //spriteAmbienteMenu.setScale(fatorEscala,fatorEscala);
 
-        float larguraBotao = texturaBotaoJogarNormal.getSize().x + 0.1f;
-        float alturaBotao = texturaBotaoJogarNormal.getSize().y + 0.1f;
+        float larguraBotao = texturaBotaoNormal.getSize().x + 0.1f;
+        float alturaBotao = texturaBotaoNormal.getSize().y + 0.1f;
         float espacoBotao = 20.f;
 
         float posicaoBotaox = larguraTela/2;
@@ -118,13 +117,13 @@ void MainMenuState::initMenu(sf::RenderWindow* _window){
             posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2 +  i * ( alturaBotao + espacoBotao );
             switch(i){
                 case 0:{
-                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado,"JOGAR");
+                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoNormal, texturaBotaoSelecionado, texturaBotaoSelecionado,"JOGAR");
                     botao->setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
                     break;
                 case 1:{
-                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado,"SAIR");
+                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoNormal, texturaBotaoSelecionado, texturaBotaoSelecionado,"SAIR");
                     botao->setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
@@ -162,21 +161,14 @@ void MainMenuState::carregarRecursos(){
             throw std::runtime_error("Erro ao carregar plano de fundo");
         }
 
-        if(!texturaBotaoJogarNormal.loadFromFile("Recursos/Textures/botao-jogar-textura-normal.png")){
+        if(!texturaBotaoNormal.loadFromFile("Recursos/Textures/textura_botao_normal_menu.png")){
             throw std::runtime_error("Erro ao carregar textura botão jogar");
         }
 
-        if(!texturaBotaoJogarSelecionado.loadFromFile("Recursos/Textures/botao-jogar-textura-selecionada.png")){
+        if(!texturaBotaoSelecionado.loadFromFile("Recursos/Textures/textura_botao_selecionado_menu.png")){
             throw std::runtime_error("Erro ao carregar textura botão jogar");
         }
 
-        if(!texturaBotaoSairNormal.loadFromFile("Recursos/Textures/botao-sair-textura-normal.png")){
-            throw std::runtime_error("Erro ao carregar textura botão sair");
-        }
-
-        if(!texturaBotaoSairSelecionado.loadFromFile("Recursos/Textures/botao-sair-textura-selecionada.png")){
-            throw std::runtime_error("Erro ao carregar textura botão sair");
-        }
     }catch(std::exception& e){
         std::cerr<<"Erro ao carregar recursos menu"<<e.what()<<std::endl;
     }

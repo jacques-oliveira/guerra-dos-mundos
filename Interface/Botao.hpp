@@ -19,7 +19,7 @@ private:
     virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
     const sf::Texture * texturaNormal;
     const sf::Texture * texturaSelecaoMouse;
-    const sf::Texture * texturaSelecioando;
+    const sf::Texture * texturaSelecionado;
     bool cliqueEnter;
     std::string nomeBotao;
     sf::Text textoBotao;

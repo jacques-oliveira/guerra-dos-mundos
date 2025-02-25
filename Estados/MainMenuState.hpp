@@ -22,10 +22,9 @@ private:
 
     sf::Texture texturaPainelMenu;
     sf::Sprite spritePainelMenu;
-    sf::Texture texturaBotaoJogarNormal;
-    sf::Texture texturaBotaoJogarSelecionado;
-    sf::Texture texturaBotaoSairNormal;
-    sf::Texture texturaBotaoSairSelecionado;
+    sf::Texture texturaBotaoNormal;
+    sf::Texture texturaBotaoSelecionado;
+
     std::vector<sf::Text> options;
     int selectedOption;
     bool continueGame;
