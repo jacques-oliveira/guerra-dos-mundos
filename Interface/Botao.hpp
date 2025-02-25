@@ -13,13 +13,16 @@ public:
     sf::RectangleShape formaBotao;
     bool obterEventoBotao();
     std::string obterNomebotao();
+    void atribuirPosicao(float posx, float posy);
 
 private:
     virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
     const sf::Texture * texturaNormal;
     const sf::Texture * texturaSelecaoMouse;
-    const sf::Texture * texturaSelecioando;
+    const sf::Texture * texturaSelecionado;
     bool cliqueEnter;
     std::string nomeBotao;
+    sf::Text textoBotao;
+    sf::Font fonteBotao;
 };
 #endif
