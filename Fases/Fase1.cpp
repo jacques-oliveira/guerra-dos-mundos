@@ -111,7 +111,7 @@ void Fase1::render(sf::RenderWindow& window) {
             fe->renderizar(window);
         }
 
-        enemy->render(window);
+        //enemy->render(window);
         window.draw(selectionBox);
         window.setView(uiView);
 
