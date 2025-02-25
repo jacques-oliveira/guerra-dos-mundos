@@ -14,8 +14,15 @@ void PainelControle::inicializarPainel(){
         }
         if(!texturaComandante.loadFromFile("Recursos/Textures/textura_comandante.png")){
             std::cerr<<"Erro ao carregar textura comandante no painel"<<std::endl;
-        }if(!texturaNeonPainel.loadFromFile("Recursos/Textures/fundo_neon_painel.png")){
+        }
+        if(!texturaNeonPainel.loadFromFile("Recursos/Textures/fundo_neon_painel.png")){
             std::cerr<<"Erro ao carregar textura neon painel"<<std::endl;
+        }
+        if(!texturaBotaoNormal.loadFromFile("Recursos/Textures/tetura_botao_painel_normal.png")){
+            std::cerr<<"Erro ao carregar textura botao painel"<<std::endl;
+        }
+        if(!texturaBotaoSelecionado.loadFromFile("Recursos/Textures/tetura_botao_painel_selecionado.png")){
+            std::cerr<<"Erro ao carregar textura botao painel"<<std::endl;
         }
         spriteFundoPainel.setTexture(texturaFundoPainel);
         spriteComandante.setTexture(texturaComandante);
@@ -31,6 +38,10 @@ void PainelControle::draw(sf::RenderTarget& target, sf::RenderStates states) con
     target.draw(spriteNeonPainel,states);
     target.draw(textTituloNeon,states);
     target.draw(textValorNeon,states);
+
+    for(Botao* botao : botoes){
+        target.draw(*botao,states);
+    }
 }
 
 void PainelControle::atribuirPosicao(float posx, float posy){
@@ -49,6 +60,18 @@ void PainelControle::atribuirPosicao(float posx, float posy){
     //textValorNeon.setOrigin(textValorNeon.getLocalBounds().left, textValorNeon.getLocalBounds().height/2);
     textValorNeon.setPosition(textTituloNeon.getGlobalBounds().left + textTituloNeon.getGlobalBounds().width + 6.f,
                               spriteNeonPainel.getPosition().y);
+
+    float larguraBotao = texturaBotaoNormal.getSize().x;
+    float alturaBotao = texturaBotaoNormal.getSize().y;
+    float posicaoX = spriteComandante.getGlobalBounds().left + larguraBotao/2;
+    float posicaoY = spriteComandante.getGlobalBounds().top + spriteComandante.getGlobalBounds().height + alturaBotao;
+    std::vector<std::wstring> nomeBotoes = {L"Comandante",L"Equiapmento",L"Fábrica",L"Opções"};
+
+
+    botoes = Interface::criarBotoesHorizontal(larguraBotao, alturaBotao,
+                                              posicaoX, posicaoY,
+                                              texturaBotaoNormal, texturaBotaoSelecionado,texturaBotaoSelecionado,
+                                              nomeBotoes, 0.f,0.f,16);
 }
 
 void PainelControle::renderizar(sf::RenderWindow& window){

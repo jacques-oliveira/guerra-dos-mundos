@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "../Botao.hpp"
+#include "../Interface.hpp"
 
 class PainelControle : sf::Drawable{
 
@@ -27,6 +28,8 @@ private:
     sf::Text textTituloNeon;
     void inicializarPainel();
     void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-    std::vector<Botao> botoes;
+    std::vector<Botao*> botoes;
+    sf::Texture texturaBotaoNormal;
+    sf::Texture texturaBotaoSelecionado;
 };
 #endif

@@ -116,7 +116,7 @@ void MainMenuState::initMenu(sf::RenderWindow* _window){
 
         botoes = Interface::criarBotoesVertical(larguraBotao, alturaBotao, posicaoBotaox, posicaoBotaoy,
                                                   texturaBotaoNormal, texturaBotaoSelecionado, texturaBotaoSelecionado,
-                                                  nomesBotao,0.f,1.25f);
+                                                  nomesBotao,0.f,1.25f,34);
         tocarMusicaAmbiente();
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
