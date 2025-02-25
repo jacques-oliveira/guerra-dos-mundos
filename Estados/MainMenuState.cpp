@@ -37,10 +37,10 @@ void MainMenuState::processEvents(sf::RenderWindow& window, bool * isRunning){
                     }
                 }
             }*/
-            for(auto& botao : botoes){
-                botao.atualizar(window, event);
-                if(botao.obterEventoBotao()){
-                    if(botao.obterNomebotao() == "JOGAR"){
+            for(auto* botao : botoes){
+                botao->atualizar(window, event);
+                if(botao->obterEventoBotao()){
+                    if(botao->obterNomebotao() == "JOGAR"){
                         continueGame = true;
                     }else{
                         exitGame = true;
@@ -64,8 +64,8 @@ void MainMenuState::render(sf::RenderWindow& window){
         window.draw(spritePainelMenu);
 
 
-        for(Botao& botao : botoes){
-            botao.renderizar(window);
+        for(Botao* botao : botoes){
+            botao->renderizar(window);
         }
         window.display();
 
@@ -118,14 +118,14 @@ void MainMenuState::initMenu(sf::RenderWindow* _window){
             posicaoBotaoy = spritePainelMenu.getPosition().y/2 + (alturaTela -alturaBotao)/2 +  i * ( alturaBotao + espacoBotao );
             switch(i){
                 case 0:{
-                    Botao botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado,"JOGAR");
-                    botao.setPosition(posicaoBotaox, posicaoBotaoy);
+                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoJogarNormal, texturaBotaoJogarSelecionado, texturaBotaoJogarSelecionado,"JOGAR");
+                    botao->setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
                     break;
                 case 1:{
-                    Botao botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado,"SAIR");
-                    botao.setPosition(posicaoBotaox, posicaoBotaoy);
+                    Botao * botao = new Botao(larguraBotao, alturaBotao, texturaBotaoSairNormal, texturaBotaoSairSelecionado, texturaBotaoSairSelecionado,"SAIR");
+                    botao->setPosition(posicaoBotaox, posicaoBotaoy);
                     botoes.push_back(botao);
                 }
                     break;
@@ -136,6 +136,15 @@ void MainMenuState::initMenu(sf::RenderWindow* _window){
         tocarMusicaAmbiente();
     }catch(std::exception& e){
         std::cerr<<"Erro ao iniciar menu"<<e.what()<<std::endl;
+    }
+}
+
+MainMenuState::~MainMenuState(){
+    if(botoes.size() > 0){
+        for(auto * botao : botoes){
+            delete botao;
+            botao = nullptr;
+        }
     }
 }
 

@@ -5,8 +5,17 @@ Botao::Botao(float width, float height, const sf::Texture& texturaNormal, const 
     try{
         formaBotao.setSize(sf::Vector2f(width, height));
         formaBotao.setTexture(&texturaNormal);
-        formaBotao.setOrigin(formaBotao.getSize().x/2, formaBotao.getSize().y/2);
+        formaBotao.setOrigin(formaBotao.getLocalBounds().left + formaBotao.getGlobalBounds().width/2, formaBotao.getLocalBounds().height/2);
+
         cliqueEnter = false;
+        if(!fonteBotao.loadFromFile("Recursos/Fonts/TrulyMadlyDpad-a72o.ttf")){
+            std::cerr<<"Erro ao carregar fonte botão"<<std::endl;
+        }
+        textoBotao.setFont(fonteBotao);
+        textoBotao.setCharacterSize(34);
+        textoBotao.setString(nomeBotao);
+        textoBotao.setOrigin(textoBotao.getLocalBounds().left + textoBotao.getGlobalBounds().width/2, textoBotao.getLocalBounds().height/2);
+        textoBotao.setPosition(formaBotao.getPosition().x, formaBotao.getPosition().y-textoBotao.getGlobalBounds().height/2);
     }catch(std::exception e){
         std::cerr<<"Erro ao carregar botão menu"<<e.what()<<std::endl;
     }
@@ -44,6 +53,7 @@ void Botao::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     try{
         states.transform *= getTransform();
         target.draw(formaBotao,states);
+        target.draw(textoBotao,states);
     }catch(std::exception& e){
         std::cerr<<"Erro ao desenhar botão menu"<<e.what()<<std::endl;
     }
@@ -66,5 +76,9 @@ std::string Botao::obterNomebotao(){
     return nomeBotao;
 }
 
+void Botao::atribuirPosicao(float posx, float posy){
+    formaBotao.setPosition(posx,posy);
+    textoBotao.setPosition(formaBotao.getGlobalBounds().left + formaBotao.getGlobalBounds().width/2 + textoBotao.getGlobalBounds().getSize().x*2, formaBotao.getPosition().y);
+}
 
 
