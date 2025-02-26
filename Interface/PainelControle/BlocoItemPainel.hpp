@@ -11,6 +11,7 @@ public:
 
     unsigned short obterValorItem();
     unsigned short obterQuantidadeItem();
+    void atribuirPosicao(float posx, float posy);
 private:
     void inicializar();
     void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
@@ -24,5 +25,6 @@ private:
     sf::Text textValorItem;
     sf::Text textQuantidadeItem;
     void carregarRecursos();
+    void atribuirFonte(sf::Font& fonte);
 };
 #endif
