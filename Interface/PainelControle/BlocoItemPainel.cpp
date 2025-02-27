@@ -38,6 +38,7 @@ void BlocoItemPainel::carregarRecursos(){
             std::cerr<<"Falha ao carregar textura no Bloco no painel"<<std::endl;
         }
         spriteBloco.setTexture(texturaBloco);
+        spriteBloco.setOrigin(spriteBloco.getLocalBounds().left, spriteBloco.getLocalBounds().height/2);
     }catch(std::exception& e){
         std::cerr<<"Falha ao carregar recursos no bloco"<<e.what()<<std::endl;
     }
@@ -65,4 +66,3 @@ void BlocoItemPainel::atribuirPosicao(float posx, float posy){
         std::cerr<<"Erro ao atribuir posição ao bloco"<<e.what()<<std::endl;
     }
 }
-

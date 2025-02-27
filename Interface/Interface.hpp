@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Botao.hpp"
+#include "../Interface/PainelControle/BlocoItemPainel.hpp"
 
 class Interface{
 public:
@@ -52,7 +53,7 @@ public:
         try{
             float posicaoY = posy;
             for(int i = 0; i < nomeBotoes.size(); ++i){
-                float posicaoX = posx + i * largura + espacoHorizontal;
+                float posicaoX = posx + i * (largura + espacoHorizontal);
                 std::wstring nomeBotao = nomeBotoes[i];
                 Botao * botao = new Botao(largura, altura, texturaNormal, texturaSelecaoMouse, texturaSelecionado,
                                         nomeBotao, tamanhoFonte);
@@ -64,6 +65,20 @@ public:
             std::cerr<<"Falha ao criar botões na horizontal"<<e.what()<<std::endl;
             return vetorBotoes;
         }
+    }
+
+    static std::vector<BlocoItemPainel*> criarBlocosPainel(float posx, float posy, const sf::Texture& texturaBloco, unsigned short numeroBotoes, float espacoHorizontal){
+        std::vector<BlocoItemPainel*> vetorBlocos;
+        float distVertical = 8.f;
+        float largura = texturaBloco.getSize().x;
+        float posicaoY = posy + texturaBloco.getSize().y/2 + distVertical;
+        for(unsigned short i = 0; i < numeroBotoes; ++i){
+            float posicaoX = posx + i * (largura + espacoHorizontal);
+            BlocoItemPainel * bloco = new BlocoItemPainel();
+            bloco->atribuirPosicao(posicaoX,posicaoY);
+            vetorBlocos.push_back(bloco);
+        }
+        return vetorBlocos;
     }
 };
 #endif
