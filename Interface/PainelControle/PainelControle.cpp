@@ -24,6 +24,9 @@ void PainelControle::inicializarPainel(){
         if(!texturaBotaoSelecionado.loadFromFile("Recursos/Textures/tetura_botao_painel_selecionado.png")){
             std::cerr<<"Erro ao carregar textura botao painel"<<std::endl;
         }
+        if(!texturaBlocoItem.loadFromFile("Recursos/Textures/bloco_item.png")){
+            std::cerr<<"Erro ao carregar textura do bloco painel"<<std::endl;
+        }
         spriteFundoPainel.setTexture(texturaFundoPainel);
         spriteComandante.setTexture(texturaComandante);
         spriteNeonPainel.setTexture(texturaNeonPainel);
@@ -41,6 +44,10 @@ void PainelControle::draw(sf::RenderTarget& target, sf::RenderStates states) con
 
     for(Botao* botao : botoes){
         target.draw(*botao,states);
+    }
+
+    for(BlocoItemPainel * bloco : blocosItemPainel){
+        target.draw(*bloco,states);
     }
 }
 
@@ -72,6 +79,12 @@ void PainelControle::atribuirPosicao(float posx, float posy){
                                               posicaoX, posicaoY,
                                               texturaBotaoNormal, texturaBotaoSelecionado,texturaBotaoSelecionado,
                                               nomeBotoes, 0.f,0.f,16);
+
+    float posicaoBlocoX = botoes[0]->formaBotao.getGlobalBounds().left;
+    float posicaoBlocoY = botoes[0]->formaBotao.getGlobalBounds().top + botoes[0]->formaBotao.getGlobalBounds().height;
+
+    blocosItemPainel = Interface::criarBlocosPainel(posicaoBlocoX, posicaoBlocoY,
+                                                    texturaBlocoItem, 8 , 13.f);
 }
 
 void PainelControle::renderizar(sf::RenderWindow& window){

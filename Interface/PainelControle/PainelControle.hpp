@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Botao.hpp"
 #include "../Interface.hpp"
+#include "BlocoItemPainel.hpp"
 
 class PainelControle : sf::Drawable{
 
@@ -31,5 +32,7 @@ private:
     std::vector<Botao*> botoes;
     sf::Texture texturaBotaoNormal;
     sf::Texture texturaBotaoSelecionado;
+    std::vector<BlocoItemPainel*> blocosItemPainel;
+    sf::Texture texturaBlocoItem;
 };
 #endif
