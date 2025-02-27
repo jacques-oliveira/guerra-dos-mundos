@@ -16,6 +16,7 @@ void RelogioPlaneta::inicializar(){
         std::cerr<<"Falha ao carregar fonte tempo"<<std::endl;
     }
     spriteTempo.setTexture(texturaDia);
+    spriteTempo.setOrigin(spriteTempo.getLocalBounds().left, spriteTempo.getLocalBounds().height/2);
     atribuirFonte(fonte);
 }
 
@@ -35,13 +36,24 @@ void RelogioPlaneta::renderizar(sf::RenderWindow& window){
 void RelogioPlaneta::atribuirFonte(sf::Font& _fonte){
     try{
         textNumeroDia.setFont(_fonte);
-        textNumeroDia.setOrigin(textNumeroDia.getLocalBounds().left, textNumeroDia.getLocalBounds().height/2);
-        textNumeroDia.setCharacterSize(16);
-        textNumeroDia.setFillColor(sf::Color::Yellow);
+        textNumeroDia.setCharacterSize(24);
+        textNumeroDia.setFillColor(sf::Color::White);
         textNumeroDia.setString("01");
+        textNumeroDia.setOrigin(textNumeroDia.getLocalBounds().left, textNumeroDia.getLocalBounds().height/2);
     }catch(std::exception& e){
         std::cerr<<"Falha ao atribuir fonte texto dia relogio planeta"<<e.what()<<std::endl;
     }
 }
 
+void RelogioPlaneta::atribuirPosicao(float posx, float posy){
+    float espaco = 16.f;
+    spriteTempo.setPosition(posx, posy);
+    textNumeroDia.setPosition(spriteTempo.getPosition().x + spriteTempo.getGlobalBounds().width + espaco, posy - textNumeroDia.getGlobalBounds().height/2);
+}
+
+sf::Vector2f RelogioPlaneta::dimensaoSpriteTempo(){
+    float largura = spriteTempo.getGlobalBounds().width;
+    float altura = spriteTempo.getGlobalBounds().height;
+    return sf::Vector2f(largura,altura);
+}
 

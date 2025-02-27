@@ -6,6 +6,7 @@
 #include "../Botao.hpp"
 #include "../Interface.hpp"
 #include "BlocoItemPainel.hpp"
+#include "../RelogioPlaneta/RelogioPlaneta.hpp"
 
 class PainelControle : sf::Drawable{
 
@@ -34,5 +35,6 @@ private:
     sf::Texture texturaBotaoSelecionado;
     std::vector<BlocoItemPainel*> blocosItemPainel;
     sf::Texture texturaBlocoItem;
+    RelogioPlaneta relogioPlaneta;
 };
 #endif

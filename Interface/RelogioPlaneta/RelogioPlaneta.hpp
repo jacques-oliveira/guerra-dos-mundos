@@ -12,7 +12,8 @@ public:
 
     void inicializar();
     void renderizar(sf::RenderWindow& window);
-
+    void atribuirPosicao(float posx, float posy);
+    sf::Vector2f dimensaoSpriteTempo();
 private:
     sf::Texture texturaDia;
     sf::Texture texturaNoite;
