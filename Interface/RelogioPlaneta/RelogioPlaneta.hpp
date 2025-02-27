@@ -14,12 +14,13 @@ public:
     void renderizar(sf::RenderWindow& window);
 
 private:
-    sf::Texture texturaTempo;
+    sf::Texture texturaDia;
+    sf::Texture texturaNoite;
     sf::Sprite spriteTempo;
     sf::Text textNumeroDia;
     unsigned short numeroDia;
     sf::Font fonte;
     void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
-
+    void atribuirFonte(sf::Font& fonte);
 };
 #endif
