@@ -4,7 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-class BlocoItemPainel : sf::Drawable{
+class BlocoItemPainel : public sf::Drawable{
 public:
     BlocoItemPainel();
     virtual ~BlocoItemPainel() = default;
