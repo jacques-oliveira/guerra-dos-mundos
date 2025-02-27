@@ -88,7 +88,11 @@ void PainelControle::atribuirPosicao(float posx, float posy){
 }
 
 void PainelControle::renderizar(sf::RenderWindow& window){
-    draw(window, sf::RenderStates::Default);
+    try{
+        draw(window, sf::RenderStates::Default);
+    }catch(std::exception& e){
+        std::cerr<<"Falha ao renderizar painel de controle"<<e.what()<<std::endl;
+    }
 }
 
 sf::Vector2f PainelControle::obterPosicaoPainel(){
@@ -107,6 +111,7 @@ void PainelControle::atribuirFonte(sf::Font& fonte){
         textTituloNeon.setCharacterSize(24);
         textValorNeon.setString(std::to_string(valorNeon));
         textTituloNeon.setString("neon:");
+
     }catch(std::exception& e){
         std::cerr<<"Falha ao atriubuir Fonte a Painel de controle"<<e.what()<<std::endl;
     }
