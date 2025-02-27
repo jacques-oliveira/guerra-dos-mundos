@@ -41,6 +41,7 @@ void PainelControle::draw(sf::RenderTarget& target, sf::RenderStates states) con
     target.draw(spriteNeonPainel,states);
     target.draw(textTituloNeon,states);
     target.draw(textValorNeon,states);
+    target.draw(relogioPlaneta,states);
 
     for(Botao* botao : botoes){
         target.draw(*botao,states);
@@ -85,6 +86,14 @@ void PainelControle::atribuirPosicao(float posx, float posy){
 
     blocosItemPainel = Interface::criarBlocosPainel(posicaoBlocoX, posicaoBlocoY,
                                                     texturaBlocoItem, 8 , 13.f);
+
+    float posicaoXRelogioPlaneta = botoes[botoes.size() -1]->formaBotao.getPosition().x +
+                                    botoes[botoes.size() -1]->formaBotao.getGlobalBounds().width/2;
+
+    sf::Vector2f dimensaoSpriteTempo = relogioPlaneta.dimensaoSpriteTempo();
+
+    relogioPlaneta.atribuirPosicao(posicaoXRelogioPlaneta + dimensaoSpriteTempo.x/2,
+                                   spriteComandante.getPosition().y + dimensaoSpriteTempo.y/2 +10.f);
 }
 
 void PainelControle::renderizar(sf::RenderWindow& window){
