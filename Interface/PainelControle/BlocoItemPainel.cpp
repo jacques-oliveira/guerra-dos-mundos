@@ -63,7 +63,7 @@ void BlocoItemPainel::atribuirFonte(sf::Font& fonte){
 
         textValorItem.setString(std::to_string(valorItem));
         textQuantidadeItem.setString(std::to_string(quantidadeItem));
-        textValorItem.setOrigin(textValorItem.getLocalBounds().left, textValorItem.getLocalBounds().height/2);
+        textValorItem.setOrigin(textValorItem.getLocalBounds().left + textValorItem.getLocalBounds().width/2, textValorItem.getLocalBounds().height/2);
         textQuantidadeItem.setOrigin(textQuantidadeItem.getLocalBounds().left, textQuantidadeItem.getLocalBounds().height/2);
     }catch(std::exception& e){
         std::cerr<<"Erro ao atribuir fonte ao bloco"<<e.what()<<std::endl;
@@ -78,7 +78,7 @@ void BlocoItemPainel::atribuirPosicao(float posx, float posy){
         float posyQuantidadeItem = spriteBloco.getGlobalBounds().top + spriteBloco.getGlobalBounds().height - textQuantidadeItem.getGlobalBounds().height - 5.f;
         textQuantidadeItem.setPosition(posxQuantidadeItem, posyQuantidadeItem);
 
-        float posxValorItem = spriteBloco.getGlobalBounds().left + spriteBloco.getGlobalBounds().width/2 -10.f;
+        float posxValorItem = spriteBloco.getGlobalBounds().left + spriteBloco.getGlobalBounds().width/2;
         float posyValorItem = spriteBloco.getGlobalBounds().top + spriteBloco.getGlobalBounds().height + 2.f;
         textValorItem.setPosition(posxValorItem, posyValorItem);
     }catch(std::exception& e){

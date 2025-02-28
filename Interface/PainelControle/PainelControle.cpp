@@ -27,9 +27,16 @@ void PainelControle::inicializarPainel(){
         if(!texturaBlocoItem.loadFromFile("Recursos/Textures/bloco_item.png")){
             std::cerr<<"Erro ao carregar textura do bloco painel"<<std::endl;
         }
+        if(!texturaBotaoOperacaoNormal.loadFromFile("Recursos/Textures/textura_botao_operacao_normal.png")){
+            std::cerr<<"Erro ao carregar textura do botão operação do painel"<<std::endl;
+        }
+        if(!texturaBotaoOperacaoSelecionado.loadFromFile("Recursos/Textures/textura_botao_operacao_selecionado.png")){
+            std::cerr<<"Erro ao carregar textura do botão operação do painel"<<std::endl;
+        }
         spriteFundoPainel.setTexture(texturaFundoPainel);
         spriteComandante.setTexture(texturaComandante);
         spriteNeonPainel.setTexture(texturaNeonPainel);
+        spriteNeonPainel.setOrigin(spriteNeonPainel.getLocalBounds().left, spriteNeonPainel.getLocalBounds().height/2);
     }catch(std::exception& e){
         std::cerr<<"Erro ao carregar textura do painel"<<e.what()<<std::endl;
     }
@@ -50,24 +57,27 @@ void PainelControle::draw(sf::RenderTarget& target, sf::RenderStates states) con
     for(BlocoItemPainel * bloco : blocosItemPainel){
         target.draw(*bloco,states);
     }
+
+    for(Botao * botao : botoesOperacao){
+        target.draw(*botao,states);
+    }
 }
 
 void PainelControle::atribuirPosicao(float posx, float posy){
-    float borda = 2.f;
+    float borda = 24.f;
     spriteFundoPainel.setOrigin(spriteFundoPainel.getLocalBounds().left, spriteFundoPainel.getLocalBounds().height/2);
-    spriteFundoPainel.setPosition(posx, posy - spriteFundoPainel.getGlobalBounds().height/2 -borda);
+    spriteFundoPainel.setPosition(posx + borda, posy - spriteFundoPainel.getGlobalBounds().height/2 - borda);
     spriteComandante.setOrigin(spriteComandante.getLocalBounds().left, spriteComandante.getLocalBounds().height/2);
     spriteComandante.setPosition(spriteFundoPainel.getPosition().x + 60.f, spriteFundoPainel.getGlobalBounds().top + spriteComandante.getLocalBounds().height/2 + 36.f);
     spriteNeonPainel.setPosition(spriteComandante.getGlobalBounds().left - 16.f,
-                                 spriteFundoPainel.getPosition().y + spriteFundoPainel.getGlobalBounds().height/2 - 45.f);
+                                 spriteFundoPainel.getGlobalBounds().top + spriteFundoPainel.getGlobalBounds().height - spriteNeonPainel.getGlobalBounds().height- 5.f);
 
     textTituloNeon.setOrigin(textTituloNeon.getLocalBounds().left, textTituloNeon.getLocalBounds().height/2);
     textTituloNeon.setPosition(spriteNeonPainel.getGlobalBounds().left + 6,
                                spriteNeonPainel.getGlobalBounds().top + textTituloNeon.getGlobalBounds().height/3 );
 
-    //textValorNeon.setOrigin(textValorNeon.getLocalBounds().left, textValorNeon.getLocalBounds().height/2);
     textValorNeon.setPosition(textTituloNeon.getGlobalBounds().left + textTituloNeon.getGlobalBounds().width + 6.f,
-                              spriteNeonPainel.getPosition().y);
+                              textTituloNeon.getPosition().y + textTituloNeon.getGlobalBounds().height/3);
 }
 
 void PainelControle::criandoItemsPainel(){
@@ -79,8 +89,7 @@ void PainelControle::criandoItemsPainel(){
         std::vector<std::wstring> nomeBotoes = {L"Combatente",L"Equipamento",L"Fábrica",L"Opções"};
 
 
-        botoes = Interface::criarBotoesHorizontal(larguraBotao, alturaBotao,
-                                                posicaoX, posicaoY,
+        botoes = Interface::criarBotoesHorizontal(posicaoX, posicaoY,
                                                 texturaBotaoNormal, texturaBotaoSelecionado,texturaBotaoSelecionado,
                                                 nomeBotoes, 0.f,0.f,16);
 
@@ -97,6 +106,15 @@ void PainelControle::criandoItemsPainel(){
 
         relogioPlaneta.atribuirPosicao(posicaoXRelogioPlaneta + dimensaoSpriteTempo.x/2,
                                     spriteComandante.getPosition().y + dimensaoSpriteTempo.y/2 +10.f);
+
+        float posicaoXBotaoAplicar = spriteFundoPainel.getGlobalBounds().width/2;
+        float posicaoYBotaoAplicar = spriteNeonPainel.getPosition().y + spriteNeonPainel.getLocalBounds().height*0.3f;
+
+        std::vector<std::wstring> nomeBotoesOperacao = {L"Aplicar",L"Cancelar"};
+
+        botoesOperacao = Interface::criarBotoesHorizontal(posicaoXBotaoAplicar, posicaoYBotaoAplicar,
+                                            texturaBotaoOperacaoNormal, texturaBotaoOperacaoSelecionado, texturaBotaoOperacaoSelecionado,
+                                            nomeBotoesOperacao, 20.f, 0.f,20);
     }catch(std::exception& e){
         std::cerr<<"Falha ao criar items do painel de controle"<<e.what()<<std::endl;
     }
@@ -125,6 +143,7 @@ void PainelControle::atribuirFonte(sf::Font& fonte){
         textValorNeon.setCharacterSize(24);
         textTituloNeon.setCharacterSize(24);
         textValorNeon.setString(std::to_string(valorNeon));
+        textValorNeon.setOrigin(textValorNeon.getLocalBounds().left, textValorNeon.getLocalBounds().height/2);
         textTituloNeon.setString("neon:");
 
     }catch(std::exception& e){

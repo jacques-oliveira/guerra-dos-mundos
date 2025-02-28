@@ -48,12 +48,17 @@ public:
         }
     }
 
-    static std::vector<Botao*> criarBotoesHorizontal(float largura, float altura, float posx, float posy, const sf::Texture&                                                        texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,
-                                                     std::vector<std::wstring> nomeBotoes,
-                                                     float espacoHorizontal = 0.f, float espacoVertical = 0.f, short tamanhoFonte = 0){
+    static std::vector<Botao*> criarBotoesHorizontal(float posx, float posy,
+                    const sf::Texture& texturaNormal, const sf::Texture& texturaSelecaoMouse, const sf::Texture& texturaSelecionado,
+                    std::vector<std::wstring> nomeBotoes,
+                    float espacoHorizontal = 0.f, float espacoVertical = 0.f, short tamanhoFonte = 0){
         std::vector<Botao*> vetorBotoes;
+
         try{
             float posicaoY = posy;
+            float largura = texturaNormal.getSize().x;
+            float altura = texturaNormal.getSize().y;
+
             for(int i = 0; i < nomeBotoes.size(); ++i){
                 float posicaoX = posx + i * (largura + espacoHorizontal);
                 std::wstring nomeBotao = nomeBotoes[i];
