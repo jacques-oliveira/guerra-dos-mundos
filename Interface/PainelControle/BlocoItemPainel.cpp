@@ -1,11 +1,11 @@
 #include "BlocoItemPainel.hpp"
 
-BlocoItemPainel::BlocoItemPainel(){
+BlocoItemPainel::BlocoItemPainel(unsigned short valorItem){
+    this->valorItem = valorItem;
     inicializar();
 }
 
 void BlocoItemPainel::inicializar(){
-    valorItem = 0;
     quantidadeItem = 0;
     carregarRecursos();
 }
@@ -61,7 +61,7 @@ void BlocoItemPainel::atribuirFonte(sf::Font& fonte){
         textQuantidadeItem.setFillColor(sf::Color::Yellow);
         textValorItem.setFillColor(sf::Color::Green);
 
-        textValorItem.setString("900");
+        textValorItem.setString(std::to_string(valorItem));
         textQuantidadeItem.setString(std::to_string(quantidadeItem));
         textValorItem.setOrigin(textValorItem.getLocalBounds().left, textValorItem.getLocalBounds().height/2);
         textQuantidadeItem.setOrigin(textQuantidadeItem.getLocalBounds().left, textQuantidadeItem.getLocalBounds().height/2);
