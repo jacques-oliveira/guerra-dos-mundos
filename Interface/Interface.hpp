@@ -5,6 +5,7 @@
 #include "Botao.hpp"
 #include "../Interface/PainelControle/BlocoItemPainel.hpp"
 #include "../Personagem/TipoPersonagem.hpp"
+#include "../Motor/GerenciadorJogo.hpp"
 
 class Interface{
 public:
@@ -75,7 +76,12 @@ public:
         float posicaoY = posy + texturaBloco.getSize().y/2 + distVertical;
         for(unsigned short i = 0; i < numeroBotoes; ++i){
             float posicaoX = posx + i * (largura + espacoHorizontal);
-            BlocoItemPainel * bloco = new BlocoItemPainel();
+            TipoPersonagem tipo = static_cast<TipoPersonagem>(i);
+            GerenciadorJogo& gerenciador = GerenciadorJogo::obterInstancia();
+            unsigned short valorItem = gerenciador.obterValorPersonagem(tipo);
+
+            BlocoItemPainel * bloco = new BlocoItemPainel(valorItem);
+
             bloco->atribuirPosicao(posicaoX,posicaoY);
             vetorBlocos.push_back(bloco);
         }
