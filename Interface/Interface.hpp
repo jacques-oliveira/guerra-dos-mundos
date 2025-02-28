@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Botao.hpp"
 #include "../Interface/PainelControle/BlocoItemPainel.hpp"
+#include "../Personagem/TipoPersonagem.hpp"
 
 class Interface{
 public:

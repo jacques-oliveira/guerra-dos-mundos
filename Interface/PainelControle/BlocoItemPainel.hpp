@@ -23,6 +23,7 @@ private:
     sf::Sprite spriteItem;
     unsigned short valorItem;
     unsigned short quantidadeItem;
+    std::string nomeItem;
     sf::Text textValorItem;
     sf::Text textQuantidadeItem;
     void carregarRecursos();
