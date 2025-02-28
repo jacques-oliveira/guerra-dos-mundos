@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(guerra-dos-mundos)
 
-add_executable(guerra-dos-mundos main.cpp Motor/Game.cpp Personagem/Player.cpp GeradorMapa/TileGenerator.cpp GeradorMapa/TileBlock.cpp Enemy.cpp Estados/MainMenuState.cpp Fases/Fase1.cpp Estados/GameState.cpp Estados/GameOverState.cpp Fases/Fase.cpp Animacao/Animacao.cpp Personagem/HealthBar.cpp Colisao/Collider.cpp Personagem/Soldado.cpp Fabrica/FabricaJogador.cpp Personagem/Coletor.cpp Personagem/Aereo.cpp Interface/Botao.cpp GeradorMapa/FonteEnergia.cpp Interface/BarraMensagem/BarraMensagem.cpp Interface/PainelControle/PainelControle.cpp Interface/Interface.cpp Interface/PainelControle/BlocoItemPainel.cpp Interface/RelogioPlaneta/RelogioPlaneta.cpp)
+add_executable(guerra-dos-mundos main.cpp Motor/Game.cpp Personagem/Player.cpp GeradorMapa/TileGenerator.cpp GeradorMapa/TileBlock.cpp Enemy.cpp Estados/MainMenuState.cpp Fases/Fase1.cpp Estados/GameState.cpp Estados/GameOverState.cpp Fases/Fase.cpp Animacao/Animacao.cpp Personagem/HealthBar.cpp Colisao/Collider.cpp Personagem/Soldado.cpp Fabrica/FabricaJogador.cpp Personagem/Coletor.cpp Personagem/Aereo.cpp Interface/Botao.cpp GeradorMapa/FonteEnergia.cpp Interface/BarraMensagem/BarraMensagem.cpp Interface/PainelControle/PainelControle.cpp Interface/Interface.cpp Interface/PainelControle/BlocoItemPainel.cpp Interface/RelogioPlaneta/RelogioPlaneta.cpp Motor/GerenciadorJogo.cpp)
 
 install(TARGETS guerra-dos-mundos RUNTIME DESTINATION bin)
  add_custom_command(
