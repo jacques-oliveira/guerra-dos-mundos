@@ -17,6 +17,7 @@ public:
     void atribuirPosicao(float posx, float posy);
     sf::Vector2f obterPosicaoPainel();
     void atribuirFonte(sf::Font& fonte);
+    void criandoItemsPainel();
 private:
     int valorNeon;
     short numeroDia;
@@ -36,5 +37,6 @@ private:
     std::vector<BlocoItemPainel*> blocosItemPainel;
     sf::Texture texturaBlocoItem;
     RelogioPlaneta relogioPlaneta;
+
 };
 #endif

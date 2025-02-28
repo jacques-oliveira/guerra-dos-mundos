@@ -68,32 +68,38 @@ void PainelControle::atribuirPosicao(float posx, float posy){
     //textValorNeon.setOrigin(textValorNeon.getLocalBounds().left, textValorNeon.getLocalBounds().height/2);
     textValorNeon.setPosition(textTituloNeon.getGlobalBounds().left + textTituloNeon.getGlobalBounds().width + 6.f,
                               spriteNeonPainel.getPosition().y);
+}
 
-    float larguraBotao = texturaBotaoNormal.getSize().x;
-    float alturaBotao = texturaBotaoNormal.getSize().y;
-    float posicaoX = spriteComandante.getGlobalBounds().left + larguraBotao/2;
-    float posicaoY = spriteComandante.getGlobalBounds().top + spriteComandante.getGlobalBounds().height + alturaBotao*0.75f;
-    std::vector<std::wstring> nomeBotoes = {L"Combatente",L"Equipamento",L"Fábrica",L"Opções"};
+void PainelControle::criandoItemsPainel(){
+    try{
+        float larguraBotao = texturaBotaoNormal.getSize().x;
+        float alturaBotao = texturaBotaoNormal.getSize().y;
+        float posicaoX = spriteComandante.getGlobalBounds().left + larguraBotao/2;
+        float posicaoY = spriteComandante.getGlobalBounds().top + spriteComandante.getGlobalBounds().height + alturaBotao*0.75f;
+        std::vector<std::wstring> nomeBotoes = {L"Combatente",L"Equipamento",L"Fábrica",L"Opções"};
 
 
-    botoes = Interface::criarBotoesHorizontal(larguraBotao, alturaBotao,
-                                              posicaoX, posicaoY,
-                                              texturaBotaoNormal, texturaBotaoSelecionado,texturaBotaoSelecionado,
-                                              nomeBotoes, 0.f,0.f,16);
+        botoes = Interface::criarBotoesHorizontal(larguraBotao, alturaBotao,
+                                                posicaoX, posicaoY,
+                                                texturaBotaoNormal, texturaBotaoSelecionado,texturaBotaoSelecionado,
+                                                nomeBotoes, 0.f,0.f,16);
 
-    float posicaoBlocoX = botoes[0]->formaBotao.getGlobalBounds().left;
-    float posicaoBlocoY = botoes[0]->formaBotao.getGlobalBounds().top + botoes[0]->formaBotao.getGlobalBounds().height;
+        float posicaoBlocoX = botoes[0]->formaBotao.getGlobalBounds().left;
+        float posicaoBlocoY = botoes[0]->formaBotao.getGlobalBounds().top + botoes[0]->formaBotao.getGlobalBounds().height;
 
-    blocosItemPainel = Interface::criarBlocosPainel(posicaoBlocoX, posicaoBlocoY,
-                                                    texturaBlocoItem, 8 , 13.f);
+        blocosItemPainel = Interface::criarBlocosPainel(posicaoBlocoX, posicaoBlocoY,
+                                                        texturaBlocoItem, 8 , 13.f);
 
-    float posicaoXRelogioPlaneta = botoes[botoes.size() -1]->formaBotao.getPosition().x +
-                                    botoes[botoes.size() -1]->formaBotao.getGlobalBounds().width/2;
+        float posicaoXRelogioPlaneta = botoes[botoes.size() -1]->formaBotao.getPosition().x +
+        botoes[botoes.size() -1]->formaBotao.getGlobalBounds().width/2;
 
-    sf::Vector2f dimensaoSpriteTempo = relogioPlaneta.dimensaoSpriteTempo();
+        sf::Vector2f dimensaoSpriteTempo = relogioPlaneta.dimensaoSpriteTempo();
 
-    relogioPlaneta.atribuirPosicao(posicaoXRelogioPlaneta + dimensaoSpriteTempo.x/2,
-                                   spriteComandante.getPosition().y + dimensaoSpriteTempo.y/2 +10.f);
+        relogioPlaneta.atribuirPosicao(posicaoXRelogioPlaneta + dimensaoSpriteTempo.x/2,
+                                    spriteComandante.getPosition().y + dimensaoSpriteTempo.y/2 +10.f);
+    }catch(std::exception& e){
+        std::cerr<<"Falha ao criar items do painel de controle"<<e.what()<<std::endl;
+    }
 }
 
 void PainelControle::renderizar(sf::RenderWindow& window){
