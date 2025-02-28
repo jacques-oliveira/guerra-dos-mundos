@@ -6,18 +6,22 @@ RelogioPlaneta::RelogioPlaneta(){
 
 void RelogioPlaneta::inicializar(){
     numeroDia = 0;
-    if(!texturaDia.loadFromFile("Recursos/Textures/textura_dia.png")){
-        std::cerr<<"Falha ao carregar textura tempo dia"<<std::endl;
+    try{
+        if(!texturaDia.loadFromFile("Recursos/Textures/textura_dia.png")){
+            std::cerr<<"Falha ao carregar textura tempo dia"<<std::endl;
+        }
+        if(!texturaNoite.loadFromFile("Recursos/Textures/textura_noite.png")){
+            std::cerr<<"Falha ao carregar textura tempo noite"<<std::endl;
+        }
+        if(!fonte.loadFromFile("Recursos/Fonts/TrulyMadlyDpad-a72o.ttf")){
+            std::cerr<<"Falha ao carregar fonte tempo"<<std::endl;
+        }
+        spriteTempo.setTexture(texturaDia);
+        spriteTempo.setOrigin(spriteTempo.getLocalBounds().left, spriteTempo.getLocalBounds().height/2);
+        atribuirFonte(fonte);
+    }catch(std::exception& e){
+        std::cerr<<"Falha ao inicializar relogio planeta"<<e.what()<<std::endl;
     }
-    if(!texturaNoite.loadFromFile("Recursos/Textures/textura_noite.png")){
-        std::cerr<<"Falha ao carregar textura tempo noite"<<std::endl;
-    }
-    if(!fonte.loadFromFile("Recursos/Fonts/TrulyMadlyDpad-a72o.ttf")){
-        std::cerr<<"Falha ao carregar fonte tempo"<<std::endl;
-    }
-    spriteTempo.setTexture(texturaDia);
-    spriteTempo.setOrigin(spriteTempo.getLocalBounds().left, spriteTempo.getLocalBounds().height/2);
-    atribuirFonte(fonte);
 }
 
 void RelogioPlaneta::draw(sf::RenderTarget& target, sf::RenderStates states) const{
@@ -46,14 +50,22 @@ void RelogioPlaneta::atribuirFonte(sf::Font& _fonte){
 }
 
 void RelogioPlaneta::atribuirPosicao(float posx, float posy){
-    float espaco = 16.f;
-    spriteTempo.setPosition(posx, posy);
-    textNumeroDia.setPosition(spriteTempo.getPosition().x + spriteTempo.getGlobalBounds().width + espaco, posy - textNumeroDia.getGlobalBounds().height/2);
+    try{
+        float espaco = 16.f;
+        spriteTempo.setPosition(posx, posy);
+        textNumeroDia.setPosition(spriteTempo.getPosition().x + spriteTempo.getGlobalBounds().width + espaco, posy - textNumeroDia.getGlobalBounds().height/2);
+    }catch(std::exception& e){
+        std::cerr<<"Falha ao atribuir relogio planeta"<<e.what()<<std::endl;
+    }
 }
 
 sf::Vector2f RelogioPlaneta::dimensaoSpriteTempo(){
-    float largura = spriteTempo.getGlobalBounds().width;
-    float altura = spriteTempo.getGlobalBounds().height;
-    return sf::Vector2f(largura,altura);
+    try{
+        float largura = spriteTempo.getGlobalBounds().width;
+        float altura = spriteTempo.getGlobalBounds().height;
+        return sf::Vector2f(largura,altura);
+    }catch(std::exception& e){
+        std::cerr<<"Falha ao obter dimensao sprite tempo"<<e.what()<<std::endl;
+    }
 }
 
