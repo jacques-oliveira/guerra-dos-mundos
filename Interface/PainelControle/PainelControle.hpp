@@ -37,6 +37,9 @@ private:
     std::vector<BlocoItemPainel*> blocosItemPainel;
     sf::Texture texturaBlocoItem;
     RelogioPlaneta relogioPlaneta;
+    std::vector<Botao*> botoesOperacao;
+    sf::Texture texturaBotaoOperacaoNormal;
+    sf::Texture texturaBotaoOperacaoSelecionado;
 
 };
 #endif
