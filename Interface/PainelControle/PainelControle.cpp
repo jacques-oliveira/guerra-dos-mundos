@@ -68,7 +68,6 @@ void PainelControle::atribuirPosicao(float posx, float posy){
     //textValorNeon.setOrigin(textValorNeon.getLocalBounds().left, textValorNeon.getLocalBounds().height/2);
     textValorNeon.setPosition(textTituloNeon.getGlobalBounds().left + textTituloNeon.getGlobalBounds().width + 6.f,
                               spriteNeonPainel.getPosition().y);
-    criandoItemsPainel();
 }
 
 void PainelControle::criandoItemsPainel(){
