@@ -36,5 +36,6 @@ private:
     std::vector<BlocoItemPainel*> blocosItemPainel;
     sf::Texture texturaBlocoItem;
     RelogioPlaneta relogioPlaneta;
+    void criandoItemsPainel();
 };
 #endif
