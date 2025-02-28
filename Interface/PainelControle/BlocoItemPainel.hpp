@@ -6,13 +6,14 @@
 
 class BlocoItemPainel : public sf::Drawable{
 public:
-    BlocoItemPainel();
+    BlocoItemPainel(unsigned short valorItem);
     virtual ~BlocoItemPainel() = default;
 
     unsigned short obterValorItem();
     unsigned short obterQuantidadeItem();
     void atribuirPosicao(float posx, float posy);
     void atribuirFonte(sf::Font& fonte);
+
 private:
     void inicializar();
     void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
