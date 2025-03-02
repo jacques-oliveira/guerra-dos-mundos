@@ -37,6 +37,9 @@ void PainelControle::inicializarPainel(){
         spriteComandante.setTexture(texturaComandante);
         spriteNeonPainel.setTexture(texturaNeonPainel);
         spriteNeonPainel.setOrigin(spriteNeonPainel.getLocalBounds().left, spriteNeonPainel.getLocalBounds().height/2);
+        areaAnulaMoverView.setSize(sf::Vector2f(spriteFundoPainel.getGlobalBounds().width*0.4f,50.f));
+        areaAnulaMoverView.setOrigin(areaAnulaMoverView.getLocalBounds().left + areaAnulaMoverView.getLocalBounds().width/2,
+                                     areaAnulaMoverView.getLocalBounds().height/2);
     }catch(std::exception& e){
         std::cerr<<"Erro ao carregar textura do painel"<<e.what()<<std::endl;
     }
@@ -78,6 +81,11 @@ void PainelControle::atribuirPosicao(float posx, float posy){
 
     textValorNeon.setPosition(textTituloNeon.getGlobalBounds().left + textTituloNeon.getGlobalBounds().width + 6.f,
                               textTituloNeon.getPosition().y + textTituloNeon.getGlobalBounds().height/3);
+
+    float posAnulaMoveViewX = spriteFundoPainel.getPosition().x + spriteFundoPainel.getGlobalBounds().width/2;
+    float posAnulaMoveViewY = spriteNeonPainel.getPosition().y;
+
+    areaAnulaMoverView.setPosition(spriteFundoPainel.getPosition().x + spriteFundoPainel.getGlobalBounds().width/2, posAnulaMoveViewY + spriteNeonPainel.getGlobalBounds().height/2);
 }
 
 void PainelControle::criandoItemsPainel(){
