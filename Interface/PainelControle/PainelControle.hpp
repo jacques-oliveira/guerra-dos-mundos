@@ -18,6 +18,7 @@ public:
     sf::Vector2f obterPosicaoPainel();
     void atribuirFonte(sf::Font& fonte);
     void criandoItemsPainel();
+    sf::RectangleShape areaAnulaMoverView;
 private:
     int valorNeon;
     short numeroDia;
@@ -40,6 +41,5 @@ private:
     std::vector<Botao*> botoesOperacao;
     sf::Texture texturaBotaoOperacaoNormal;
     sf::Texture texturaBotaoOperacaoSelecionado;
-
 };
 #endif

@@ -77,8 +77,11 @@ void Fase1::update(sf::Time deltaTime) {
                 if(window != nullptr){
                     // float ratio = (float)window->getSize().y / (float)window->getSize().x;
                     // setViewSize(view,ratio);
+                    sf::Vector2i posMouse = sf::Mouse::getPosition(*window);
+                    if(!moverViewHabilitado(painelControle.areaAnulaMoverView,posMouse)){
 
-                    moverViewMouse();
+                        moverViewMouse();
+                    }
                 }else{
                     cerr<<"Window não foi inicializado"<<endl;
                 }
@@ -155,6 +158,7 @@ void Fase1::initLevel(std::string _levelName, sf::RenderWindow* window){
             painelControle.criandoItemsPainel();
             barraMensagem.atribuirPosicao(painelControle.obterPosicaoPainel().x, tamanhoJanelaY - 60.f, tamanhoJanelaX);
             enemy = new Enemy(Tipo_Soldado);
+
         }
     }catch(exception& e){
         cerr<<"Falha ao iniciar Fase1"<<e.what()<<endl;

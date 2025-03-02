@@ -115,3 +115,7 @@ void Fase::updateViewSize(sf::View& view, sf::RenderWindow& window){
     view.setSize(SIZE, SIZE * ratio);
 }
 
+bool Fase::moverViewHabilitado(sf::RectangleShape& retArea, sf::Vector2i& mousePos){
+    bool dentroArea = retArea.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos));
+    return dentroArea;
+}
