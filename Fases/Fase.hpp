@@ -55,5 +55,6 @@ protected:
     sf::Texture texturaMiniMapa;
     BarraMensagem barraMensagem;
     PainelControle painelControle;
+    bool moverViewHabilitado(sf::RectangleShape& retArea, sf::Vector2i& mousePos);
 };
 #endif
