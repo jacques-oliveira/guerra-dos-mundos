@@ -8,7 +8,8 @@ fez o homem habitar o espaço, trilhando uma busca constante por recursos. Assim
 conquista do desconhecido.
 
 <p align="left">
-  <img src="https://github.com/user-attachments/assets/5f6fc64b-0a6a-4948-b9fc-db8160fc1430" height="500px"/>
+  <img src="https://github.com/user-attachments/assets/91568ec0-4de3-4f3e-90c8-5b9410dda0c4"  width=860px/>
+  <img src="https://github.com/user-attachments/assets/a9d766d2-a659-461a-916f-b001a07b8b42"  width=860px/>
 </p>
 
 ## Desenvolvimento 
